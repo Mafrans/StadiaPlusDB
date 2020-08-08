@@ -1,0 +1,45 @@
+$widths: 480px, 600px, 960px, 1280px;
+$margins: .5rem, .5rem, .75rem, .75rem;
+$columns: 4, 8, 12, 12;
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+
+    @each $width in $widths {
+        @media screen and (min-width: $width) {
+            max-width: $width;
+        }
+    }
+}
+
+.row {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    box-sizing: border-box;
+
+    @for $i from 1 to length($columns) {
+        @media screen and (min-width: nth($widths, $i)) {
+            padding: 0 nth($margins, $i);
+        }
+    }
+}
+
+.col {
+    @for $cols from 1 to 13 { 
+        &-#{$cols} {
+            flex-grow: 1;
+  
+            @for $i from 1 to length($columns) {
+                @media screen and (min-width: nth($widths, $i)) {
+                    flex-basis: min(100%, floor(100% / nth($columns, $i) * $cols));
+                    padding: nth($margins, $i);
+                    box-sizing: border-box;
+                }
+            }
+        }
+    }
+}
