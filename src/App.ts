@@ -7,9 +7,9 @@ export class App {
         this.server = express();
     }
 
-    async start(port) {
+    async start(port): Promise<void> {
         this.server.listen(port, () => {
             Promise.resolve();
-        })
+        });
     }
 }
