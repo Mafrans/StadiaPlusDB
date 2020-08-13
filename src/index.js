@@ -1,6 +1,6 @@
-const { App } = require("./App");
-const { AuthService } = require("./services/AuthService");
-const { AuthRoutes } = require("./routes/AuthRoutes");
+import { App } from "./App.ts";
+import { AuthService } from "./services/AuthService.ts";
+import { AuthRoutes } from "./routes/AuthRoutes.ts";
 
 const app = new App();
 
