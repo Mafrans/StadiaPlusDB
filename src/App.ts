@@ -6,7 +6,7 @@ import { Database } from './database/Database';
 
 export class App {
     server: Express;
-    routes: IRoute[];
+    routes: {[path: string]: IRoute};
     services: IService[];
     database: Database.Client;
     static self: App;
@@ -23,9 +23,10 @@ export class App {
                 resolve();
             });
     
-            for (const route of this.routes) {
-                this.server.get(route.path, (req, res) => route.get(req, res));
-                this.server.post(route.path, (req, res) => route.get(req, res));
+            for (const path in this.routes) {
+                const route: IRoute = this.routes[path];
+                this.server.get(path, (req, res) => route.get(req, res));
+                this.server.post(path, (req, res) => route.get(req, res));
             }
     
             for (const service of this.services) {
@@ -34,10 +35,8 @@ export class App {
         })
     }
 
-    route(route: IRoute) {
-        if(!this.routes.includes(route)) {
-            this.routes.push(route);
-        }
+    route(path: string, route: IRoute) {
+        this.routes[path] = route;
     }
 
     use(service: IService) {
