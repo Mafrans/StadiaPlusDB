@@ -3,16 +3,16 @@ import { MongoClient, Db, Collection } from 'mongodb';
 export namespace Database {
     export class Client {
         mongo: MongoClient;
-        users: Games;
-        logins: Auth;
+        games: Games;
+        auth: Auth;
     
         async connect(uri: string) {
             this.mongo = await MongoClient.connect('mongodb://' + uri);
 
-            this.logins = new Auth();
-            this.logins.db = this.mongo.db('auth');
+            this.auth = new Auth();
+            this.auth.db = this.mongo.db('auth');
 
-            this.users = new Games(this);
+            this.games = new Games(this);
             
             return this;
         }
@@ -36,7 +36,7 @@ export namespace Database {
             this.logins = this.db.collection('logins');
         }
 
-        async addLogin(token: string, gaia: string) {
+        public async addLogin(token: string, gaia: string) {
             const existing: Login = await this.logins.findOne({token: token});
             const expiry: Date = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30); // Expires in 30 days
 

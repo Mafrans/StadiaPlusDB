@@ -2,15 +2,18 @@ import express from 'express';
 import { Express } from 'express-serve-static-core';
 import { IRoute } from './routes/IRoute';
 import { IService } from './services/IService';
+import { Database } from './database/Database';
 
 export class App {
     server: Express;
     routes: IRoute[];
     services: IService[];
+    database: Database.Client;
     static self: App;
 
     constructor() {
         this.server = express();
+        this.database.connect('');
         App.self = this;
     }
 
