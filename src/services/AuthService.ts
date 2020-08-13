@@ -2,6 +2,7 @@ import { IService } from "./IService";
 import { App } from "../App";
 import passport from 'passport';
 import crypto from 'crypto';
+import config from '../../config.json';
 const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
 
 export class AuthService implements IService {
@@ -9,9 +10,9 @@ export class AuthService implements IService {
         passport.use(
             new GoogleStrategy(
                 {
-                    clientId: '',
-                    clientSecret: '',
-                    callbackURL: ''
+                    clientId: config.clientId,
+                    clientSecret: config.clientSecret,
+                    callbackURL: config.callbackURL
                 },
                 (accessToken, refreshToken, profile, done) => {
                     const token = this.randomToken(16);
