@@ -13,6 +13,7 @@ export class App {
 
     constructor() {
         this.server = express();
+        this.database = new Database.Client();
         this.database.connect('');
         App.self = this;
     }
