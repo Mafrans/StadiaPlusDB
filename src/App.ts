@@ -1,6 +1,6 @@
 import express from 'express';
 import { Express } from 'express-serve-static-core';
-import { IRoute } from './IRoute';
+import { IRoute } from './routes/IRoute';
 
 export class App {
     server: Express;
