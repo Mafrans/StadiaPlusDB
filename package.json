@@ -1,0 +1,19 @@
+{
+  "name": "stadiaplusdb",
+  "version": "1.0.0",
+  "description": "Addon database website for Stadia+",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mafrans/StadiaPlusDB.git"
+  },
+  "author": "Mafrans",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Mafrans/StadiaPlusDB/issues"
+  },
+  "homepage": "https://github.com/Mafrans/StadiaPlusDB#readme"
+}
