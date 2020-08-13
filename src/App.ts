@@ -1,10 +1,12 @@
 import express from 'express';
 import { Express } from 'express-serve-static-core';
 import { IRoute } from './routes/IRoute';
+import { IService } from './services/IService';
 
 export class App {
     server: Express;
     routes: IRoute[];
+    services: IService[];
     static self: App;
 
     constructor() {
@@ -22,12 +24,22 @@ export class App {
                 this.server.get(route.path, (req, res) => route.get(req, res));
                 this.server.post(route.path, (req, res) => route.get(req, res));
             }
+    
+            for (const service of this.services) {
+                service.start(this);
+            }
         })
     }
 
-    register(route: IRoute) {
+    route(route: IRoute) {
         if(!this.routes.includes(route)) {
             this.routes.push(route);
+        }
+    }
+
+    use(service: IService) {
+        if(!this.services.includes(service)) {
+            this.services.push(service);
         }
     }
 }
