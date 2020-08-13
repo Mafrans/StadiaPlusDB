@@ -26,8 +26,16 @@ export class App {
     
             for (const path in this.routes) {
                 const routes: IRoute[] = this.routes[path];
-                this.server.get(path, routes.map(r => r.get));
-                this.server.post(path, routes.map(r => r.post));
+                
+                const get = [];
+                const post = [];
+                for(const route of routes) {
+                    if(route.get != null) get.push(route.get);
+                    if(route.post != null) post.push(route.post);
+                }
+
+                this.server.get(path, get);
+                this.server.post(path, post);
             }
     
             for (const service of this.services) {
