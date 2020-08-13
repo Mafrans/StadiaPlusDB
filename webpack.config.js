@@ -7,7 +7,10 @@ module.exports = env => {
         entry: {
             bundle: './src/index.js',
         },
-        devtool: 'inline-source-map',
+        target: 'node',
+        node: {
+            net: 'empty',
+        },
         mode: env.production ? 'production' : 'development',
         module: {
             rules: [

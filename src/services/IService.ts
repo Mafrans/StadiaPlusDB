@@ -1,5 +1,5 @@
 import { App } from "../App";
 
 export interface IService {
-    start(app: App);
+    start(app: App): void;
 }

@@ -1,8 +1,8 @@
 import { IService } from "./IService";
 import { App } from "../App";
 import passport from 'passport';
-import crypto from 'crypto';
 import config from '../../config.json';
+const crypto = require('crypto');
 const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
 
 export class AuthService implements IService {
@@ -14,7 +14,7 @@ export class AuthService implements IService {
                     clientSecret: config.clientSecret,
                     callbackURL: config.callbackURL
                 },
-                (accessToken, refreshToken, profile, done) => {
+                (_accessToken: string, _refreshToken: string, profile: any, done: (err: any, token: string) => void) => {
                     const token = this.randomToken(16);
                     app.database.auth.addLogin(token, profile.id)
                         .then(() => {
