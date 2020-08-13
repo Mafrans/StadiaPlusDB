@@ -6,15 +6,15 @@ import { Database } from './database/Database';
 
 export class App {
     server: Express;
-    routes: {[path: string]: IRoute[]};
-    services: IService[];
+    routes: {[path: string]: IRoute[]} = {};
+    services: IService[] = [];
     database: Database.Client;
     static self: App;
 
     constructor() {
         this.server = express();
         this.database = new Database.Client();
-        this.database.connect('');
+        this.database.connect('localhost:27017/stadiaplus');
         App.self = this;
     }
 
