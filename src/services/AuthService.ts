@@ -3,14 +3,14 @@ import { App } from "../App";
 import passport from 'passport';
 import config from '../../config.json';
 const crypto = require('crypto');
-const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 export class AuthService implements IService {
     start(app: App) {
         passport.use(
             new GoogleStrategy(
                 {
-                    clientId: config.clientId,
+                    clientID: config.clientId,
                     clientSecret: config.clientSecret,
                     callbackURL: config.callbackURL
                 },

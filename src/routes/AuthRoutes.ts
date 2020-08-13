@@ -5,14 +5,14 @@ export namespace AuthRoutes {
     export class Start implements IRoute {
         get(req: any, res: any) {
             console.log('start');
-            passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile'] });
+            passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile'] })(req, res);
         }
     }
 
     export class Callback implements IRoute {
         get(req: any, res: any) {
             console.log('callback');
-            passport.authenticate('google', { failureRedirect: '/login' });
+            passport.authenticate('google', { failureRedirect: '/login' })(req, res);
         }
     }
 
