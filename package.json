@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --env.production",
-    "build:dev": "webpack --env.development"
+    "build:dev": "webpack --env.development",
+    "run": "webpack --env.production && node dist/bundle.js",
+    "run:dev": "webpack --env.development && node dist/bundle.js"
   },
   "repository": {
     "type": "git",
