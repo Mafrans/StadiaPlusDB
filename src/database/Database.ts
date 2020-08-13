@@ -9,9 +9,7 @@ export namespace Database {
         async connect(uri: string) {
             this.mongo = await MongoClient.connect('mongodb://' + uri);
 
-            this.auth = new Auth();
-            this.auth.db = this.mongo.db('auth');
-
+            this.auth = new Auth(this);
             this.games = new Games(this);
             
             return this;
@@ -23,8 +21,8 @@ export namespace Database {
         users: Collection<Database.User>;
 
         constructor(client: Database.Client) {
-            this.users = this.db.collection('users');
             this.db = client.mongo.db('games');
+            this.users = this.db.collection('users');
         }
     }
 
@@ -32,7 +30,8 @@ export namespace Database {
         db: Db;
         logins: Collection<Database.Login>;
 
-        constructor() {
+        constructor(client: Database.Client) {
+            this.db = client.mongo.db('auth');
             this.logins = this.db.collection('logins');
         }
 

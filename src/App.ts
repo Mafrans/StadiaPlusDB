@@ -14,7 +14,7 @@ export class App {
     constructor() {
         this.server = express();
         this.database = new Database.Client();
-        this.database.connect('localhost:27017/stadiaplus');
+        this.database.connect('localhost:27017');
         App.self = this;
     }
 
@@ -26,7 +26,7 @@ export class App {
     
             for (const path in this.routes) {
                 const routes: IRoute[] = this.routes[path];
-                
+
                 const get = [];
                 const post = [];
                 for(const route of routes) {
