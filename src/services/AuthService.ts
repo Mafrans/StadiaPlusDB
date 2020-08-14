@@ -7,8 +7,6 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 export class AuthService implements IService {
     start(app: App) {
-        app.server.use(passport.initialize());
-
         passport.use(
             new GoogleStrategy(
                 {
@@ -17,7 +15,7 @@ export class AuthService implements IService {
                     callbackURL: config.callbackURL
                 },
                 (_accessToken: string, _refreshToken: string, profile: any, done: (err: any, token: string) => void) => {
-                    const token = this.randomToken(16);
+                    const token = this.randomToken(32);
                     app.database.auth.addLogin(token, profile.id)
                         .then(() => {
                             return done(null, token);
@@ -25,9 +23,14 @@ export class AuthService implements IService {
                 }
             )
         );
+
+        passport.serializeUser(function (user, done) {
+            console.log('serializing user')
+            done(null, user);
+        });
     }
 
     randomToken(length: number) {
-        return crypto.randomBytes(length).toString('ascii');
+        return crypto.randomBytes(length/2).toString('hex');
     }
 }
