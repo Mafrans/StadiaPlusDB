@@ -8,6 +8,7 @@ import passport from 'passport';
 import config from '../config.json';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import * as path from 'path';
 
 export class App {
     server: Express;
@@ -20,6 +21,7 @@ export class App {
         this.server = express();
 
         this.server.use(bodyParser.json());
+        this.server.use(express.static(path.join(__dirname, '../public/assets')));
         this.server.use(cors());
         this.server.use(session({ secret: config.sessionSecret }));
         this.server.use(passport.initialize());
