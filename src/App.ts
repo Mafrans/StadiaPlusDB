@@ -6,6 +6,8 @@ import { IService } from './services/IService';
 import { Database } from './database/Database';
 import passport from 'passport';
 import config from '../config.json';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 
 export class App {
     server: Express;
@@ -17,6 +19,8 @@ export class App {
     constructor() {
         this.server = express();
 
+        this.server.use(bodyParser.json());
+        this.server.use(cors());
         this.server.use(session({ secret: config.sessionSecret }));
         this.server.use(passport.initialize());
         this.server.use(passport.session());
