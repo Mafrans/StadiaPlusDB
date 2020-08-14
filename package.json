@@ -5,10 +5,12 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --env.production",
-    "build:dev": "webpack --env.development",
-    "run": "webpack --env.production && node dist/bundle.js",
-    "run:dev": "webpack --env.development && node dist/bundle.js"
+    "csass": "sass ./public/scss:./public/scss/dist",
+    "clean": "del-cli --force ./public/scss/dist && del-cli --force ./dist",
+    "build": "npm run clean && webpack --env.production && npm run csass",
+    "build:dev": "npm run clean && webpack --env.development && npm run csass",
+    "run": "npm run build && node dist/bundle.js",
+    "run:dev": "npm run build:dev && node dist/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,8 @@
     "express-session": "^1.17.1",
     "mongodb": "^3.6.0",
     "passport": "^0.4.1",
-    "passport-google-oauth": "^2.0.0"
+    "passport-google-oauth": "^2.0.0",
+    "sass": "^1.26.10"
   },
   "devDependencies": {
     "@types/cors": "^2.8.7",
@@ -43,6 +46,7 @@
     "typedoc-webpack-plugin": "^1.1.4",
     "typescript": "^3.9.7",
     "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.11",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   }
