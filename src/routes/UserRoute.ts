@@ -11,6 +11,15 @@ export class UserRoute implements IRoute {
         }
 
         const user = await App.self.database.games.getUser(gaia);
-        res.send(user);
+        if(user == null) {
+            res.send({});
+            return;
+        }
+        res.send({
+            name: user.username,
+            tag: user.tag,
+            avatar: user.avatar,
+            games: user.games
+        });
     }
 }
