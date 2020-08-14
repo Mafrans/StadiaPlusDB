@@ -26,7 +26,7 @@ export namespace Database {
             this.users = this.db.collection('users');
         }
 
-        public async addData(gaia: string, data: IGameData) {
+        public async addUser(gaia: string, data: IGameData) {
             const existing: IUser = await this.users.findOne({gaia: gaia});
 
             const game = {
@@ -37,17 +37,22 @@ export namespace Database {
             }
 
             if(existing != null) {
-                this.users.update({ 'gaia': gaia, 'games.uuid': data.game.uuid }, { $set: { 'games.$': game } });
+                this.users.update({ 'gaia': gaia }, { $set: { ['games.' + data.game.uuid]: game }});
             }
             else {
                 this.users.insertOne({
                     gaia: gaia,
-                    games: [ game ],
+                    games: { [game.uuid]: game },
                     username: data.user.name,
                     tag: data.user.tag,
                     avatar: data.user.avatar
                 });
             }
+        }
+
+        public async getUser(gaia: string): Promise<IUser> {
+            const data = await this.users.findOne({gaia: gaia});
+            return data;
         }
     }
 
@@ -93,7 +98,7 @@ export namespace Database {
 
     export interface IUser {
         gaia: string;
-        games: IGame[];
+        games: {[uuid: string]: IGame};
         username: string;
         tag: string;
         avatar: string;
