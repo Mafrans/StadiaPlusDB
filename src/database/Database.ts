@@ -39,7 +39,7 @@ export namespace Database {
             const existing: Login = await this.logins.findOne({token: token});
             const expiry: Date = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30); // Expires in 30 days
 
-            if(existing == null) {
+            if(existing != null) {
                 existing.expiry = expiry;
                 this.logins.update({token}, existing);
             }

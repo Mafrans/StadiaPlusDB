@@ -7,6 +7,8 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 export class AuthService implements IService {
     start(app: App) {
+        app.server.use(passport.initialize());
+
         passport.use(
             new GoogleStrategy(
                 {
