@@ -3,7 +3,7 @@ import { App } from "../App";
 
 export class UserRoute implements IRoute {
     async get(req: any, res: any, next: any) {
-        const gaia = await App.self.database.auth.getLogin(req.query.token);
+        const gaia = await App.self.database.auth.getSession(req.query.token);
 
         if(gaia == null) {
             res.send({error: 'Not authenticated'});

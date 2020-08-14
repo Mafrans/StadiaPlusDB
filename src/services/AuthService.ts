@@ -16,7 +16,7 @@ export class AuthService implements IService {
                 },
                 (_accessToken: string, _refreshToken: string, profile: any, done: (err: any, token: string) => void) => {
                     const token = this.randomToken(32);
-                    app.database.auth.addLogin(token, profile.id)
+                    app.database.auth.addSession(token, profile.id)
                         .then(() => {
                             return done(null, token);
                         });

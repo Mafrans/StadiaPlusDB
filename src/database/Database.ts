@@ -20,10 +20,12 @@ export namespace Database {
     export class Games {
         db: Db;
         users: Collection<Database.IUser>;
+        statistics: Collection<Database.IGameStats>;
 
         constructor(client: Database.Client) {
             this.db = client.mongo.db('games');
             this.users = this.db.collection('users');
+            this.statistics = this.db.collection('statistics');
         }
 
         public async addUser(gaia: string, data: IGameData) {
@@ -38,6 +40,18 @@ export namespace Database {
 
             if(existing != null) {
                 this.users.update({ 'gaia': gaia }, { $set: { ['games.' + data.game.uuid]: game }});
+
+                if(!Object.keys(existing.games).includes(game.uuid)) {
+                    await this.addGame(game.uuid);
+                }
+                else {
+                    for(const achievement of game.achievements) {
+                        const achievementID = achievement.icon.substring("https://lh3.googleusercontent.com/".length);
+                        if(existing.games[game.uuid].achievements.find(e => e.icon === achievement.icon) == null) {
+                            await this.addAchievement(game.uuid, achievementID);
+                        }
+                    }
+                }
             }
             else {
                 this.users.insertOne({
@@ -47,6 +61,50 @@ export namespace Database {
                     tag: data.user.tag,
                     avatar: data.user.avatar
                 });
+                
+                await this.addGame(game.uuid);
+
+                for(const achievement of game.achievements) {
+                    const achievementID = achievement.icon.substring("https://lh3.googleusercontent.com/".length);
+                    await this.addAchievement(game.uuid, achievementID);
+                }
+            }
+        }
+
+        public async addAchievement(gameUUID: string, achievementID: string) {
+            const existing: IGameStats = await this.statistics.findOne({ uuid: gameUUID });
+
+            if(existing == null) {
+                const stats: IGameStats = {
+                    uuid: gameUUID,
+                    owners: 1,
+                    achievements: {
+                        [achievementID]: 1
+                    }
+                };
+
+                // Important that we await this, because otherwise the values will be completely off
+                await this.statistics.insertOne(stats)
+            }
+            else {
+                this.statistics.update({ uuid: gameUUID }, { $inc: { ['achievements.' + achievementID]: 1 } }); // Add one to the achivement
+            }
+        }
+
+        public async addGame(uuid: string) {
+            const existing: IGameStats = await this.statistics.findOne({ uuid: uuid });
+            if(existing == null) {
+                const stats: IGameStats = {
+                    uuid: uuid,
+                    owners: 1,
+                    achievements: {}
+                };
+                
+                // Important that we await this, because otherwise the values will be completely off
+                await this.statistics.insertOne(stats);
+            }
+            else {
+                this.statistics.update({ uuid: uuid }, { $inc: { owners: 1 }}); // Add 1 to owners
             }
         }
 
@@ -65,7 +123,7 @@ export namespace Database {
             this.logins = this.db.collection('logins');
         }
 
-        public async addLogin(token: string, gaia: string) {
+        public async addSession(token: string, gaia: string) {
             const existing: ILogin = await this.logins.findOne({token: token});
             const expiry: Date = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30); // Expires in 30 days
 
@@ -78,7 +136,11 @@ export namespace Database {
             }
         }
 
-        public async getLogin(token: string): Promise<string> {
+        public async removeSession(token: string) {
+            await this.logins.remove({token: token});
+        }
+
+        public async getSession(token: string): Promise<string> {
             const login = await this.logins.findOne({token: token});
             
             if(login == null) return null; // Not logged in
@@ -109,5 +171,11 @@ export namespace Database {
         name: string;
         achievements: IAchievement[];
         time: number;
+    }
+
+    export interface IGameStats {
+        uuid: string,
+        owners: number,
+        achievements: { [icon: string]: number }
     }
 }
