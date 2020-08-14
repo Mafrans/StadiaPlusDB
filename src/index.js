@@ -4,6 +4,7 @@ import { AuthRoutes } from "./routes/AuthRoutes.ts";
 import { PingRoute } from "./routes/PingRoute";
 import { UserRoute } from "./routes/UserRoute";
 import { UpdateRoute } from "./routes/UpdateRoute";
+import config from '../config.json';
 
 const app = new App();
 
@@ -15,7 +16,7 @@ app.route('/api/update', new UpdateRoute());
 app.route('/api/ping', new PingRoute());
 app.route('/api/user', new UserRoute());
 
-app.start(3000)
+app.start(config.port)
     .then(() => {
-        console.log("Started server on port 3000")
+        console.log(`Started server on port ${config.port}`);
     });
