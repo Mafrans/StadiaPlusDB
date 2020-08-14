@@ -9,7 +9,7 @@ export class UpdateRoute implements IRoute {
         
         const gaia = await App.self.database.auth.getLogin(req.body.token);
         if(gaia != null) {
-            App.self.database.games.addData(gaia, req.body.data);
+            App.self.database.games.addUser(gaia, req.body.data);
         }
     }
 }
