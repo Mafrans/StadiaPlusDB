@@ -1,4 +1,5 @@
 import { MongoClient, Db, Collection } from 'mongodb';
+import { IGameData, IAchievement } from './IGameData';
 
 export namespace Database {
     export class Client {
@@ -18,17 +19,41 @@ export namespace Database {
 
     export class Games {
         db: Db;
-        users: Collection<Database.User>;
+        users: Collection<Database.IUser>;
 
         constructor(client: Database.Client) {
             this.db = client.mongo.db('games');
             this.users = this.db.collection('users');
         }
+
+        public async addData(gaia: string, data: IGameData) {
+            const existing: IUser = await this.users.findOne({gaia: gaia});
+
+            const game = {
+                uuid: data.game.uuid,
+                name: data.game.name,
+                achievements: data.achievements,
+                time: data.time
+            }
+
+            if(existing != null) {
+                this.users.update({ 'gaia': gaia, 'games.uuid': data.game.uuid }, { $set: { 'games.$': game } });
+            }
+            else {
+                this.users.insertOne({
+                    gaia: gaia,
+                    games: [ game ],
+                    username: data.user.name,
+                    tag: data.user.tag,
+                    avatar: data.user.avatar
+                });
+            }
+        }
     }
 
     export class Auth {
         db: Db;
-        logins: Collection<Database.Login>;
+        logins: Collection<Database.ILogin>;
 
         constructor(client: Database.Client) {
             this.db = client.mongo.db('auth');
@@ -36,7 +61,7 @@ export namespace Database {
         }
 
         public async addLogin(token: string, gaia: string) {
-            const existing: Login = await this.logins.findOne({token: token});
+            const existing: ILogin = await this.logins.findOne({token: token});
             const expiry: Date = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30); // Expires in 30 days
 
             if(existing != null) {
@@ -47,19 +72,37 @@ export namespace Database {
                 this.logins.insertOne({token, gaia, expiry});
             }
         }
+
+        public async getLogin(token: string): Promise<string> {
+            const login = await this.logins.findOne({token: token});
+            
+            if(login == null) return null; // Not logged in
+            if(login.expiry.getTime() < Date.now()) { // Token has expired
+                this.logins.remove({token: token});
+            }
+
+            return login.gaia;
+        }
     }
 
-    export interface Login {
+    export interface ILogin {
         token: string;
         gaia: string;
         expiry: Date;
     }
 
-    export interface User {
+    export interface IUser {
         gaia: string;
-        games: object;
+        games: IGame[];
         username: string;
         tag: string;
         avatar: string;
+    }
+
+    export interface IGame {
+        uuid: string;
+        name: string;
+        achievements: IAchievement[];
+        time: number;
     }
 }
