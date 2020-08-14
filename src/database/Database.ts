@@ -44,7 +44,7 @@ export namespace Database {
                 this.logins.update({token}, existing);
             }
             else {
-                this.logins.insert({token, gaia, expiry});
+                this.logins.insertOne({token, gaia, expiry});
             }
         }
     }
