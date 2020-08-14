@@ -1,8 +1,11 @@
 import express from 'express';
+import session from 'express-session';
 import { Express } from 'express-serve-static-core';
 import { IRoute } from './routes/IRoute';
 import { IService } from './services/IService';
 import { Database } from './database/Database';
+import passport from 'passport';
+import config from '../config.json';
 
 export class App {
     server: Express;
@@ -13,6 +16,11 @@ export class App {
 
     constructor() {
         this.server = express();
+
+        this.server.use(session({ secret: config.sessionSecret }));
+        this.server.use(passport.initialize());
+        this.server.use(passport.session());
+
         this.database = new Database.Client();
         this.database.connect('localhost:27017');
         App.self = this;
@@ -36,8 +44,10 @@ export class App {
     
             for (const service of this.services) {
                 service.start(this);
+                console.log("starting")
             }
 
+            console.log("listening")
             this.server.listen(port, () => {
                 resolve();
             });
