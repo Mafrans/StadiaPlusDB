@@ -1,6 +1,7 @@
 import { RouteInterface } from "./Route.interface";
 import passport from "passport";
 import { App } from "../App";
+import { Login } from './../models/Login.model';
 
 export namespace AuthRoutes {
     export class Start implements RouteInterface {
@@ -30,7 +31,7 @@ export namespace AuthRoutes {
             if(req.body.token == null) return;
             const token: string = req.body.token;
             
-            App.self.database.auth.removeSession(token);
+            Login.Remove(token);
         }
     }
 }

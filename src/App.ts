@@ -2,7 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import { Express } from 'express-serve-static-core';
 import { RouteInterface } from './routes/Route.interface';
-import { IService } from './services/IService';
+import { Service } from './services/Service.interface';
 import { Database } from './database/Database';
 import passport from 'passport';
 import config from '../config.json';
@@ -14,7 +14,7 @@ import { StadiaGameDBHook } from './StadiaGameDBHook';
 export class App {
     server: Express;
     routes: {[path: string]: RouteInterface[]} = {};
-    services: IService[] = [];
+    services: Service[] = [];
     database: Database;
     stadiagamedb: StadiaGameDBHook;
     static self: App;
@@ -67,7 +67,7 @@ export class App {
             }
     
             for (const service of this.services) {
-                service.start(this);
+                service.start();
                 console.log("starting")
             }
 
@@ -82,7 +82,7 @@ export class App {
         this.routes[path] = routes;
     }
 
-    use(service: IService) {
+    use(service: Service) {
         if(!this.services.includes(service)) {
             this.services.push(service);
         }
