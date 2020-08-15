@@ -1,21 +1,22 @@
 import express from 'express';
 import session from 'express-session';
 import { Express } from 'express-serve-static-core';
-import { RouteInterface } from './routes/Route.interface';
-import { Service } from './services/Service.interface';
+import { IRoute } from './routes/IRoute';
+import { IService } from './services/IService';
 import { Database } from './database/Database';
 import passport from 'passport';
 import config from '../config.json';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import * as path from 'path';
 import { StadiaGameDBHook } from './StadiaGameDBHook';
-import routes from './Routes';
 
 export class App {
     server: Express;
-    services: Service[] = [];
-    database: Database;
-    stadiaGameDb: StadiaGameDBHook;
+    routes: {[path: string]: IRoute[]} = {};
+    services: IService[] = [];
+    database: Database.Client;
+    stadiagamedb: StadiaGameDBHook;
     static self: App;
 
     constructor() {
@@ -40,49 +41,48 @@ export class App {
         this.server.use(passport.initialize());
         this.server.use(passport.session());
 
-        this.database = new Database();
+        this.database = new Database.Client();
         this.database.connect('localhost:27017');
 
-        this.stadiaGameDb = new StadiaGameDBHook();
-        this.stadiaGameDb.updateCache();
+        this.stadiagamedb = new StadiaGameDBHook();
+        this.stadiagamedb.updateCache();
 
         App.self = this;
     }
 
     async start(port: number): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.registerRoutes();            
-            this.registerServices();
+            for (const path in this.routes) {
+                const routes: IRoute[] = this.routes[path];
 
+                const get = [];
+                const post = [];
+                for(const route of routes) {
+                    if(route.get != null) get.push(route.get);
+                    if(route.post != null) post.push(route.post);
+                }
+
+                this.server.get(path, get);
+                this.server.post(path, post);
+            }
+    
+            for (const service of this.services) {
+                service.start(this);
+                console.log("starting")
+            }
+
+            console.log("listening")
             this.server.listen(port, () => {
                 resolve();
             });
         })
     }
-    private registerRoutes() {
-        for (let route of routes) {
-            
-            const get = [];
-            const post = [];
-            for(const instance of route.classInstances) {
-                if(instance.get != null) get.push(instance.get);
-                if(instance.post != null) post.push(instance.post);
-            }
 
-            this.server.get(route.path, get);
-            this.server.post(route.path, post);
-        }
-
+    route(path: string, ...routes: IRoute[]) {
+        this.routes[path] = routes;
     }
 
-    private registerServices() {
-        for (const service of this.services) {
-            service.start();
-            console.log("starting", service.constructor.name)
-        }
-    }
-
-    use(service: Service) {
+    use(service: IService) {
         if(!this.services.includes(service)) {
             this.services.push(service);
         }
