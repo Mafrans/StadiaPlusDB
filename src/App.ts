@@ -41,7 +41,7 @@ export class App {
         this.server.use(passport.session());
 
         this.database = new Database();
-        this.database.connect('localhost:27017');
+        this.database.connect(config.dbURL);
 
         this.stadiaGameDb = new StadiaGameDBHook();
         this.stadiaGameDb.updateCache();
