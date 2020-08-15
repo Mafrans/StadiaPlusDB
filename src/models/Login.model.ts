@@ -1,8 +1,10 @@
 import { Database } from '../database/Database';
 export class Login implements LoginInterface {
-    constructor(public token: string,
+    constructor(
+        public token: string,
         public gaia: string,
-        public expiry: Date) { }
+        public expiry: Date
+    ) {}
 
     public static async Create(token: string, gaia: string) {
         const logins = Database.self.auth.logins;
@@ -12,8 +14,7 @@ export class Login implements LoginInterface {
         if (existing != null) {
             existing.expiry = expiry;
             logins.update({ token }, existing);
-        }
-        else {
+        } else {
             logins.insertOne({ token, gaia, expiry });
         }
     }
@@ -24,11 +25,12 @@ export class Login implements LoginInterface {
 
     public static async Find(token: string): Promise<string> {
         const logins = Database.self.auth.logins;
-        
+
         const login = await logins.findOne({ token: token });
 
         if (login == null) return null; // Not logged in
-        if (login.expiry.getTime() < Date.now()) { // Token has expired
+        if (login.expiry.getTime() < Date.now()) {
+            // Token has expired
             Login.Remove(token);
         }
 

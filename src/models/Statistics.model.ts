@@ -1,10 +1,11 @@
-import { Database } from "../database/Database";
+import { Database } from '../database/Database';
 
 export class Statistics {
-    
-    constructor(public uuid: string,
+    constructor(
+        public uuid: string,
         public owners: number,
-        public achievements: { [icon: string]: number }) {}
+        public achievements: { [icon: string]: number }
+    ) {}
 
     public static async Create(statistics: Statistics) {
         return Database.self.gameDb.statistics.insertOne(statistics);
@@ -15,6 +16,6 @@ export class Statistics {
     }
 
     public static async Find(uuid: string): Promise<Statistics> {
-        return Database.self.gameDb.statistics.findOne({  uuid });
-    } 
+        return Database.self.gameDb.statistics.findOne({ uuid });
+    }
 }
