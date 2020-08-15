@@ -12,7 +12,7 @@ export class AuthService implements Service {
         passport.use(
             new GoogleStrategy(
                 {
-                    clientID: config.clientId,
+                    clientID: config.clientID,
                     clientSecret: config.clientSecret,
                     callbackURL: config.callbackURL
                 },
