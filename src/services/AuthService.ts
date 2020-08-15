@@ -1,12 +1,12 @@
-import { Service } from "./Service.interface";
+import { IService } from "./IService";
+import { App } from "../App";
 import passport from 'passport';
 import config from '../../config.json';
-import { Login } from './../models/Login.model';
 const crypto = require('crypto');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-export class AuthService implements Service {
-    start() {
+export class AuthService implements IService {
+    start(app: App) {
         passport.use(
             new GoogleStrategy(
                 {
@@ -16,7 +16,7 @@ export class AuthService implements Service {
                 },
                 (_accessToken: string, _refreshToken: string, profile: any, done: (err: any, token: string) => void) => {
                     const token = this.randomToken(32);
-                    Login.Create(token, profile.id)
+                    app.database.auth.addSession(token, profile.id)
                         .then(() => {
                             return done(null, token);
                         });

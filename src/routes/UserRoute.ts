@@ -1,24 +1,25 @@
-import { RouteInterface } from "./Route.interface";
+import { IRoute } from "./IRoute";
+import { App } from "../App";
 
-import { Google } from "../models/Google.model";
-import { User } from "../models/User.model";
-import { Request, Response } from 'express';
-import { UserResource } from './../resources/User.resource';
-
-export class UserRoute implements RouteInterface {
-    async get(req: Request, res: Response, next: any) {
-        const gaia = await Google.GET_ID(req.query.token.toString());
+export class UserRoute implements IRoute {
+    async get(req: any, res: any, next: any) {
+        const gaia = await App.self.database.auth.getSession(req.query.token);
 
         if(gaia == null) {
             res.send({error: 'Not authenticated'});
             return;
         }
 
-        const user = await User.Find(gaia);
+        const user = await App.self.database.games.getUser(gaia);
         if(user == null) {
             res.send({});
             return;
         }
-        res.send(new UserResource(user).toString());
+        res.send({
+            name: user.username,
+            tag: user.tag,
+            avatar: user.avatar,
+            games: user.games
+        });
     }
 }
