@@ -69,8 +69,8 @@ export class App {
                 if(instance.post != null) post.push(instance.post);
             }
 
-            this.server.get(route.path, get);
-            this.server.post(route.path, post);
+            this.server.get(route.path, ...get);
+            this.server.post(route.path, ...post);
         }
 
     }

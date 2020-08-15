@@ -6,8 +6,8 @@ import { Login } from './../models/Login.model';
 export namespace AuthRoutes {
     export class Start implements RouteInterface {
         get(req: any, res: any, next: any) {
+
             req.session.redirect = req.query.redirect;
-            
             const authenticate = passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile'] });
             authenticate(req, res, next);
         }
@@ -15,6 +15,7 @@ export namespace AuthRoutes {
 
     export class Callback implements RouteInterface {
         get(req: any, res: any, next: any) {
+
             const authenticate = passport.authenticate('google', { failureRedirect: '/login' });
             authenticate(req, res, next);
         }
@@ -22,6 +23,7 @@ export namespace AuthRoutes {
 
     export class Redirect implements RouteInterface {
         get(req: any, res: any, next: any) {
+
             res.redirect(req.session.redirect + '#' + req.user);
         }
     }

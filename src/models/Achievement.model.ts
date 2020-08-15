@@ -2,14 +2,14 @@ import { Database } from './../database/Database';
 import { Statistics } from './Statistics.model';
 
 export class Achievement {
-    public static async Create(GameUuid: string, achievementID: string) {
+    public static async IncrementStat(gameUuid: string, achievementID: string) {
         const statistics = Database.self.gameDb.statistics;
-        const existing: Statistics = await statistics.findOne({ uuid: GameUuid });
+        const existing: Statistics = await statistics.findOne({ uuid: gameUuid });
 
         if (existing == null) {
             const stats: Statistics = {
-                uuid: GameUuid,
-                owners: 1, //TODO: This seems off, shouldn't this be the logged in user?
+                uuid: gameUuid,
+                owners: 1,
                 achievements: {
                     [achievementID]: 1
                 }
@@ -19,7 +19,7 @@ export class Achievement {
             await Statistics.Create(stats);
         }
         else {
-            Statistics.Update({ uuid: GameUuid }, { $inc: { ['achievements.' + achievementID]: 1 } }); // Add one to the achivement
+            Statistics.Update({ uuid: gameUuid }, { $inc: { ['achievements.' + achievementID]: 1 } }); // Add one to the achivement
         }
     }
 }

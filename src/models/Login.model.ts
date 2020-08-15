@@ -27,7 +27,6 @@ export class Login implements LoginInterface {
         const logins = Database.self.auth.logins;
 
         const login = await logins.findOne({ token: token });
-
         if (login == null) return null; // Not logged in
         if (login.expiry.getTime() < Date.now()) {
             // Token has expired

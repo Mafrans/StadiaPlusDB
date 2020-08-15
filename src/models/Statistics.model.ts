@@ -1,4 +1,6 @@
 import { Database } from '../database/Database';
+import { Achievement } from './Achievement.model';
+import { Game } from './Game.model';
 
 export class Statistics {
     constructor(
@@ -17,5 +19,13 @@ export class Statistics {
 
     public static async Find(uuid: string): Promise<Statistics> {
         return Database.self.gameDb.statistics.findOne({ uuid });
+    }
+
+    public static async AddAchievement(gameUUID: string, achievementID: string) {
+        return Achievement.IncrementStat(gameUUID, achievementID);
+    }
+
+    public static async AddGame(gameUUID: string) {
+        return Game.IncrementStat(gameUUID);
     }
 }

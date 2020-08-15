@@ -1,6 +1,7 @@
 import { Database } from '../database/Database';
 import { IAchievement } from '../database/IGameData';
 import { Statistics } from './Statistics.model';
+import { User } from './User.model';
 
 export class Game {
     constructor(
@@ -10,7 +11,7 @@ export class Game {
         public time: number
     ) {}
 
-    public static async Create(uuid: string) {
+    public static async IncrementStat(uuid: string) {
         const statistics = Database.self.gameDb.statistics;
         const existing: Statistics = await statistics.findOne({ uuid: uuid });
         if (existing == null) {
