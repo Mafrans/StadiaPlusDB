@@ -1,5 +1,6 @@
-import { IGameStats, Database } from "../database/Database";
+import { Database } from "../database/Database";
 import { IAchievement } from "../database/IGameData";
+import { Statistics } from "./Statistics.model";
 
 export class Game {
     constructor(public uuid: string,
@@ -9,9 +10,9 @@ export class Game {
 
     public static async Create(uuid: string) {
         const statistics = Database.self.gameDb.statistics;
-        const existing: IGameStats = await statistics.findOne({ uuid: uuid });
+        const existing: Statistics = await statistics.findOne({ uuid: uuid });
         if (existing == null) {
-            const stats: IGameStats = {
+            const stats: Statistics = {
                 uuid: uuid,
                 owners: 1,
                 achievements: {}

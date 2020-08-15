@@ -1,10 +1,10 @@
-import { Database, IGameStats } from './../database/Database';
+import { Database } from './../database/Database';
 import { Statistics } from './Statistics.model';
 
 export class Achievement {
     public static async Create(GameUuid: string, achievementID: string) {
         const statistics = Database.self.gameDb.statistics;
-        const existing: IGameStats = await statistics.findOne({ uuid: GameUuid });
+        const existing: Statistics = await statistics.findOne({ uuid: GameUuid });
 
         if (existing == null) {
             const stats: Statistics = {

@@ -1,6 +1,5 @@
 
-import { App } from '../App';
-import { Database, IGame } from '../database/Database';
+import { Database} from '../database/Database';
 import { IGameData } from '../database/IGameData';
 import { Game } from './Game.model';
 import { Achievement } from './Achievement.model';

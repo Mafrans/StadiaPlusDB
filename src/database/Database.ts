@@ -79,24 +79,3 @@ export interface ILogin {
     gaia: string;
     expiry: Date;
 }
-
-export interface IUser {
-    gaia: string;
-    games: { [uuid: string]: IGame };
-    username: string;
-    tag: string;
-    avatar: string;
-}
-
-export interface IGame {
-    uuid: string;
-    name: string;
-    achievements: IAchievement[];
-    time: number;
-}
-
-export interface IGameStats {
-    uuid: string,
-    owners: number,
-    achievements: { [icon: string]: number }
-}
