@@ -8,15 +8,14 @@ import passport from 'passport';
 import config from '../config.json';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import * as path from 'path';
 import { StadiaGameDBHook } from './StadiaGameDBHook';
+import routes from './Routes';
 
 export class App {
     server: Express;
-    routes: {[path: string]: RouteInterface[]} = {};
     services: Service[] = [];
     database: Database;
-    stadiagamedb: StadiaGameDBHook;
+    stadiaGameDb: StadiaGameDBHook;
     static self: App;
 
     constructor() {
@@ -44,42 +43,43 @@ export class App {
         this.database = new Database();
         this.database.connect('localhost:27017');
 
-        this.stadiagamedb = new StadiaGameDBHook();
-        this.stadiagamedb.updateCache();
+        this.stadiaGameDb = new StadiaGameDBHook();
+        this.stadiaGameDb.updateCache();
 
         App.self = this;
     }
 
     async start(port: number): Promise<void> {
         return new Promise((resolve, reject) => {
-            for (const path in this.routes) {
-                const routes: RouteInterface[] = this.routes[path];
+            this.registerRoutes();            
+            this.registerServices();
 
-                const get = [];
-                const post = [];
-                for(const route of routes) {
-                    if(route.get != null) get.push(route.get);
-                    if(route.post != null) post.push(route.post);
-                }
-
-                this.server.get(path, get);
-                this.server.post(path, post);
-            }
-    
-            for (const service of this.services) {
-                service.start();
-                console.log("starting")
-            }
-
-            console.log("listening")
             this.server.listen(port, () => {
                 resolve();
             });
         })
     }
+    private registerRoutes() {
+        for (let route of routes) {
+            
+            const get = [];
+            const post = [];
+            for(const instance of route.classInstances) {
+                if(instance.get != null) get.push(instance.get);
+                if(instance.post != null) post.push(instance.post);
+            }
 
-    route(path: string, ...routes: RouteInterface[]) {
-        this.routes[path] = routes;
+            this.server.get(route.path, get);
+            this.server.post(route.path, post);
+        }
+
+    }
+
+    private registerServices() {
+        for (const service of this.services) {
+            service.start();
+            console.log("starting", service.constructor.name)
+        }
     }
 
     use(service: Service) {
