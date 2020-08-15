@@ -3,6 +3,7 @@ import { IGameData, IAchievement } from '../database/IGameData';
 import { Game } from './Game.model';
 import { Achievement } from './Achievement.model';
 import { Statistics } from './Statistics.model';
+import { use } from 'passport';
 
 export class User {
     gaia: string;
@@ -23,8 +24,7 @@ export class User {
     }
 
     public static async CreateOrUpdate(gaia: string, user: IGameData) {
-        const gameDb = Database.self.gameDb;
-        const dbUser: User = await gameDb.users.findOne({ gaia: gaia });
+        const dbUser: User = await User.Find(gaia);
 
         const game = {
             uuid: user.game.uuid,
@@ -33,8 +33,6 @@ export class User {
             time: user.time,
         };
 
-        console.log({game});
-
         if (dbUser != null) {
             await User.AddGame(gaia, game);
 
@@ -42,8 +40,8 @@ export class User {
                 await Statistics.AddGame(game.uuid);
             }
 
+            console.log({game, ach: dbUser.games[game.uuid]});
             for (const achievement of game.achievements) {
-                const newUser: User = await User.Find(dbUser.gaia);
                 if (!(await User.HasAchievement(dbUser, game.uuid, achievement.id))) {
                     console.log("new!")
                     await Statistics.AddAchievement(game.uuid, achievement.id);
@@ -67,14 +65,14 @@ export class User {
 
     private static async HasAchievement(user: User, gameUUID: string, achievementID: string): Promise<boolean> {
         let achievements: IAchievement[] = [];
-        if(user.games[gameUUID] != null) {
+        if(user.games[gameUUID] != null && user.games[gameUUID].achievements != null) {
             achievements = user.games[gameUUID].achievements;
         }
 
         return achievements.find((e) => e.id === achievementID) != null;
     }
     
-    private static async AddGame(gaia: string, game: any) {
+    private static async AddGame(gaia: string, game: Game) {
         await Database.self.gameDb.users.updateOne(
             { gaia: gaia },
             {
@@ -85,16 +83,21 @@ export class User {
         );
     }
 
-    public static async Create(user: IGameData) {
+    public static async Create(data: IGameData) {
         await Database.self.gameDb.users.insertOne({
-            gaia: user.gaia,
+            gaia: data.gaia,
             games: {},
-            username: user.user.name,
-            tag: user.user.tag,
-            avatar: user.user.avatar,
+            username: data.user.name,
+            tag: data.user.tag,
+            avatar: data.user.avatar,
         });
 
         // Add first game
-        User.AddGame(user.gaia, user.game);
+        User.AddGame(data.gaia, {
+            uuid: data.game.uuid,
+            name: data.game.name,
+            achievements: data.achievements,
+            time: data.time
+        });
     }
 }

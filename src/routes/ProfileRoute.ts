@@ -47,6 +47,7 @@ export class ProfileRoute implements RouteInterface {
         for (const uuid in user.games) {
             const stats = await Statistics.Find(uuid);
 
+            console.log(user.games[uuid]);
             for (const achievement of user.games[uuid].achievements) {
                 (achievement as any).stats = {
                     total: stats.achievements[achievement.id],
