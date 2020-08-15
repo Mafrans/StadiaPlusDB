@@ -65,7 +65,7 @@ export namespace Database {
                 await this.addGame(game.uuid);
 
                 for(const achievement of game.achievements) {
-                    const achievementID = achievement.icon.substring("https://lh3.googleusercontent.com/".length);
+                    const achievementID = achievement.id;
                     await this.addAchievement(game.uuid, achievementID);
                 }
             }
@@ -91,6 +91,10 @@ export namespace Database {
             }
         }
 
+        public async getStats(uuid: string): Promise<IGameStats> {
+            return await this.statistics.findOne({uuid: uuid});
+        }
+
         public async addGame(uuid: string) {
             const existing: IGameStats = await this.statistics.findOne({ uuid: uuid });
             if(existing == null) {
@@ -110,6 +114,11 @@ export namespace Database {
 
         public async getUser(gaia: string): Promise<IUser> {
             const data = await this.users.findOne({gaia: gaia});
+            return data;
+        }
+
+        public async getProfile(username: string, tag: string): Promise<IUser> {
+            const data = await this.users.findOne({username: username, tag: tag});
             return data;
         }
     }

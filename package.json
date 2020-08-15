@@ -5,12 +5,12 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "csass": "sass ./public/scss:./public/scss/dist",
+    "csass": "sass ./public/assets/scss:./public/assets/scss/dist",
     "clean": "del-cli --force ./public/scss/dist && del-cli --force ./dist",
-    "build": "npm run clean && webpack --env.production && npm run csass",
-    "build:dev": "npm run clean && webpack --env.development && npm run csass",
-    "run": "npm run build && node dist/bundle.js",
-    "run:dev": "npm run build:dev && node dist/bundle.js"
+    "build": "npm run clean && npm run csass && webpack --env.production",
+    "build:dev": "npm run clean && npm run csass && webpack --env.development",
+    "run": "npm run build && node ./dist/bundle.js",
+    "run:dev": "npm run build:dev && node ./dist/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -25,9 +25,11 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "ejs": "^3.1.3",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mongodb": "^3.6.0",
+    "node-fetch": "^2.6.0",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
     "sass": "^1.26.10"
@@ -38,6 +40,7 @@
     "@types/express-session": "^1.17.0",
     "@types/mongoose": "^5.7.36",
     "@types/node": "^14.0.27",
+    "@types/node-fetch": "^2.5.7",
     "@types/passport": "^1.0.4",
     "@types/passport-google-oauth": "^1.0.41",
     "sass-loader": "^9.0.3",

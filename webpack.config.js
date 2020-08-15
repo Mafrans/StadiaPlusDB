@@ -5,7 +5,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 module.exports = env => {
     return {
         entry: {
-            backend: './src/index.js'
+            bundle: './src/index.js'
         },
         target: 'node',
         node: {

@@ -9,26 +9,44 @@ import config from '../config.json';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import * as path from 'path';
+import { StadiaGameDBHook } from './StadiaGameDBHook';
 
 export class App {
     server: Express;
     routes: {[path: string]: IRoute[]} = {};
     services: IService[] = [];
     database: Database.Client;
+    stadiagamedb: StadiaGameDBHook;
     static self: App;
 
     constructor() {
         this.server = express();
 
+        // Set EJS as the default engine
+        this.server.engine('ejs', require('ejs').__express);
+        this.server.set('view engine', 'ejs');
+
+        // Allow reading the body of post requests
         this.server.use(bodyParser.json());
-        this.server.use(express.static(path.join(__dirname, '../public/assets')));
+
+        // Set the folder paths
+        this.server.use(express.static('public/assets'));
+        this.server.set('views', 'public/docs');
+
+        // Make sure Stadia+ can communicate with the server
         this.server.use(cors());
         this.server.use(session({ secret: config.sessionSecret }));
+
+        // Initialize passport
         this.server.use(passport.initialize());
         this.server.use(passport.session());
 
         this.database = new Database.Client();
         this.database.connect('localhost:27017');
+
+        this.stadiagamedb = new StadiaGameDBHook();
+        this.stadiagamedb.updateCache();
+
         App.self = this;
     }
 

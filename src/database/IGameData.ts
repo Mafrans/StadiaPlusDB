@@ -6,6 +6,7 @@ export interface IGameData {
 }
 
 export interface IAchievement {
+    id: string;
     name: string;
     description: string;
     value: number;

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uh-oh, we did a fucky wucky</title>
+
+    <link rel="stylesheet" href="../scss/dist/style.css">
+    <link rel="stylesheet" href="../scss/dist/components.css">
+    <link rel="stylesheet" href="../scss/dist/grid.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <style>
+        .center-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 500px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+            color: #424242;
+        }
+
+        p {
+            color: #505050;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <navbar></navbar>
+
+        <div class="container">
+            <div class="center-card">
+                <i class="material-icons">error_outline</i>
+                <h1><%= error.message %></h1>
+                <p><%= error.description %></p>
+                <a html="#" @click="goToHome()"><i class="material-icons">arrow_back</i> Back to safety</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
+        import Navbar from '../components/navbar.js'
+        Vue.component('Navbar', Navbar);
+        var app = new Vue({
+            el: '#app',
+            methods: {
+                goToHome() {
+                    location.assign(`${location.origin}`);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

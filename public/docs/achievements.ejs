@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
 
-    <link rel="stylesheet" href="../scss/dist/style.css">
-    <link rel="stylesheet" href="../scss/dist/components.css">
-    <link rel="stylesheet" href="../scss/dist/grid.css">
+    <link rel="stylesheet" href="/scss/dist/style.css">
+    <link rel="stylesheet" href="/scss/dist/components.css">
+    <link rel="stylesheet" href="/scss/dist/grid.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
@@ -60,11 +60,7 @@
 </head>
 <body>
     <div id="app">
-        <navbar 
-            avatar="<%= user.avatar %>" 
-            username="<%= user.username %>" 
-            tag="<%= user.tag %>"
-        ></navbar>
+        <navbar></navbar>
 
         <div class="container">
             <div class="row hero">
@@ -84,7 +80,7 @@
             </div>
 
             <div class="row">
-                <divider icon="emoji_events">Achievements</divider>
+                <divider icon="emoji_events">Rarest Achievements</divider>
             </div>
             <div class="row achievements">
                 <achievement-card 
@@ -100,11 +96,11 @@
 
     <script type="module">
         import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
-        import Navbar from '../components/navbar.js'
-        import Badge from '../components/badge.js'
-        import Divider from '../components/divider.js'
-        import StatCard from '../components/stat-card.js'
-        import AchievementCard from '../components/achievement-card.js'
+        import Navbar from '/components/navbar.js'
+        import Badge from '/components/badge.js'
+        import Divider from '/components/divider.js'
+        import StatCard from '/components/stat-card.js'
+        import AchievementCard from '/components/achievement-card.js'
         Vue.component('Navbar', Navbar);
         Vue.component('Badge', Badge);
         Vue.component('Divider', Divider);
