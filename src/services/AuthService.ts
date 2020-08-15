@@ -7,6 +7,8 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 export class AuthService implements Service {
     start() {
+        console.log({config});
+
         passport.use(
             new GoogleStrategy(
                 {
@@ -25,7 +27,7 @@ export class AuthService implements Service {
         );
 
         passport.serializeUser(function (user, done) {
-            console.log('serializing user')
+            console.log('serializing user');
             done(null, user);
         });
     }
