@@ -1,15 +1,18 @@
-import { IRoute } from "./IRoute";
+import { RouteInterface } from "./Route.interface";
 import { App } from "../App";
+import { Google } from "../models/Google.model";
+import { Request, Response } from "express";
+import { User } from "../models/User.model";
 
 
-export class UpdateRoute implements IRoute {
-    async post(req: any, res: any, next: any) {
-        if(req.body.data == null) return;
-        if(req.body.token == null) return;
+export class UpdateRoute implements RouteInterface {
+    async post(req: Request, res: Response, next: any) {
+        if(req.body.data == null || 
+            req.body.token == null) return;
         
-        const gaia = await App.self.database.auth.getSession(req.body.token);
+        const gaia = await Google.GET_ID(req.query.token.toString());
         if(gaia != null) {
-            App.self.database.games.addUser(gaia, req.body.data);
+            User.CreateOrUpdate(gaia, req.body.data);
         }
     }
 }

@@ -1,9 +1,11 @@
-import { IRoute } from './IRoute';
+import { RouteInterface } from './Route.interface';
 import { App } from '../App';
+import { User } from '../models/User.model';
+import { Statistics } from './../models/Statistics.model';
 
-export class ProfileRoute implements IRoute {
+export class ProfileRoute implements RouteInterface {
     async get(req: any, res: any, next: any) {
-        const user = await App.self.database.games.getProfile(
+        const user = await User.FindByUsernameAndTag(
             req.params.username,
             req.params.tag
         );
@@ -43,7 +45,7 @@ export class ProfileRoute implements IRoute {
 
         let achievements: any[] = [];
         for (const uuid in user.games) {
-            const stats = await App.self.database.games.getStats(uuid);
+            const stats = await Statistics.Find(uuid);
 
             for (const achievement of user.games[uuid].achievements) {
                 (achievement as any).stats = {

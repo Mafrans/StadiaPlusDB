@@ -1,7 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import { Express } from 'express-serve-static-core';
-import { IRoute } from './routes/IRoute';
+import { RouteInterface } from './routes/Route.interface';
 import { IService } from './services/IService';
 import { Database } from './database/Database';
 import passport from 'passport';
@@ -13,9 +13,9 @@ import { StadiaGameDBHook } from './StadiaGameDBHook';
 
 export class App {
     server: Express;
-    routes: {[path: string]: IRoute[]} = {};
+    routes: {[path: string]: RouteInterface[]} = {};
     services: IService[] = [];
-    database: Database.Client;
+    database: Database;
     stadiagamedb: StadiaGameDBHook;
     static self: App;
 
@@ -41,7 +41,7 @@ export class App {
         this.server.use(passport.initialize());
         this.server.use(passport.session());
 
-        this.database = new Database.Client();
+        this.database = new Database();
         this.database.connect('localhost:27017');
 
         this.stadiagamedb = new StadiaGameDBHook();
@@ -53,7 +53,7 @@ export class App {
     async start(port: number): Promise<void> {
         return new Promise((resolve, reject) => {
             for (const path in this.routes) {
-                const routes: IRoute[] = this.routes[path];
+                const routes: RouteInterface[] = this.routes[path];
 
                 const get = [];
                 const post = [];
@@ -78,7 +78,7 @@ export class App {
         })
     }
 
-    route(path: string, ...routes: IRoute[]) {
+    route(path: string, ...routes: RouteInterface[]) {
         this.routes[path] = routes;
     }
 
