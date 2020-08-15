@@ -1,4 +1,5 @@
 export interface IGameData {
+    gaia?: string;
     game: IGame;
     achievements: IAchievement[];
     user: IUser;
