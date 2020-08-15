@@ -27,7 +27,7 @@ export class AuthService implements Service {
         );
 
         passport.serializeUser(function (user, done) {
-            console.log('serializing user')
+            console.log('serializing user');
             done(null, user);
         });
     }

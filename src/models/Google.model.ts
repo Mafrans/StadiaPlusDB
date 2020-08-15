@@ -1,4 +1,3 @@
-import { App } from "../App";
 import { Login } from "./Login.model";
 
 export class Google {
