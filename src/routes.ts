@@ -7,6 +7,7 @@ import { ProfileRoute } from "./routes/ProfileRoute";
 import { AchievementsRoute } from "./routes/AchievementsRoute";
 import { ProfileRedirectRoute } from "./routes/ProfileRedirectRoute";
 import { GameRoute } from "./routes/GameRoute";
+import { GamesRoute } from "./routes/GamesRoute";
 
 export interface Route {
     path: string;
@@ -49,6 +50,10 @@ const routes: Route[] = [
     {
         path: '/profile/:username/:tag/game/:game', 
         classInstances: [new GameRoute()]
+    },
+    {
+        path: '/profile/:username/:tag/games', 
+        classInstances: [new GamesRoute()]
     }
 ]
 export default routes;
