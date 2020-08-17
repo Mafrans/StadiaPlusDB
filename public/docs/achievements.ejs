@@ -77,6 +77,7 @@
             </div>
             <div class="row keystats">
                 <stat-card title="Achievements Unlocked"><b><%= achievements.length %></b></stat-card>
+                <stat-card title="Rarest Achievement">Top <b>{{ parseRarity(<%= achievements[0].stats.percent %>) }}%</b></stat-card>
             </div>
 
             <div class="row">
@@ -88,6 +89,7 @@
                     :icon="achievement.icon"
                     :name="achievement.name"
                     :description="achievement.description"
+                    :rarity="achievement.stats.percent"
                     wide="true"
                 ></achievement-card>
             </div>
@@ -116,6 +118,14 @@
                     const hours = Math.floor(seconds / 3600);
                     const minutes = Math.floor(seconds / 60) - hours * 60;
                     return [hours, minutes];
+                },
+                parseRarity(percent) {
+                    if(percent < 10) {
+                        return percent.toFixed(2);
+                    }
+                    else {
+                        return Math.round(percent);
+                    }
                 }
             }
         });

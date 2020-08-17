@@ -17,6 +17,7 @@
     .nav-logo-title {
         /* Tomato-Cherry */
         background: linear-gradient(90deg, #FA4821 0%, #AE0F56 100%);
+        background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     
@@ -189,6 +190,26 @@
         color: #505050;
         margin-left: auto;
     }
+
+    &.bronze {
+        border-color: #F3B4B4;
+        background-color: #FFF7F5;
+    }
+
+    &.silver {
+        border-color: #C8D2D5;
+        background-color: #F8FBFC;
+    }
+
+    &.gold {
+        border-color: #FFD2A8;
+        background-color: #FFFCF5;
+    }
+
+    &.diamond {
+        border-color: #8AD4FF;
+        background-color: #F5FEFF;
+    }
 }
 
 /**
@@ -273,6 +294,7 @@
     .sc-slot {
         font-size: 32px;
         font-weight: 400;
+        margin-bottom: .5rem;
     }
 
     b {

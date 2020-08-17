@@ -4,6 +4,7 @@ import { UpdateRoute } from "./routes/UpdateRoute";
 import { PingRoute } from "./routes/PingRoute";
 import { UserRoute } from "./routes/UserRoute";
 import { ProfileRoute } from "./routes/ProfileRoute";
+import { AchievementsRoutes } from "./routes/AchievementsRoute";
 
 export interface Route {
     path: string;
@@ -34,6 +35,10 @@ const routes: Route[] = [
     {
         path: '/profile/:username/:tag', 
         classInstances: [new ProfileRoute()]
+    },
+    {
+        path: '/profile/:username/:tag/achievements', 
+        classInstances: [new AchievementsRoutes()]
     }
 ]
 export default routes;
