@@ -45,7 +45,7 @@ export class GameRoute implements RouteInterface {
         }
 
         // Then set the icon
-        (game as any).icon = App.self.stadiaGameDb.getGame(game.uuid);
+        (game as any).image = App.self.stadiaGameDb.getGame(game.uuid).image;
 
         let achievements: any[] = game.achievements;
         if(achievements == null) achievements = [];
