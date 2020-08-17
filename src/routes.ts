@@ -5,6 +5,7 @@ import { PingRoute } from "./routes/PingRoute";
 import { UserRoute } from "./routes/UserRoute";
 import { ProfileRoute } from "./routes/ProfileRoute";
 import { AchievementsRoutes } from "./routes/AchievementsRoute";
+import { ProfileRedirectRoute } from "./routes/ProfileRedirectRoute";
 
 export interface Route {
     path: string;
@@ -31,6 +32,10 @@ const routes: Route[] = [
     {
         path: '/api/user', 
         classInstances: [new UserRoute()]
+    },
+    {
+        path: '/profile/:username/', 
+        classInstances: [new ProfileRedirectRoute()]
     },
     {
         path: '/profile/:username/:tag', 
