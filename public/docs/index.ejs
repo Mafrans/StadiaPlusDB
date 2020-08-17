@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uh-oh, we did a fucky wucky</title>
+
+    <link rel="stylesheet" href="/scss/dist/style.css">
+    <link rel="stylesheet" href="/scss/dist/components.css">
+    <link rel="stylesheet" href="/scss/dist/grid.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <style>
+        .text-gradient {
+            background: linear-gradient(90deg, #FA4821 0%, #AE0F56 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <navbar></navbar>
+
+        <div class="container">
+            <div class="row hero">
+                <h1>Stadia, <span class="text-gradient">elevated.</span></h1>
+                <p>Increase video quality. View network stats. Check your friends’ achievements. Elevate your Stadia experience with one free and easy-to-use browser extension.</p>
+                <a href="https://chrome.google.com/webstore/detail/stadia%20-extension/bbhmnnecicphphjamhdefpagipoegijd" class="extension-button">
+                    <i class="material-icons">get_app</i> Get the free extension
+                </a>
+            </div>
+            <div class="row">
+                <h3 class="text-gradient">Maximize visual quality</h3>
+                <p>
+                    <b>Push more of those delicous pixels.</b> Stadia+ allows you to force 4K 
+                    resolution on any screen and unlocks the VP9 codec for all screen resolutions, 
+                    delivering the highest level of detail that Stadia can offer.
+                </p>
+                <a href="">More about codec forcing <i class="material-icons">arrow_forward</i></a>
+                <img class="image" src="" alt="">
+            </div>
+            <div class="row">
+                <img class="image" src="" alt="">
+                <h3 class="text-gradient">Keep track of your progress</h3>
+                <p>
+                    <b>...and/or brag to your friends.</b> Your profile on Stadia+ DB shows your 
+                    achievements, game library and statistics, seamlessly synced with Stadia.
+                </p>
+                <a href="">More about Stadia+ DB <i class="material-icons">arrow_forward</i></a>
+            </div>
+            <div class="row">
+                <h3 class="text-gradient">Find your favourites fast</h3>
+                <p>
+                    <b>Cut through the clutter.</b> Stadia+ features filtering and sorting of your game 
+                    library and the Stadia game store. It also integrates Metacritic reviews to help 
+                    you decide on which game to buy.
+                </p>
+                <a href="">More about filtering and sorting <i class="material-icons">arrow_forward</i></a>
+                <img class="image" src="" alt="">
+            </div>
+            <div class="row">
+                <img class="image" src="" alt="">
+                <h3 class="text-gradient">Check in on your connection</h3>
+                <p>
+                    <b>Identify annoying lag spikes and connection issues</b> with network 
+                    monitoring built into the in-game overlay. All without leaving your game.
+                </p>
+                <a href="">More about network monitoring <i class="material-icons">arrow_forward</i></a>
+            </div>
+            <div class="row">
+                <h2>Sounds great, huh?</h2>
+                <p>Installing Stadia+ takes less time than reading this sentence. And it’s totally free.</p>
+                <a href="https://chrome.google.com/webstore/detail/stadia%20-extension/bbhmnnecicphphjamhdefpagipoegijd" class="extension-button">
+                    <i class="material-icons">get_app</i> Get the free extension
+                </a>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h3 class="text-gradient">Join the Discord server</h3>
+                    <p><b>Ask questions, give feedback or just say hi.</b> The main 
+                        developer is there along with 750+ other users. You’re welcome too.
+                    </p>
+                    <a href="">Join the Discord server <i class="material-icons">arrow_forward</i></a>
+                </div>
+                <div class="col">
+                    <h3 class="text-gradient">Help improve Stadia+</h3>
+                    <p>
+                        <b>Stadia+ is a free and open source project.</b> If you want to support 
+                        its future development, you can do so through Patreon (you’ll get a badge 
+                        on your Stadia+ DB profile too 😉). If you can code, contributions on 
+                        GitHub are also appreciated.
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <a href="">Support on Patreon <i class="material-icons">arrow_forward</i></a>
+                        </div>
+                        <div class="col">
+                            <a href="">View on GitHub <i class="material-icons">arrow_forward</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <p class="text-gradient">STADIA+</p>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="">Discord</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="">GitHub</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="">Help & docs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p>Developed and maintained by <a href="https://github.com/Mafrans">Malte "Mafrans" Klüft</a>. UI design by <a href="https://github.com/marcusbillman">Marcus Billman</a>.</p>
+                <p>Stadia is a trademark of Google LLC. Stadia+ is not affiliated with Stadia or Google.</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
+        import Navbar from '/components/navbar.js'
+        Vue.component('Navbar', Navbar);
+        var app = new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+</html>
