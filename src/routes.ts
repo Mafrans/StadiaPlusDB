@@ -4,8 +4,9 @@ import { UpdateRoute } from "./routes/UpdateRoute";
 import { PingRoute } from "./routes/PingRoute";
 import { UserRoute } from "./routes/UserRoute";
 import { ProfileRoute } from "./routes/ProfileRoute";
-import { AchievementsRoutes } from "./routes/AchievementsRoute";
+import { AchievementsRoute } from "./routes/AchievementsRoute";
 import { ProfileRedirectRoute } from "./routes/ProfileRedirectRoute";
+import { GameRoute } from "./routes/GameRoute";
 
 export interface Route {
     path: string;
@@ -43,7 +44,11 @@ const routes: Route[] = [
     },
     {
         path: '/profile/:username/:tag/achievements', 
-        classInstances: [new AchievementsRoutes()]
+        classInstances: [new AchievementsRoute()]
+    },
+    {
+        path: '/profile/:username/:tag/game/:game', 
+        classInstances: [new GameRoute()]
     }
 ]
 export default routes;

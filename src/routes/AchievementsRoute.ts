@@ -3,7 +3,7 @@ import { App } from '../App';
 import { User } from '../models/User.model';
 import { Statistics } from '../models/Statistics.model';
 
-export class AchievementsRoutes implements RouteInterface {
+export class AchievementsRoute implements RouteInterface {
     async get(req: any, res: any, next: any) {
         const user = await User.FindByUsernameAndTag(
             req.params.username,
