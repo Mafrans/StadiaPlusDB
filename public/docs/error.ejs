@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uh-oh, we did a fucky wucky</title>
 
-    <link rel="stylesheet" href="../scss/dist/style.css">
-    <link rel="stylesheet" href="../scss/dist/components.css">
-    <link rel="stylesheet" href="../scss/dist/grid.css">
+    <link rel="stylesheet" href="/scss/dist/style.css">
+    <link rel="stylesheet" href="/scss/dist/components.css">
+    <link rel="stylesheet" href="/scss/dist/grid.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
@@ -17,22 +17,59 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border: 500px;
-            height: 350px;
+            width: 550px;
+            min-height: 350px;
+            border: 2px solid #F0F0F0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
+            box-sizing: border-box;
+            padding: 3rem;
+            text-align: center;
+            border-radius: .5rem;
         }
 
-        h1 {
+        .center-card h1 {
             font-size: 24px;
             font-weight: 500;
             color: #424242;
+            margin-bottom: 1rem;
         }
 
-        p {
+        .center-card p {
             color: #505050;
+        }
+
+        .center-card a {
+            color: #FA4821;
+        }
+
+        .center-card .icon {
+            background: linear-gradient(90deg, #FA4821 0%, #AE0F56 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 64px;
+            margin-bottom: 1rem;
+        }
+
+        .center-card .button {
+            background: #F0F0F0;
+            color: #505050;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            padding: 16px 32px;
+            margin-top: 2rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .center-card .button .material-icons {
+            font-size: 17px;
+            margin-right: .5rem;
         }
     </style>
 </head>
@@ -42,17 +79,17 @@
 
         <div class="container">
             <div class="center-card">
-                <i class="material-icons">error_outline</i>
-                <h1><%= error.message %></h1>
-                <p><%= error.description %></p>
-                <a html="#" @click="goToHome()"><i class="material-icons">arrow_back</i> Back to safety</a>
+                <i class="material-icons icon">error_outline</i>
+                <h1><%- error.message %></h1>
+                <p><%- error.description %></p>
+                <a class="button" html="#" @click="goToHome()"><i class="material-icons">arrow_back</i> Back to safety</a>
             </div>
         </div>
     </div>
 
     <script type="module">
         import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
-        import Navbar from '../components/navbar.js'
+        import Navbar from '/components/navbar.js'
         Vue.component('Navbar', Navbar);
         var app = new Vue({
             el: '#app',
