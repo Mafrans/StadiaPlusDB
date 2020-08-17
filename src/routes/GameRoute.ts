@@ -19,6 +19,7 @@ export class GameRoute implements RouteInterface {
                             Mafrans on <a href="https://discord.com/invite/2VDbEQ8">Discord</a> if 
                             you think this is an error.
                         `,
+                    safetyURL: location.origin
                 },
             });
             return;
@@ -37,6 +38,7 @@ export class GameRoute implements RouteInterface {
                             by pressing the <a href="/images/UpdateInDBButton.png" target="_blank">"Update in DB" button</a> 
                             on the game. 
                         `,
+                    safetyURL: `https://${location.origin}/profile/${user.username}/${user.tag}`
                 },
             });
             return;

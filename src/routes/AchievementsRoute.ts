@@ -19,6 +19,7 @@ export class AchievementsRoute implements RouteInterface {
                             Mafrans on <a href="https://discord.com/invite/2VDbEQ8">Discord</a> if 
                             you think this is an error.
                         `,
+                    safetyURL: location.origin
                 },
             });
             return;

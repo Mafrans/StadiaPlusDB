@@ -82,7 +82,7 @@
                 <i class="material-icons icon">error_outline</i>
                 <h1><%- error.message %></h1>
                 <p><%- error.description %></p>
-                <a class="button" html="#" @click="goToHome()"><i class="material-icons">arrow_back</i> Back to safety</a>
+                <a class="button" href="<%- error.safetyURL %>"><i class="material-icons">arrow_back</i> Back to safety</a>
             </div>
         </div>
     </div>
@@ -92,12 +92,7 @@
         import Navbar from '/components/navbar.js'
         Vue.component('Navbar', Navbar);
         var app = new Vue({
-            el: '#app',
-            methods: {
-                goToHome() {
-                    location.assign(`${location.origin}`);
-                }
-            }
+            el: '#app'
         });
     </script>
 </body>
