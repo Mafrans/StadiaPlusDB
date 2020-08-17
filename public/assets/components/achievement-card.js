@@ -1,6 +1,6 @@
 var component = {
     template: `
-        <div class="achievement-card" :style="{width: wide ? '100%' : null}" :class="{diamond: wide && rarity <= 5, gold: wide && rarity <= 10, silver: wide && rarity <= 25, bronze: wide && rarity <= 50}">
+        <div class="achievement-card" :style="{width: wide ? '100%' : null}" :class="{diamond: rarity <= 5, gold: rarity <= 10, silver: rarity <= 25, bronze: rarity <= 50}">
             <img :src="icon">
             <div :style="{maxWidth: rarity <= 50 ? '60%' : 'calc(100% - 80px)'}">
                 <h3>{{ name }}</h3>
