@@ -1,6 +1,6 @@
 var component = {
     template: `
-        <div class="divider uk-flex uk-width-1-1 uk-flex-center uk-text-medium">
+        <div class="divider uk-flex uk-width-1-1 uk-flex-middle uk-text-medium">
             <h3 class="c-dark-gray">
                 <i class="material-icons">{{ icon }}</i>
                 <slot></slot>

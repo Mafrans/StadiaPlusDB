@@ -15,48 +15,22 @@
 
     <style>
         .banner {
-            background-size: cover;
-            background-position: center center;
-            background: linear-gradient(135deg, #FA4821 5.42%, #AE0F56 90.28%);
-            color: #ffffff;
-            position: relative;
             height: 200px;
-            border-radius: .5rem;
-            margin-top: 5rem;
-            width: 100%;
-        }
-        .banner div {
-            position: relative;
-            padding: 3.5rem 3rem;
-            display: flex;
-            height: 100%;
+            border-radius: 0.5rem;
+            padding: 3rem;
             box-sizing: border-box;
-            justify-content: space-between;
-            flex-direction: column;
         }
-        .banner h1 {
-            font-size: 48px;
-        }
+
         .banner h1 .material-icons {
             position: relative;
-            top: 7px;
+            top: 6px;
             font-size: 48px;
         }
+
         .banner a {
             opacity: 0.8;
             font-size: 18px;
-            color: #ffffff;
             text-decoration: none;
-        }
-        .banner a .material-icons {
-            font-size: 18px;
-            position: relative;
-            top: 2px;
-        }
-        .keystats,
-        .games {
-            width: 100%;
-            margin-left: -.5rem;
         }
     </style>
 </head>
@@ -68,24 +42,23 @@
             tag="<%= user.tag %>"
         ></navbar>
 
-        <div class="uk-container uk-container-large" uk-grid>
-            <div class="hero">
-                <div class="banner">
-                    <div>
-                        <a href="#" @click="goToProfile()"><i class="material-icons">arrow_back</i> Back to <%= user.username %>'s profile</a>
-                        <h1 class="c-white uk-text-bold"><i class="material-icons uk-margin-small-right">sports_esports</i>Games</h1>
-                    </div>
-                </div>
+        <div class="uk-container uk-container-large">
+            <div class="banner bg-gradient uk-margin-large-top uk-flex uk-flex-column uk-flex-between">
+                <a class="c-white uk-flex uk-flex-middle" href="#" @click="goToProfile()">
+                    <i class="material-icons">arrow_back</i> Back to <%= user.username %>'s profile
+                </a>
+                <h1 class="uk-heading-small c-white uk-text-bold uk-margin-remove"><i class="material-icons uk-margin-small-right">sports_esports</i>Games</h1>
             </div>
             
-            <divider icon="show_chart">Key stats</divider>
-            <div class="keystats">
+
+            <divider class="uk-margin-large-top" icon="show_chart">Key stats</divider>
+            <div class="keystats uk-margin-top">
                 <stat-card title="Games Owned"><b><%= games.length %></b></stat-card>
                 <stat-card title="Highest Playtime (<%= games.sort((a, b) => b.time - a.time)[0].name %>)"><b>{{ parseTime(<%= games.sort((a, b) => b.time - a.time)[0].time %>)[0] }}h</b> {{ parseTime(<%=games.sort((a, b) => b.time - a.time)[0].time %>)[1] }}m</stat-card>
             </div>
 
-            <divider icon="emoji_events">Games</divider>
-            <div class="games">
+            <divider class="uk-margin-large-top" icon="emoji_events">Games</divider>
+            <div class="games uk-margin-top">
                 <game-card 
                     v-for="game in <%= JSON.stringify(games) %>"
                     :image="game.image"
@@ -96,6 +69,8 @@
                 ></game-card>
             </div>
         </div>
+        
+        <div class="uk-padding-large"></div> <!-- Padding to make sure the page doesn't abruptly end -->
     </div>
 
     <script type="module">

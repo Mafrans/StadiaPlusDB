@@ -44,6 +44,7 @@
     hr {
         margin: 0 1rem;
         flex-grow: 1;
+        height: 0;
         border: 1px solid #F0F0F0;
     }
     
@@ -114,9 +115,11 @@
     height: 200px;
     box-sizing: border-box;
     cursor: pointer;
+    margin-bottom: 0 !important; // Override uikit rule
 
     &::before {
         content: '';
+        display: block !important; // Override uikit rule
         position: absolute;
         margin: -1rem;
         border-radius: .5rem;

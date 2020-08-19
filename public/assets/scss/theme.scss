@@ -12,7 +12,7 @@ $colors: (
 .c {
     @each $name, $color in $colors {
         &-#{$name} {
-            color: $color;
+            color: $color !important;
 
             &:hover {
                 color: $color !important; // Doesn't work

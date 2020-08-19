@@ -1,143 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Page</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Profile Page</title>
+        <link rel="stylesheet" href="/scss/dist/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+        />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css" />
+        <script src="/dependencies/uikit/js/uikit.min.js"></script>
+        <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+        <style>
+            .avatar {
+                width: 128px;
+                height: 128px;
+                margin-right: 2rem;
+                border-radius: 50%;
+            }
 
-    <link rel="stylesheet" href="/scss/dist/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+            .user {
+                margin: 6rem 0;
+            }
 
-    <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css">
-    <script src="/dependencies/uikit/js/uikit.min.js"></script>
-    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+            .founder-icon {
+                height: 48px;
+                margin-bottom: 1rem;
+            }
+        </style>
+    </head>
 
-    <style>
-        .user {
-            margin-top: 6rem;
-            display: flex;
-        }
-
-        .user h1 {
-            color: #424242;
-            font-size: 48px;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .avatar {
-            width: 128px;
-            height: 128px;
-            margin-right: 2rem;
-            border-radius: 50%;
-        }
-
-        .user h1 .tag {
-            color: #969696;
-            font-weight: 300;
-            margin-left: -.5rem;
-        }
-
-        .founder-icon {
-            height: 48px;
-        }
-
-        .achievements,
-        .games {
-            width: calc(100% + 1rem);
-            margin-left: -.5rem;
-        }
-    </style>
-</head>
-<body>
-    <div id="app">
-        <navbar 
-            avatar="<%= user.avatar %>" 
-            username="<%= user.username %>" 
-            tag="<%= user.tag %>"
-        ></navbar>
-
-        
-        <div class="uk-container uk-container-large">
-            <div uk-grid>
-                <div class="user">
-                    <img class="avatar" src="<%= user.avatar %>">
-                    <div>
-                        <h1>
-                            <%= user.username %>
-                            <span class="tag" v-if="<%= user.tag %> != '0000'">
-                                #<%= user.tag %>
-                            </span>
-                            <img class="founder-icon" src="/images/founder.svg" alt="Founder" v-else>
-                        </h1>
-                        <div class="badges">
-                            <badge color="#FFA800" icon="star">
-                                Gold Tier Supporter
-                            </badge>
-                            <badge color="#F26B2B" icon="add">
-                                Stadia+ Developer
-                            </badge>
+    <body>
+        <div id="app">
+            <navbar avatar="<%= user.avatar %>" username="<%= user.username %>" tag="<%= user.tag %>"></navbar>
+            <div class="uk-container uk-container-large">
+                <div uk-grid>
+                    <div class="user uk-flex uk-flex-middle">
+                        <img class="avatar" src="<%= user.avatar %>" />
+                        <div>
+                            <h1 class="c-charcoal uk-text-bold">
+                                <%= user.username %>
+                                <span class="tag" v-if="<%= user.tag %> != '0000'"> #<%= user.tag %> </span>
+                                <img class="founder-icon" src="/images/founder.svg" alt="Founder" v-else />
+                            </h1>
+                            <div class="badges">
+                                <badge color="#FFA800" icon="star"> Gold Tier Supporter </badge>
+                                <badge color="#F26B2B" icon="add"> Stadia+ Developer </badge>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <divider icon="emoji_events" @expand="goToAchievements()" expand="true">Achievements</divider>
-                <div class="achievements">
-                    <achievement-card 
-                        v-for="achievement in <%= JSON.stringify(achievements) %>"
-                        :icon="achievement.icon"
-                        :name="achievement.name"
-                        :description="achievement.gameName"
-                        :rarity="achievement.stats.percent"
-                    ></achievement-card>
-                </div>
-
-                <divider icon="sports_esports" @expand="goToGames()" expand="true">Games</divider>
-                <div class="games">
-                    <game-card 
-                        v-for="game in <%= JSON.stringify(games) %>"
-                        :image="game.image"
-                        :name="game.name"
-                        :play-time="game.time"
-
-                        @click.native="goToGame(game.uuid)"
-                    ></game-card>
+                    <divider class="uk-margin-remove" icon="emoji_events" @expand="goToAchievements()" expand="true">
+                        Rarest Achievements</divider
+                    >
+                    <div class="achievements uk-margin-top">
+                        <achievement-card
+                            v-for="achievement in <%= JSON.stringify(achievements) %>"
+                            :icon="achievement.icon"
+                            :name="achievement.name"
+                            :description="achievement.gameName"
+                            :rarity="achievement.stats.percent"
+                        ></achievement-card>
+                    </div>
+                    <divider class="uk-margin-large-top" icon="sports_esports" @expand="goToGames()" expand="true"
+                        >Games
+                    </divider>
+                    <div class="games uk-margin-top uk-width-1-1">
+                        <game-card
+                            v-for="game in <%= JSON.stringify(games) %>"
+                            :image="game.image"
+                            :name="game.name"
+                            :play-time="game.time"
+                            @click.native="goToGame(game.uuid)"
+                        ></game-card>
+                    </div>
                 </div>
             </div>
+            
+            <div class="uk-padding-large"></div> <!-- Padding to make sure the page doesn't abruptly end -->
         </div>
-    </div>
+        <script type="module">
+            import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js';
+            import Navbar from '/components/navbar.js';
+            import Badge from '/components/badge.js';
+            import Divider from '/components/divider.js';
+            import AchievementCard from '/components/achievement-card.js';
+            import GameCard from '/components/game-card.js';
 
-    <script type="module">
-        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
-        import Navbar from '/components/navbar.js'
-        import Badge from '/components/badge.js'
-        import Divider from '/components/divider.js'
-        import AchievementCard from '/components/achievement-card.js'
-        import GameCard from '/components/game-card.js'
-
-        Vue.component('Navbar', Navbar);
-        Vue.component('Badge', Badge);
-        Vue.component('Divider', Divider);
-        Vue.component('AchievementCard', AchievementCard);
-        Vue.component('GameCard', GameCard);
-
-        var app = new Vue({
-            el: '#app',
-            methods: {
-                goToGame(uuid) {
-                    location.assign(`${location.origin}/profile/<%= user.username %>/<%= user.tag %>/game/${uuid}`);
+            Vue.component('Navbar', Navbar);
+            Vue.component('Badge', Badge);
+            Vue.component('Divider', Divider);
+            Vue.component('AchievementCard', AchievementCard);
+            Vue.component('GameCard', GameCard);
+            var app = new Vue({
+                el: '#app',
+                methods: {
+                    goToGame(uuid) {
+                        location.assign(`${location.origin}/profile/<%= user.username %>/<%= user.tag %>/game/${uuid}`);
+                    },
+                    goToAchievements() {
+                        location.assign(`${location.origin}/profile/<%= user.username %>/<%= user.tag %>/achievements`);
+                    },
+                    goToGames() {
+                        location.assign(`${location.origin}/profile/<%= user.username %>/<%= user.tag %>/games`);
+                    },
                 },
-
-                goToAchievements() {
-                    location.assign(`${location.origin}/profile/<%= user.username %>/<%= user.tag %>/achievements`);
-                },
-
-                goToGames() {
-                    location.assign(`${location.origin}/profile/<%= user.username %>/<%= user.tag %>/games`);
-                }
-            }
-        });
-    </script>
-</body>
+            });
+        </script>
+    </body>
 </html>

@@ -1,184 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stadia+</title>
-
-    <link rel="stylesheet" href="/scss/dist/style.css">
-    <link rel="stylesheet" href="/scss/dist/index.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-    <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css">
-    <script src="/dependencies/uikit/js/uikit.min.js"></script>
-    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
-</head>
-
-<body>
-    <div id="app">
-        <navbar></navbar>
-        <div class="hero bg-light-gray uk-flex uk-flex-middle">
-            <div class="uk-container uk-container-large" style="width: 100%">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Stadia+</title>
+        <link rel="stylesheet" href="/scss/dist/style.css" />
+        <link rel="stylesheet" href="/scss/dist/index.css" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+        />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css" />
+        <script src="/dependencies/uikit/js/uikit.min.js"></script>
+        <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <navbar></navbar>
+            <div class="hero bg-light-gray uk-flex uk-flex-middle">
+                <div class="uk-container uk-container-large" style="width: 100%">
+                    <div uk-grid>
+                        <div class="uk-width-1-2">
+                            <h1 class="uk-text-bold uk-heading-medium">
+                                Stadia, <span class="c-gradient">elevated.</span>
+                            </h1>
+                            <p class="uk-text-medium uk-margin-medium-top uk-margin-medium-bottom">
+                                Increase video quality. View network stats. Check your friends’ achievements. Elevate
+                                your Stadia experience with one free and easy-to-use browser extension.
+                            </p>
+                            <btn icon="get_app" @click="openExtensionPage()" gradient=""> Get the free extension </btn>
+                        </div>
+                        <div class="uk-width-1-2 splash" uk-parallax="y: -100">
+                            <img src="/images/splash.svg" alt="" class="splash" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-container uk-container-large">
+                <div class="uk-margin-xlarge-top" uk-grid>
+                    <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
+                        <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Maximize visual quality</h2>
+                        <p>
+                            <b>Push more of those delicous pixels.</b> Stadia+ allows you to force 4K resolution on any
+                            screen and unlocks the VP9 codec for all screen resolutions, delivering the highest level of
+                            detail that Stadia can offer.
+                        </p>
+                        <a
+                            class="c-tomato uk-margin-medium-top uk-text-medium"
+                            href="https://github.com/Mafrans/StadiaPlus/wiki/Getting-Started#force-codec--force-resolution"
+                            target="_blank"
+                        >
+                            More about codec/resolution forcing<i class="material-icons">arrow_forward</i>
+                        </a>
+                    </div>
+                    <div class="uk-width-1-2">
+                        <div class="image right bg-gradient">
+                            <img src="https://via.placeholder.com/320x180" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin-xlarge-top" uk-grid>
+                    <div class="uk-width-1-2">
+                        <div class="image left bg-gradient">
+                            <img src="https://via.placeholder.com/320x180" alt="" />
+                        </div>
+                    </div>
+                    <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
+                        <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Keep track of your progress</h2>
+                        <p>
+                            <b>...and/or brag to your friends.</b> Your profile on Stadia+ DB shows your achievements,
+                            game library and statistics, seamlessly synced with Stadia.
+                        </p>
+                        <a class="c-tomato uk-margin-medium-top uk-text-medium" href="" target="_blank"
+                            >More about Stadia+ DB<i class="material-icons">arrow_forward</i></a
+                        >
+                    </div>
+                </div>
+                <div class="uk-margin-xlarge-top" uk-grid>
+                    <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
+                        <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Find your favourites fast</h2>
+                        <p>
+                            <b>Cut through the clutter.</b> Stadia+ features filtering and sorting of your game library
+                            and the Stadia game store. It also integrates Metacritic reviews to help you decide on which
+                            game to buy.
+                        </p>
+                        <a
+                            class="c-tomato uk-margin-medium-top uk-text-medium"
+                            href="https://github.com/Mafrans/StadiaPlus/wiki/Getting-Started#library-filter"
+                            target="_blank"
+                            >More about filtering and sorting<i class="material-icons">arrow_forward</i></a
+                        >
+                    </div>
+                    <div class="uk-width-1-2">
+                        <div class="image right bg-gradient">
+                            <img src="https://via.placeholder.com/320x180" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-margin-xlarge-top" uk-grid>
+                    <div class="uk-width-1-2">
+                        <div class="image left bg-gradient">
+                            <img src="https://via.placeholder.com/320x180" alt="" />
+                        </div>
+                    </div>
+                    <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
+                        <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Check in on your connection</h2>
+                        <p>
+                            <b>Identify annoying lag spikes and connection issues</b> with network monitoring built into
+                            the in-game overlay. All without leaving your game.
+                        </p>
+                        <a
+                            class="c-tomato uk-margin-medium-top uk-text-medium"
+                            href="https://github.com/Mafrans/StadiaPlus/wiki/Getting-Started#network-monitor"
+                            target="_blank"
+                            >More about network monitoring<i class="material-icons">arrow_forward</i></a
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="bg-light-gray uk-margin-xlarge-top uk-padding-large uk-text-center">
+                <h1 class="uk-heading-small uk-text-bold">Sounds great, huh?</h1>
+                <p class="uk-margin-medium-bottom">
+                    Installing Stadia+ takes less time than reading this sentence. <b>And it’s totally free.</b>
+                </p>
+                <btn icon="get_app" @click="openExtensionPage()" gradient=""> Get the free extension </btn>
+            </div>
+            <div class="uk-container uk-container-large uk-margin-xlarge-top">
                 <div uk-grid>
                     <div class="uk-width-1-2">
-                        <h1 class="uk-text-bold uk-heading-medium">Stadia, <span class="c-gradient">elevated.</span>
-                        </h1>
-                        <p class="uk-text-medium uk-margin-medium-top uk-margin-medium-bottom">Increase video quality.
-                            View network stats. Check your friends’ achievements. Elevate your Stadia experience with
-                            one free and easy-to-use browser extension.</p>
-                        <btn icon="get_app" @click="openExtensionPage()" gradient="">
-                            Get the free extension
-                        </btn>
+                        <h2 class="c-gradient uk-text-bold">Join the Discord server</h2>
+                        <p class="uk-margin-top uk-margin-bottom">
+                            <b>Ask questions, give feedback or just say hi.</b> The main developer is there along with
+                            750+ other users. You’re welcome too.
+                        </p>
+                        <a class="c-tomato uk-text-medium" href=""
+                            >Join the Discord server<i class="material-icons">arrow_forward</i></a
+                        >
                     </div>
-                    <div class="uk-width-1-2 splash" uk-parallax="y: -100">
-                        <img src="/images/splash.svg" alt="" class="splash">
+                    <div class="uk-width-1-2">
+                        <h2 class="c-gradient uk-text-bold">Help improve Stadia+</h2>
+                        <p class="uk-margin-top uk-margin-bottom">
+                            <b>Stadia+ is a free and open source project.</b> If you want to support its future
+                            development, you can do so through Patreon (you’ll get a badge on your Stadia+ DB profile
+                            too 😉). If you can code, contributions on GitHub are also appreciated.
+                        </p>
+                        <a class="c-tomato uk-text-medium" href=""
+                            >Join the Discord server<i class="material-icons">arrow_forward</i></a
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="bg-light-gray uk-margin-xlarge-top uk-padding">
+                <div class="uk-container uk-container-large">
+                    <div class="uk-grid-medium" uk-grid>
+                        <p class="c-gradient uk-text-bold uk-margin-medium-right">STADIA+</p>
+                        <a class="c-dark-gray uk-text-medium">Discord</a>
+                        <a class="c-dark-gray uk-text-medium">GitHub</a>
+                        <a class="c-dark-gray uk-text-medium">Help & docs</a>
+                    </div>
+                    <div class="uk-margin-medium-top">
+                        <p>
+                            Developed and maintained by
+                            <a class="c-tomato" href="https://github.com/Mafrans">Malte "Mafrans" Klüft</a>. UI design
+                            by <a class="c-tomato" href="https://github.com/marcusbillman">Marcus Billman</a>.
+                        </p>
+                        <p>Stadia is a trademark of Google LLC. Stadia+ is not affiliated with Stadia or Google.</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="uk-container uk-container-large">
-            <div class="uk-margin-xlarge-top" uk-grid>
-                <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
-                    <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Maximize visual quality</h2>
-                    <p>
-                        <b>Push more of those delicous pixels.</b> Stadia+ allows you to force 4K
-                        resolution on any screen and unlocks the VP9 codec for all screen resolutions,
-                        delivering the highest level of detail that Stadia can offer.
-                    </p>
-                    <a class="c-tomato uk-margin-medium-top uk-text-medium"
-                        href="https://github.com/Mafrans/StadiaPlus/wiki/Getting-Started#force-codec--force-resolution"
-                        target="_blank">
-                        More about codec/resolution forcing<i class="material-icons">arrow_forward</i>
-                    </a>
-                </div>
-                <div class="uk-width-1-2">
-                    <div class="image right bg-gradient">
-                        <img src="https://via.placeholder.com/320x180" alt="">
-                    </div>
-                </div>
-            </div>
-
-            <div class="uk-margin-xlarge-top" uk-grid>
-                <div class="uk-width-1-2">
-                    <div class="image left bg-gradient">
-                        <img src="https://via.placeholder.com/320x180" alt="">
-                    </div>
-                </div>
-                <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
-                    <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Keep track of your progress</h2>
-                    <p>
-                        <b>...and/or brag to your friends.</b> Your profile on Stadia+ DB shows your achievements, game
-                        library and statistics, seamlessly synced with Stadia.
-                    </p>
-                    <a class="c-tomato uk-margin-medium-top uk-text-medium" href="" target="_blank">More about Stadia+ DB<i
-                            class="material-icons">arrow_forward</i></a>
-                </div>
-            </div>
-
-            <div class="uk-margin-xlarge-top" uk-grid>
-                <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
-                    <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Find your favourites fast</h2>
-                    <p>
-                        <b>Cut through the clutter.</b> Stadia+ features filtering and sorting of your game library and
-                        the Stadia game store. It also integrates Metacritic reviews to help you decide on which game to
-                        buy.
-                    </p>
-                    <a class="c-tomato uk-margin-medium-top uk-text-medium" href="https://github.com/Mafrans/StadiaPlus/wiki/Getting-Started#library-filter" target="_blank">More about filtering and sorting<i
-                            class="material-icons">arrow_forward</i></a>
-                </div>
-                <div class="uk-width-1-2">
-                    <div class="image right bg-gradient">
-                        <img src="https://via.placeholder.com/320x180" alt="">
-                    </div>
-                </div>
-            </div>
-
-            <div class="uk-margin-xlarge-top" uk-grid>
-                <div class="uk-width-1-2">
-                    <div class="image left bg-gradient">
-                        <img src="https://via.placeholder.com/320x180" alt="">
-                    </div>
-                </div>
-                <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
-                    <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Check in on your connection</h2>
-                    <p>
-                        <b>Identify annoying lag spikes and connection issues</b> with network monitoring built into the
-                        in-game overlay. All without leaving your game.
-                    </p>
-                    <a class="c-tomato uk-margin-medium-top uk-text-medium" href="https://github.com/Mafrans/StadiaPlus/wiki/Getting-Started#network-monitor" target="_blank">More about network monitoring<i
-                            class="material-icons">arrow_forward</i></a>
-                </div>
-            </div>
-        </div>
-        <div class="bg-light-gray uk-margin-xlarge-top uk-padding-large uk-text-center">
-            <h1 class="uk-heading-small uk-text-bold">Sounds great, huh?</h1>
-            <p class="uk-margin-medium-bottom">
-                Installing Stadia+ takes less time than reading this sentence. <b>And it’s totally free.</b>
-            </p>
-            <btn icon="get_app" @click="openExtensionPage()" gradient="">
-                Get the free extension
-            </btn>
-        </div>
-        <div class="uk-container uk-container-large uk-margin-xlarge-top">
-            <div uk-grid>
-                <div class="uk-width-1-2">
-                    <h2 class="c-gradient uk-text-bold">Join the Discord server</h2>
-                    <p class="uk-margin-top uk-margin-bottom">
-                        <b>Ask questions, give feedback or just say hi.</b> The main developer is there along with 750+
-                        other users. You’re welcome too.
-                    </p>
-                    <a class="c-tomato uk-text-medium" href="">Join the Discord server<i
-                            class="material-icons">arrow_forward</i></a>
-                </div>
-                <div class="uk-width-1-2">
-                    <h2 class="c-gradient uk-text-bold">Help improve Stadia+</h2>
-                    <p class="uk-margin-top uk-margin-bottom">
-                        <b>Stadia+ is a free and open source project.</b> If you want to support its future development,
-                        you can do so through Patreon (you’ll get a badge on your Stadia+ DB profile too 😉). If you can
-                        code, contributions on GitHub are also appreciated.
-                    </p>
-                    <a class="c-tomato uk-text-medium" href="">Join the Discord server<i
-                            class="material-icons">arrow_forward</i></a>
-                </div>
-            </div>
-        </div>
-        <div class="bg-light-gray uk-margin-xlarge-top uk-padding">
-            <div class="uk-container uk-container-large">
-                <div class="uk-grid-medium" uk-grid>
-                    <p class="c-gradient uk-text-bold uk-margin-medium-right">STADIA+</p>
-                    <a class="c-dark-gray uk-text-medium">Discord</a>
-                    <a class="c-dark-gray uk-text-medium">GitHub</a>
-                    <a class="c-dark-gray uk-text-medium">Help & docs</a>
-                </div>
-                <div class="uk-margin-medium-top">
-                    <p>Developed and maintained by <a class="c-tomato" href="https://github.com/Mafrans">Malte "Mafrans"
-                            Klüft</a>. UI design by <a class="c-tomato" href="https://github.com/marcusbillman">Marcus
-                            Billman</a>.</p>
-                    <p>Stadia is a trademark of Google LLC. Stadia+ is not affiliated with Stadia or Google.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script type="module">
-        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
-        import Navbar from '/components/navbar.js'
-        import Button from '/components/button.js'
-        Vue.component('Navbar', Navbar);
-        Vue.component('Btn', Button);
-        var app = new Vue({
-            el: '#app',
-
-            methods: {
-                openExtensionPage() {
-                    window.open('https://chrome.google.com/webstore/detail/stadia%20-extension/bbhmnnecicphphjamhdefpagipoegijd', '_blank');
-                }
-            }
-        });
-    </script>
-</body>
-
+        <script type="module">
+            import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js';
+            import Navbar from '/components/navbar.js';
+            import Button from '/components/button.js';
+            
+            Vue.component('Navbar', Navbar);
+            Vue.component('Btn', Button);
+            var app = new Vue({
+                el: '#app',
+                methods: {
+                    openExtensionPage() {
+                        window.open(
+                            'https://chrome.google.com/webstore/detail/stadia%20-extension/bbhmnnecicphphjamhdefpagipoegijd',
+                            '_blank'
+                        );
+                    },
+                },
+            });
+        </script>
+    </body>
 </html>
