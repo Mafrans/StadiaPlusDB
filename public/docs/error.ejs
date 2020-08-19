@@ -6,10 +6,11 @@
     <title>Uh-oh, we did a fucky wucky</title>
 
     <link rel="stylesheet" href="/scss/dist/style.css">
-    <link rel="stylesheet" href="/scss/dist/components.css">
-    <link rel="stylesheet" href="/scss/dist/grid.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css" />
+    <script src="/dependencies/uikit/js/uikit.min.js"></script>
+    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
 
     <style>
         .center-card {
@@ -20,25 +21,14 @@
             width: 550px;
             min-height: 350px;
             border: 2px solid #F0F0F0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
             box-sizing: border-box;
-            padding: 3rem;
-            text-align: center;
             border-radius: .5rem;
         }
 
         .center-card h1 {
             font-size: 24px;
             font-weight: 500;
-            color: #424242;
             margin-bottom: 1rem;
-        }
-
-        .center-card p {
-            color: #505050;
         }
 
         .center-card a {
@@ -51,25 +41,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-size: 64px;
-            margin-bottom: 1rem;
-        }
-
-        .center-card .button {
-            background: #F0F0F0;
-            color: #505050;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            flex-direction: row;
-            padding: 16px 32px;
-            margin-top: 2rem;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .center-card .button .material-icons {
-            font-size: 17px;
-            margin-right: .5rem;
         }
     </style>
 </head>
@@ -77,12 +48,12 @@
     <div id="app">
         <navbar></navbar>
 
-        <div class="container">
-            <div class="center-card">
-                <i class="material-icons icon">error_outline</i>
-                <h1><%- error.message %></h1>
-                <p><%- error.description %></p>
-                <a class="button" href="<%- error.safetyURL %>"><i class="material-icons">arrow_back</i> Back to safety</a>
+        <div class="uk-container uk-container-large">
+            <div class="center-card uk-flex uk-flex-column uk-flex-middle uk-flex-between uk-padding uk-text-middle">
+                <i class="material-icons icon uk-margin-bottom">error_outline</i>
+                <h1 class="c-charcoal uk-heading-small uk-margin-remove"><%- error.message %></h1>
+                <p class="c-dark-gray uk-margin"><%- error.description %></p>
+                <btn @click="goToSafety()" class="uk-text-normal" icon="arrow_back">Back to safety</btn>
             </div>
         </div>
     </div>
@@ -90,9 +61,16 @@
     <script type="module">
         import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
         import Navbar from '/components/navbar.js'
+        import Button from '/components/button.js'
         Vue.component('Navbar', Navbar);
+        Vue.component('Btn', Button);
         var app = new Vue({
-            el: '#app'
+            el: '#app',
+            methods: {
+                goToSafety() {
+                    window.open('<%- error.safetyURL %>');
+                }
+            }
         });
     </script>
 </body>

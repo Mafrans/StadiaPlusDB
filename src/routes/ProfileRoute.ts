@@ -2,6 +2,7 @@ import { RouteInterface } from './Route.interface';
 import { App } from '../App';
 import { User } from '../models/User.model';
 import { Statistics } from './../models/Statistics.model';
+import config from '../../config.json';
 
 export class ProfileRoute implements RouteInterface {
     async get(req: any, res: any, next: any) {
@@ -19,7 +20,7 @@ export class ProfileRoute implements RouteInterface {
                             Mafrans on <a href="https://discord.com/invite/2VDbEQ8">Discord</a> if 
                             you think this is an error.
                         `,
-                    safetyURL: location.origin
+                    safetyURL: config.host
                 },
             });
             return;
