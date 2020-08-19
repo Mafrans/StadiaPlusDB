@@ -34,7 +34,8 @@
 
     <body>
         <div id="app">
-            <navbar avatar="<%= user.avatar %>" username="<%= user.username %>" tag="<%= user.tag %>"></navbar>
+            <navbar showdb></navbar>
+
             <div class="uk-container uk-container-large">
                 <div uk-grid>
                     <div class="user uk-flex uk-flex-middle">
@@ -77,7 +78,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="uk-padding-large"></div> <!-- Padding to make sure the page doesn't abruptly end -->
         </div>
         <script type="module">
