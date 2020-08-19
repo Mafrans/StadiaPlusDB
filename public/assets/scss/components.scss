@@ -1,78 +1,18 @@
 /**
  *  The Navbar component
  */
- .navbar {
-    height: 100px;
-    width: 100%;
-
+.navbar {
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.16);
-
-    .container {
-        height: inherit;
-        align-items: center;
-        justify-content: space-between;
-        display: flex;
-    }
-
-    .nav-logo-title {
-        /* Tomato-Cherry */
-        background: linear-gradient(90deg, #FA4821 0%, #AE0F56 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    
-        font-size: 32px;
-        letter-spacing: 2px;
-    }
-
-    .nav-logo-db {
-        /* Tomato-Cherry */
-        color: #ae0f56;
-        margin-left: 1rem;
-    
-        font-size: 32px;
-        letter-spacing: 2px;
-    }
-
-    .nav-logo-container {
-        display: flex;
-        align-items: center;
-    }
+    letter-spacing: 2px;
+    height: 100px;
 
     .nav-logo {
-        height: 36px;    
-        margin-right: 1rem;
+        height: 36px;
         margin-bottom: 0.25rem;
     }
 
-    .nav-user {
-        display: flex;
-        align-items: center;
-        border: 2px solid #F0F0F0;
-        box-sizing: border-box;
-        padding: .75rem 1rem;
-        border-radius: 0.5rem;
-
-        .nav-avatar {
-            height: 38px;
-            width: 38px;
-            border-radius: .5rem;
-        }
-
-        .nav-name-container {
-            margin: 0 1rem;
-
-            .nav-username {
-                font-weight: 500;
-                font-size: 20px;
-                color: #424242;
-            }
-    
-            .nav-tag {
-                font-size: 14px;
-                color: #969696;
-            }
-        }
+    h1, p {
+        font-size: 32px;
     }
 }
 
@@ -82,8 +22,9 @@
 .badge {
     font-size: 14px;
     display: inline-flex;
+    align-items: center;
     flex-direction: row;
-    padding: 6px 16px;
+    padding: 4px 16px;
     background: #F0F0F0;
     border-radius: 999px;
     font-weight: 500;
@@ -190,26 +131,6 @@
         color: #505050;
         margin-left: auto;
     }
-
-    &.bronze {
-        border-color: #F3B4B4;
-        background-color: #FFF7F5;
-    }
-
-    &.silver {
-        border-color: #C8D2D5;
-        background-color: #F8FBFC;
-    }
-
-    &.gold {
-        border-color: #FFD2A8;
-        background-color: #FFFCF5;
-    }
-
-    &.diamond {
-        border-color: #8AD4FF;
-        background-color: #F5FEFF;
-    }
 }
 
 /**
@@ -310,5 +231,20 @@
 
     @media screen and (min-width: 960px) {
         width: calc(33% - 1.1231rem);
+    }
+}
+
+/**
+ *  The Button component
+ */
+.button {
+    padding: 1rem 2rem;
+    text-decoration: none;
+    width: fit-content;
+    border-radius: 0.5rem;
+    font-size: 18px;
+
+    &:hover {
+        text-decoration: none;
     }
 }

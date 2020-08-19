@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.image {
+    width: 100%;
+}
+
+body {
+    h1, h2, h3, h4, h5, p {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+    }
+}
+
+// Extend the default uk-text weights
+.uk-text {
+    &-medium {
+        font-weight: 500;
+    }
+    &-semibold {
+        font-weight: 600;
+    }
+}
+
+a {
+    .material-icons {
+        font-size: calc(1em + 1px);
+        vertical-align: middle;
+        margin: 0 0.25em;
+    }
+}

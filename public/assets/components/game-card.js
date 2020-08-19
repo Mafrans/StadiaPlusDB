@@ -2,7 +2,7 @@ var component = {
     template: `
         <div class="game-card" :style="{'background-image': 'url(' + image + ')'}">
             <div class="gc-text-container">
-                <h3>{{ name }}</h3>
+                <h3 class="c-white">{{ name }}</h3>
                 <p>Played for {{ parseTime(playTime)[0] }}h {{ parseTime(playTime)[1] }}m</p>
             </div>
         </div>

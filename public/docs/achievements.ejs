@@ -6,10 +6,12 @@
     <title>Profile Page</title>
 
     <link rel="stylesheet" href="/scss/dist/style.css">
-    <link rel="stylesheet" href="/scss/dist/components.css">
-    <link rel="stylesheet" href="/scss/dist/grid.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css">
+    <script src="/dependencies/uikit/js/uikit.min.js"></script>
+    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
 
     <style>
         .banner {
@@ -62,28 +64,24 @@
     <div id="app">
         <navbar></navbar>
 
-        <div class="container">
-            <div class="row hero">
+        <div class="uk-container uk-container-large" uk-grid>
+            <div class="hero">
                 <div class="banner">
                     <div>
                         <a href="#" @click="goToProfile()"><i class="material-icons">arrow_back</i> Back to <%= user.username %>'s profile</a>
-                        <h1><i class="material-icons">emoji_events</i>Achievements</h1>
+                        <h1 class="c-white uk-text-bold"><i class="material-icons uk-margin-small-right">emoji_events</i>Achievements</h1>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <divider icon="show_chart">Key stats</divider>
-            </div>
-            <div class="row keystats">
+            <divider icon="show_chart">Key stats</divider>
+            <div class="keystats">
                 <stat-card title="Achievements Unlocked"><b><%= achievements.length %></b></stat-card>
                 <stat-card title="Rarest Achievement">Top <b>{{ parseRarity(<%= achievements[0].stats.percent %>) }}%</b></stat-card>
             </div>
 
-            <div class="row">
-                <divider icon="emoji_events">Rarest Achievements</divider>
-            </div>
-            <div class="row achievements">
+            <divider icon="emoji_events">Rarest Achievements</divider>
+            <div class="achievements">
                 <achievement-card 
                     v-for="achievement in <%= JSON.stringify(achievements) %>"
                     :icon="achievement.icon"

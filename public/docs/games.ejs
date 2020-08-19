@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title><%= user.username %>'s Games</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Page</title>
 
     <link rel="stylesheet" href="/scss/dist/style.css">
-    <link rel="stylesheet" href="/scss/dist/components.css">
-    <link rel="stylesheet" href="/scss/dist/grid.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css">
+    <script src="/dependencies/uikit/js/uikit.min.js"></script>
+    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
 
     <style>
         .banner {
@@ -66,28 +68,24 @@
             tag="<%= user.tag %>"
         ></navbar>
 
-        <div class="container">
-            <div class="row hero">
+        <div class="uk-container uk-container-large" uk-grid>
+            <div class="hero">
                 <div class="banner">
                     <div>
                         <a href="#" @click="goToProfile()"><i class="material-icons">arrow_back</i> Back to <%= user.username %>'s profile</a>
-                        <h1><i class="material-icons">sports_esports</i>Games</h1>
+                        <h1 class="c-white uk-text-bold"><i class="material-icons uk-margin-small-right">sports_esports</i>Games</h1>
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <divider icon="show_chart">Key stats</divider>
-            </div>
-            <div class="row keystats">
+            
+            <divider icon="show_chart">Key stats</divider>
+            <div class="keystats">
                 <stat-card title="Games Owned"><b><%= games.length %></b></stat-card>
                 <stat-card title="Highest Playtime (<%= games.sort((a, b) => b.time - a.time)[0].name %>)"><b>{{ parseTime(<%= games.sort((a, b) => b.time - a.time)[0].time %>)[0] }}h</b> {{ parseTime(<%=games.sort((a, b) => b.time - a.time)[0].time %>)[1] }}m</stat-card>
             </div>
 
-            <div class="row">
-                <divider icon="emoji_events">Games</divider>
-            </div>
-            <div class="row games">
+            <divider icon="emoji_events">Games</divider>
+            <div class="games">
                 <game-card 
                     v-for="game in <%= JSON.stringify(games) %>"
                     :image="game.image"

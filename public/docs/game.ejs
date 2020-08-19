@@ -6,10 +6,12 @@
     <title>Profile Page</title>
 
     <link rel="stylesheet" href="/scss/dist/style.css">
-    <link rel="stylesheet" href="/scss/dist/components.css">
-    <link rel="stylesheet" href="/scss/dist/grid.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css">
+    <script src="/dependencies/uikit/js/uikit.min.js"></script>
+    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
 
     <style>
         .game {
@@ -68,28 +70,25 @@
             tag="<%= user.tag %>"
         ></navbar>
 
-        <div class="container">
-            <div class="row hero">
+        <div class="uk-container uk-container-large" uk-grid>
+            <div class="hero">
                 <div class="game" style="background-image: url(<%= game.image %>">
                     <div>
                         <a href="#" @click="goToProfile()"><i class="material-icons">arrow_back</i> Back to <%= user.username %>'s profile</a>
-                        <h1><%= game.name %></h1>
+                        <h1 class="c-white uk-text-bold"><%= game.name %></h1>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <divider icon="show_chart">Key stats</divider>
-            </div>
-            <div class="row keystats">
+            <divider icon="show_chart">Key stats</divider>
+            <div class="keystats">
                 <stat-card title="Time Played"><b>{{ parseTime(<%= game.time %>)[0] }}h</b> {{ parseTime(<%= game.time %>)[1] }}m</stat-card>
                 <stat-card title="Achievements Unlocked"><b><%= achievements.filter(e => e.value === 100).length %></b></stat-card>
+                <stat-card title="Rarest Achievement">Top <b>{{ parseRarity(<%= achievements[0].stats.percent %>) }}%</b></stat-card>
             </div>
 
-            <div class="row">
-                <divider icon="emoji_events">Achievements</divider>
-            </div>
-            <div class="row achievements">
+            <divider icon="emoji_events">Achievements</divider>
+            <div class="achievements">
                 <achievement-card 
                     v-for="achievement in <%= JSON.stringify(achievements) %>"
                     :icon="achievement.icon"
@@ -124,6 +123,14 @@
                     const hours = Math.floor(seconds / 3600);
                     const minutes = Math.floor(seconds / 60) - hours * 60;
                     return [hours, minutes];
+                },
+                parseRarity(percent) {
+                    if(percent < 10) {
+                        return percent.toFixed(2);
+                    }
+                    else {
+                        return Math.round(percent);
+                    }
                 },
                 parseRarity(percent) {
                     if(percent < 10) {
