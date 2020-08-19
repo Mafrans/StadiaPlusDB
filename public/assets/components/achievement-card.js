@@ -1,12 +1,16 @@
 var component = {
     template: `
-        <div class="achievement-card" :style="{width: wide ? '100%' : null}" :class="{diamond: rarity <= 5, gold: rarity <= 10, silver: rarity <= 25, bronze: rarity <= 50}">
+        <div 
+            class="achievement-card uk-flex-inline uk-flex-middle" 
+            :style="{width: wide ? '100%' : null}" 
+            :class="{diamond: rarity <= 5, gold: rarity <= 10, silver: rarity <= 25, bronze: rarity <= 50}"
+        >
             <img :src="icon">
             <div :style="{maxWidth: rarity <= 50 ? '60%' : 'calc(100% - 80px)'}">
-                <h3>{{ name }}</h3>
-                <p>{{ description }}</p>
+                <h3 class="c-charcoal uk-text-medium uk-width-1-1">{{ name }}</h3>
+                <p class="c-gray">{{ description }}</p>
             </div>
-            <div v-if="rarity <= 50" class="stats">
+            <div v-if="rarity <= 50" class="c-dark-gray uk-text-normal uk-text-italic uk-margin-auto-left">
                 Top {{ parseRarity(rarity) }}%
             </div>
         </div>
@@ -23,10 +27,6 @@ var component = {
                 return Math.round(percent);
             }
         }
-    },
-
-    mounted() {
-        console.log(this.name + ":", this.rarity);
     }
 };
 

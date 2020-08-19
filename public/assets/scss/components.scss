@@ -41,16 +41,6 @@
  *  The Divider component
  */
 .divider {
-    font-size: 16px;
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 6rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
-    color: #505050;
-
     hr {
         margin: 0 1rem;
         flex-grow: 1;
@@ -65,11 +55,6 @@
         }
     }
 
-    .divider-expand {
-        color: #969696;
-        cursor: pointer;
-    }
-
     .material-icons {
         font-size: 14px;
         margin-bottom: 3px;
@@ -81,23 +66,21 @@
  *  The Achivement Card component
  */
 .achievement-card {
-    display: inline-flex;
     padding: 1rem;
     border: 2px solid #F0F0F0;
     border-radius: .5rem;
-    align-items: center;
     margin: .5rem;
     box-sizing: border-box;
 
-    @media screen and (min-width: 480px) {
+    @media screen and (min-width: 600px) {
         width: calc(100% - 1rem);
     }
 
-    @media screen and (min-width: 600px) {
+    @media screen and (min-width: 960px) {
         width: calc(50% - 1rem);
     }
 
-    @media screen and (min-width: 960px) {
+    @media screen and (min-width: 1150px) {
         width: calc(33.33% - 1rem);
     }
 
@@ -109,27 +92,11 @@
     }
 
     h3 {
-        font-weight: 500;
         font-size: 20px;
-        color: #424242;
         margin-bottom: .25rem;
         white-space: nowrap;
         overflow: hidden;
-        width: 100%;
         text-overflow: ellipsis;
-    }
-
-    p {
-        font-size: 16px;
-        color: #969696;
-        margin-bottom: .25rem;
-    }
-
-    .stats {
-        font-weight: normal;
-        font-style: italic;
-        color: #505050;
-        margin-left: auto;
     }
 }
 
@@ -138,7 +105,6 @@
  */
 .game-card {
     position: relative;
-    display: inline-flex;
     padding: 1rem;
     background-image: #F0F0F0;
     background-size: cover;
@@ -160,7 +126,6 @@
     }
 
     .gc-text-container {
-        color: #ffffff;
         position: absolute;
         bottom: 1rem;
         z-index: 0;
@@ -183,10 +148,8 @@
     }
 
     h3 {
-        font-weight: 500;
         font-size: 20px;
         margin-bottom: .25rem;
-        width: 100%;
     }
 
     p {
@@ -199,22 +162,15 @@
  *  The Stat Card component
  */
 .stat-card {
-    display: inline-flex;
-    flex-direction: column;
-    width: calc(100% - 1.1231rem); /* WHAT THE FUCK IS THIS NUMBER?! */
+    width: 100%;
     height: 150px;
     border: #f0f0f0 solid 2px;
     border-radius: .5rem;
-    justify-content: center;
-    align-items: center;
-    color: #505050;
-    text-align: center;
     margin: 0.5rem;
     box-sizing: border-box;
 
     .sc-slot {
         font-size: 32px;
-        font-weight: 400;
         margin-bottom: .5rem;
     }
 
@@ -225,12 +181,12 @@
     }
 
     @media screen and (min-width: 600px) {
-        width: calc(50% - 1.1231rem);
+        width: 50%;
         max-width: 350px;
     }
 
     @media screen and (min-width: 960px) {
-        width: calc(33% - 1.1231rem);
+        width: 33.33%
     }
 }
 

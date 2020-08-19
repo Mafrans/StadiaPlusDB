@@ -1,9 +1,9 @@
 var component = {
     template: `
-        <div class="game-card" :style="{'background-image': 'url(' + image + ')'}">
+        <div class="game-card uk-flex-inline" :style="{'background-image': 'url(' + image + ')'}">
             <div class="gc-text-container">
-                <h3 class="c-white">{{ name }}</h3>
-                <p>Played for {{ parseTime(playTime)[0] }}h {{ parseTime(playTime)[1] }}m</p>
+                <h3 class="c-white uk-text-medium uk-width-1-1">{{ name }}</h3>
+                <p class="c-white">Played for {{ parseTime(playTime)[0] }}h {{ parseTime(playTime)[1] }}m</p>
             </div>
         </div>
     `,
