@@ -68,7 +68,7 @@
             el: '#app',
             methods: {
                 goToSafety() {
-                    window.open('<%- error.safetyURL %>');
+                    location.href = '<%- error.safetyURL %>';
                 }
             }
         });
