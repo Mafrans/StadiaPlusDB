@@ -39,7 +39,7 @@ export class GameRoute implements RouteInterface {
                             by pressing the <a href="/images/UpdateInDBButton.png" target="_blank">"Update in DB" button</a> 
                             on the game. 
                         `,
-                    safetyURL: `https://${location.origin}/profile/${user.username}/${user.tag}`
+                    safetyURL: `https://${config.host}/profile/${user.username}/${user.tag}`
                 },
             });
             return;
