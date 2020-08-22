@@ -17,11 +17,12 @@
     </head>
     <body>
         <div id="app">
-            <navbar></navbar>
+            <navbar drawer="#drawer"></navbar>
+            <drawer id="drawer"></drawer>
 
             <div class="hero bg-light-gray uk-flex uk-flex-middle">
                 <div class="uk-container uk-container-large" style="width: 100%">
-                    <div uk-grid>
+                    <div class="uk-visible@s" uk-grid>
                         <div class="uk-width-1-2">
                             <h1 class="uk-text-bold uk-heading-medium">
                                 Stadia, <span class="c-gradient">elevated.</span>
@@ -36,11 +37,25 @@
                             <img src="/images/splash.svg" alt="" class="splash" />
                         </div>
                     </div>
+                    <div class="uk-hidden@s" uk-grid>
+                        <div class="splash mobile uk-width-1-1">
+                            <img src="/images/splash.svg" alt="" />
+                        </div>
+                        <div class="uk-width-1-1">
+                            <h1 class="uk-text-bold uk-heading-medium">
+                                Stadia, <span class="c-gradient">elevated.</span>
+                            </h1>
+                            <p class="uk-text-medium uk-margin-medium-top uk-margin-medium-bottom">
+                                Increase video quality. View network stats. Check your friends’ achievements. Elevate
+                                your Stadia experience with one free and easy-to-use browser extension.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="uk-container uk-container-large">
                 <div class="uk-margin-xlarge-top" uk-grid>
-                    <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
+                    <div class="uk-width-1-2@s uk-flex uk-flex-column uk-flex-center">
                         <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Maximize visual quality</h2>
                         <p>
                             <b>Push more of those delicous pixels.</b> Stadia+ allows you to force 4K resolution on any
@@ -55,19 +70,20 @@
                             More about codec/resolution forcing<i class="material-icons">arrow_forward</i>
                         </a>
                     </div>
-                    <div class="uk-width-1-2">
+                    <div class="uk-width-1-2@s uk-flex-first uk-flex-last@s uk-margin-small-bottom uk-margin-remove-bottom@s">
                         <div class="image right bg-gradient">
                             <img src="https://via.placeholder.com/320x180" alt="" />
                         </div>
                     </div>
                 </div>
+                <hr class="uk-margin-xlarge-top uk-margin-xlarge-bottom uk-hidden@s">
                 <div class="uk-margin-xlarge-top" uk-grid>
-                    <div class="uk-width-1-2">
+                    <div class="uk-width-1-2@s uk-margin-small-bottom uk-margin-remove-bottom@s">
                         <div class="image left bg-gradient">
                             <img src="https://via.placeholder.com/320x180" alt="" />
                         </div>
                     </div>
-                    <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
+                    <div class="uk-width-1-2@s uk-flex uk-flex-column uk-flex-center">
                         <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Keep track of your progress</h2>
                         <p>
                             <b>...and/or brag to your friends.</b> Your profile on Stadia+ DB shows your achievements,
@@ -78,8 +94,9 @@
                         >
                     </div>
                 </div>
+                <hr class="uk-margin-xlarge-top uk-margin-xlarge-bottom uk-hidden@s">
                 <div class="uk-margin-xlarge-top" uk-grid>
-                    <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
+                    <div class="uk-width-1-2@s uk-flex uk-flex-column uk-flex-center">
                         <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Find your favourites fast</h2>
                         <p>
                             <b>Cut through the clutter.</b> Stadia+ features filtering and sorting of your game library
@@ -93,19 +110,20 @@
                             >More about filtering and sorting<i class="material-icons">arrow_forward</i></a
                         >
                     </div>
-                    <div class="uk-width-1-2">
+                    <div class="uk-width-1-2@s uk-flex-first uk-flex-last@s uk-margin-small-bottom uk-margin-remove-bottom@s">
                         <div class="image right bg-gradient">
                             <img src="https://via.placeholder.com/320x180" alt="" />
                         </div>
                     </div>
                 </div>
+                <hr class="uk-margin-xlarge-top uk-margin-xlarge-bottom uk-hidden@s">
                 <div class="uk-margin-xlarge-top" uk-grid>
-                    <div class="uk-width-1-2">
+                    <div class="uk-width-1-2@s uk-margin-small-bottom uk-margin-remove-bottom@s">
                         <div class="image left bg-gradient">
                             <img src="https://via.placeholder.com/320x180" alt="" />
                         </div>
                     </div>
-                    <div class="uk-width-1-2 uk-flex uk-flex-column uk-flex-center">
+                    <div class="uk-width-1-2@s uk-flex uk-flex-column uk-flex-center">
                         <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Check in on your connection</h2>
                         <p>
                             <b>Identify annoying lag spikes and connection issues</b> with network monitoring built into
@@ -122,14 +140,14 @@
             </div>
             <div class="bg-light-gray uk-margin-xlarge-top uk-padding-large uk-text-center">
                 <h1 class="uk-heading-small uk-text-bold">Sounds great, huh?</h1>
-                <p class="uk-margin-medium-bottom">
+                <p class="uk-margin-medium-bottom@s">
                     Installing Stadia+ takes less time than reading this sentence. <b>And it’s totally free.</b>
                 </p>
-                <btn icon="get_app" @click="openExtensionPage()" gradient=""> Get the free extension </btn>
+                <btn class="uk-visible@s" icon="get_app" @click="openExtensionPage()" gradient=""> Get the free extension </btn>
             </div>
             <div class="uk-container uk-container-large uk-margin-xlarge-top">
                 <div uk-grid>
-                    <div class="uk-width-1-2">
+                    <div class="uk-width-1-2@s">
                         <h2 class="c-gradient uk-text-bold">Join the Discord server</h2>
                         <p class="uk-margin-top uk-margin-bottom">
                             <b>Ask questions, give feedback or just say hi.</b> The main developer is there along with
@@ -139,7 +157,10 @@
                             >Join the Discord server<i class="material-icons">arrow_forward</i></a
                         >
                     </div>
-                    <div class="uk-width-1-2">
+                    <div class="uk-width-1-1 uk-margin-large-top uk-margin-small-top">
+                        <hr>
+                    </div>
+                    <div class="uk-width-1-2@s">
                         <h2 class="c-gradient uk-text-bold">Help improve Stadia+</h2>
                         <p class="uk-margin-top uk-margin-bottom">
                             <b>Stadia+ is a free and open source project.</b> If you want to support its future

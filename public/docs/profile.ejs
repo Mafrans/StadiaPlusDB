@@ -15,14 +15,25 @@
         <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
         <style>
             .avatar {
-                width: 128px;
                 height: 128px;
                 margin-right: 2rem;
                 border-radius: 50%;
+                box-sizing: content-box;
             }
 
             .user {
                 margin: 6rem 0;
+            }
+
+            @media screen and (max-width: 640px) {
+                .avatar {
+                    height: 84px;
+                    margin-right: 1rem;
+                }
+
+                .user {
+                    margin: 4rem 0;
+                }
             }
 
             .founder-icon {
@@ -43,10 +54,10 @@
                         <div>
                             <h1 class="c-charcoal uk-text-bold">
                                 <%= user.username %>
-                                <span class="tag" v-if="<%= user.tag %> != '0000'"> #<%= user.tag %> </span>
+                                <span class="tag c-gray" v-if="<%= user.tag %> != '0000'"> #<%= user.tag %> </span>
                                 <img class="founder-icon" src="/images/founder.svg" alt="Founder" v-else />
                             </h1>
-                            <div class="badges">
+                            <div class="badges uk-visible@s">
                                 <badge color="#FFA800" icon="star"> Gold Tier Supporter </badge>
                                 <badge color="#F26B2B" icon="add"> Stadia+ Developer </badge>
                             </div>

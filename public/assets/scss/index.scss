@@ -12,6 +12,12 @@
             transform: translateY(-100px) rotate(-5deg) scale(1.2);
             opacity: 0.5;
         }
+
+        &.mobile {
+            position: absolute;
+            opacity: 0.5;
+            z-index: -1;
+        }
     }
 }
 

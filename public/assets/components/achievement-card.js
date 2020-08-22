@@ -10,7 +10,7 @@ var component = {
                 <h3 class="c-charcoal uk-text-medium uk-width-1-1">{{ name }}</h3>
                 <p class="c-gray">{{ description }}</p>
             </div>
-            <div v-if="rarity <= 50" class="c-dark-gray uk-text-normal uk-text-italic uk-margin-auto-left">
+            <div v-if="rarity <= 50" class="c-dark-gray uk-visible@s uk-text-normal uk-text-italic uk-margin-auto-left">
                 Top {{ parseRarity(rarity) }}%
             </div>
         </div>

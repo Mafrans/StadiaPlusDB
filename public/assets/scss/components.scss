@@ -14,6 +14,10 @@
         margin-bottom: 0.25rem;
     }
 
+    .menu {
+        font-size: 36px;
+    }
+
     h1, p {
         font-size: 32px;
     }
@@ -32,6 +36,7 @@
     border-radius: 999px;
     font-weight: 500;
     color: #505050;
+    margin-top: 0.5rem;
     margin-right: 0.5rem;
 
     .material-icons {
@@ -70,10 +75,12 @@
  *  The Achivement Card component
  */
 .achievement-card {
+    width: 100%;
     padding: 1rem;
     border: 2px solid #F0F0F0;
     border-radius: .5rem;
-    margin: .5rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
     box-sizing: border-box;
 
     @media screen and (min-width: 600px) {
@@ -108,13 +115,15 @@
  *  The Game Card component
  */
 .game-card {
+    width: 100%;
     position: relative;
     padding: 1rem;
     background-image: #F0F0F0;
     background-size: cover;
     background-position: center center;
     border-radius: .5rem;
-    margin: .5rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
     height: 200px;
     box-sizing: border-box;
     cursor: pointer;
@@ -172,7 +181,8 @@
     height: 150px;
     border: #f0f0f0 solid 2px;
     border-radius: .5rem;
-    margin: 0.5rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
     box-sizing: border-box;
 
     .sc-slot {
