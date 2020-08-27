@@ -140,10 +140,10 @@
             </div>
             <div class="bg-light-gray uk-margin-xlarge-top uk-padding-large uk-text-center">
                 <h1 class="uk-heading-small uk-text-bold">Sounds great, huh?</h1>
-                <p class="uk-margin-medium-bottom@s">
+                <p>
                     Installing Stadia+ takes less time than reading this sentence. <b>And it’s totally free.</b>
                 </p>
-                <btn class="uk-visible@s" icon="get_app" @click="openExtensionPage()" gradient=""> Get the free extension </btn>
+                <btn class="uk-visible@s uk-margin-medium-top" icon="get_app" @click="openExtensionPage()" gradient=""> Get the free extension </btn>
             </div>
             <div class="uk-container uk-container-large uk-margin-xlarge-top">
                 <div uk-grid>
@@ -173,32 +173,18 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-light-gray uk-margin-xlarge-top uk-padding">
-                <div class="uk-container uk-container-large">
-                    <div class="uk-grid-medium" uk-grid>
-                        <p class="c-gradient uk-text-bold uk-margin-medium-right">STADIA+</p>
-                        <a class="c-dark-gray uk-text-medium">Discord</a>
-                        <a class="c-dark-gray uk-text-medium">GitHub</a>
-                        <a class="c-dark-gray uk-text-medium">Help & docs</a>
-                    </div>
-                    <div class="uk-margin-medium-top">
-                        <p>
-                            Developed and maintained by
-                            <a class="c-tomato" href="https://github.com/Mafrans" target="_blank">Malte "Mafrans" Klüft</a>. UI design
-                            by <a class="c-tomato" href="https://github.com/marcusbillman" target="_blank">Marcus Billman</a>.
-                        </p>
-                        <p>Stadia is a trademark of Google LLC. Stadia+ is not affiliated with Stadia or Google.</p>
-                    </div>
-                </div>
-            </div>
+            
+            <page-footer></page-footer>
         </div>
         <script type="module">
             import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js';
             import Navbar from '/components/navbar.js';
             import Button from '/components/button.js';
+            import Footer from '/components/footer.js';
             
             Vue.component('Navbar', Navbar);
             Vue.component('Btn', Button);
+            Vue.component('PageFooter', Footer);
             var app = new Vue({
                 el: '#app',
                 methods: {

@@ -8,7 +8,7 @@ export namespace AuthRoutes {
         get(req: any, res: any, next: any) {
 
             req.session.redirect = req.query.redirect;
-            const authenticate = passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile'] });
+            const authenticate = passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', "https://www.googleapis.com/auth/stadia.profile"] });
             authenticate(req, res, next);
         }
     }
@@ -23,16 +23,18 @@ export namespace AuthRoutes {
 
     export class Redirect implements RouteInterface {
         get(req: any, res: any, next: any) {
-
             res.redirect(req.session.redirect + '#' + req.user);
         }
     }
 
     export class Signout implements RouteInterface {
         post(req: any, res: any, next: any) {
+            console.log("signing out", {token: req.body.token});
             if(req.body.token == null) return;
             const token: string = req.body.token;
-            
+
+            req.logout();
+            res.send('Signed out');
             Login.Remove(token);
         }
     }

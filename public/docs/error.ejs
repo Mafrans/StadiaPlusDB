@@ -56,14 +56,19 @@
                 <btn @click="goToSafety()" class="uk-text-normal" icon="arrow_back">Back to safety</btn>
             </div>
         </div>
+
+        <page-footer></page-footer>
     </div>
 
     <script type="module">
         import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
         import Navbar from '/components/navbar.js'
         import Button from '/components/button.js'
+        import Footer from '/components/footer.js';
+
         Vue.component('Navbar', Navbar);
         Vue.component('Btn', Button);
+        Vue.component('PageFooter', Footer);
         var app = new Vue({
             el: '#app',
             methods: {

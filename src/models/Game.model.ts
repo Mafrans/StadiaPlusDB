@@ -27,4 +27,7 @@ export class Game {
             statistics.update({ uuid: uuid }, { $inc: { owners: 1 } }); // Add 1 to owners
         }
     }
+    public static async DecreaseStat(uuid: string) {
+        Statistics.Update({ uuid: uuid }, { $inc: { owners: -1 } }); // Subtract 1 from owners
+    }
 }

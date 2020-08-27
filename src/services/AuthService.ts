@@ -20,6 +20,8 @@ export class AuthService implements Service {
                     const token = this.randomToken(32);
                     Login.Create(token, profile.id)
                         .then(() => {
+                            console.log({profile});
+                            console.log('creating login:', token);
                             return done(null, token);
                         });
                 }
@@ -30,6 +32,11 @@ export class AuthService implements Service {
             console.log('serializing user');
             done(null, user);
         });
+
+        passport.deserializeUser(function (user, done) {
+            console.log('deserializing user');
+            done(null, user);
+        })
     }
 
     randomToken(length: number) {

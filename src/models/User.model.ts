@@ -100,4 +100,17 @@ export class User {
             time: data.time
         });
     }
+
+    public static async Remove(gaia: string) {
+        const user = await User.Find(gaia);
+        for(const uuid in user.games) {
+            Game.DecreaseStat(uuid);
+
+            const game = user.games[uuid];
+            for(const achievement of game.achievements) {
+                Achievement.DecreaseStat(uuid, achievement.id);
+            }
+        }
+        Database.self.gameDb.users.remove({gaia});
+    }
 }

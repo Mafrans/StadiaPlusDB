@@ -20,7 +20,7 @@ export class Login implements LoginInterface {
     }
 
     public static async Remove(token: string) {
-        return Database.self.auth.logins.findOne({ token });
+        return Database.self.auth.logins.remove({ token });
     }
 
     public static async Find(token: string): Promise<string> {

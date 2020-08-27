@@ -9,6 +9,8 @@ import { ProfileRedirectRoute } from "./routes/ProfileRedirectRoute";
 import { GameRoute } from "./routes/GameRoute";
 import { GamesRoute } from "./routes/GamesRoute";
 import { IndexRoute } from "./routes/IndexRoute";
+import { WipeDataRoute } from "./routes/WipeDataRoute";
+import { PrivacyPolicyRoutes } from "./routes/PrivacyPolicyRoutes";
 
 export interface Route {
     path: string;
@@ -23,6 +25,14 @@ const routes: Route[] = [
     {
         path: '/auth/google/callback', 
         classInstances: [new AuthRoutes.Callback(), new AuthRoutes.Redirect()]
+    },
+    {
+        path: '/api/signout',
+        classInstances: [new AuthRoutes.Signout()]
+    },
+    {
+        path: '/api/wipedata',
+        classInstances: [new WipeDataRoute()]
     },
     {
         path: '/api/update', 
@@ -55,6 +65,14 @@ const routes: Route[] = [
     {
         path: '/profile/:username/:tag/games', 
         classInstances: [new GamesRoute()]
+    },
+    {
+        path: '/privacy-policy', 
+        classInstances: [new PrivacyPolicyRoutes.MainRoute()]
+    },
+    {
+        path: '/privacy-policy/tldr', 
+        classInstances: [new PrivacyPolicyRoutes.TLDRRoute()]
     },
     {
         path: '/', 

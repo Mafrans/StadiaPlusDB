@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><%= user.username %>'s Games</title>
+    <title><%= user.username %>'s Games - Stadia+</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="/scss/dist/style.css">
@@ -66,7 +66,7 @@
             </div>
         </div>
         
-        <div class="uk-padding-large"></div> <!-- Padding to make sure the page doesn't abruptly end -->
+        <page-footer></page-footer>
     </div>
 
     <script type="module">
@@ -76,11 +76,14 @@
         import Divider from '/components/divider.js'
         import StatCard from '/components/stat-card.js'
         import GameCard from '/components/game-card.js'
+        import Footer from '/components/footer.js';
+
         Vue.component('Navbar', Navbar);
         Vue.component('Badge', Badge);
         Vue.component('Divider', Divider);
         Vue.component('StatCard', StatCard);
         Vue.component('GameCard', GameCard);
+        Vue.component('PageFooter', Footer);
         var app = new Vue({
             el: '#app',
             methods: {

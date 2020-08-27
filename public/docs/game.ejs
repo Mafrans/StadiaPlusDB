@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Page</title>
+    <title><%= game.name %> - Stadia+</title>
 
     <link rel="stylesheet" href="/scss/dist/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
@@ -101,7 +101,7 @@
                 ></achievement-card>
             </div>
 
-            <div class="uk-padding-large"></div> <!-- Padding to make sure the page doesn't abruptly end -->
+            <page-footer></page-footer>
         </div>
     </div>
 
@@ -112,11 +112,14 @@
         import Divider from '/components/divider.js'
         import StatCard from '/components/stat-card.js'
         import AchievementCard from '/components/achievement-card.js'
+        import Footer from '/components/footer.js';
+        
         Vue.component('Navbar', Navbar);
         Vue.component('Badge', Badge);
         Vue.component('Divider', Divider);
         Vue.component('StatCard', StatCard);
         Vue.component('AchievementCard', AchievementCard);
+        Vue.component('PageFooter', Footer);
         var app = new Vue({
             el: '#app',
             methods: {

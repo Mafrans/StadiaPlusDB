@@ -22,4 +22,8 @@ export class Achievement {
             Statistics.Update({ uuid: gameUuid }, { $inc: { ['achievements.' + achievementID]: 1 } }); // Add one to the achivement
         }
     }
+
+    public static async DecreaseStat(gameUuid: string, achievementID: string) {
+        Statistics.Update({ uuid: gameUuid }, { $inc: { ['achievements.' + achievementID]: -1 } }); // Subtract one from the achivement
+    }
 }

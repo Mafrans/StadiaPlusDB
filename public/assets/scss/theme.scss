@@ -40,6 +40,14 @@ $colors: (
     }
 }
 
+.border {
+    @each $name, $color in $colors {
+        &-#{$name} {
+            border-color: $color;
+        }
+    }
+}
+
 .achievement-card {
     &.bronze {
         border-color: #F3B4B4;
