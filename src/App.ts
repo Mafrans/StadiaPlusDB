@@ -9,7 +9,7 @@ import config from '../config.json';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { StadiaGameDBHook } from './StadiaGameDBHook';
-import routes from './Routes';
+import routes from './routes';
 
 export class App {
     server: Express;

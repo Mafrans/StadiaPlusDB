@@ -1,4 +1,4 @@
-import { JsonResource } from "./JSON.resource";
+import { JsonResource } from "./Json.resource";
 
 export class UserResource extends JsonResource {
     public toString(): any {
