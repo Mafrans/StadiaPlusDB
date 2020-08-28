@@ -11,6 +11,7 @@ import { GamesRoute } from "./routes/GamesRoute";
 import { IndexRoute } from "./routes/IndexRoute";
 import { WipeDataRoute } from "./routes/WipeDataRoute";
 import { PrivacyPolicyRoutes } from "./routes/PrivacyPolicyRoutes";
+import { TermsAndConditionsRoutes } from "./routes/TermsAndConditionsRoutes";
 
 export interface Route {
     path: string;
@@ -73,6 +74,14 @@ const routes: Route[] = [
     {
         path: '/privacy-policy/tldr', 
         classInstances: [new PrivacyPolicyRoutes.TLDRRoute()]
+    },
+    {
+        path: '/terms-and-conditions', 
+        classInstances: [new TermsAndConditionsRoutes.MainRoute()]
+    },
+    {
+        path: '/terms-and-conditions/tldr', 
+        classInstances: [new TermsAndConditionsRoutes.TLDRRoute()]
     },
     {
         path: '/', 
