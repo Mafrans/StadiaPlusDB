@@ -2,7 +2,7 @@ import Button from '/components/button.js';
 
 var component = {
     template: `
-        <div v-if="!accepted" class="bg-white cookie-banner border-light-gray uk-container uk-container-small">
+        <div v-if="!accepted" class="bg-white cookie-banner border-light-gray uk-container uk-container-small" style="width: 100%">
             <div uk-grid>
                 <div class="uk-width-2-3@s">
                     <p class="c-dark-gray">
