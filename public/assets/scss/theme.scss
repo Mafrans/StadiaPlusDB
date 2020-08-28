@@ -43,7 +43,7 @@ $colors: (
 .border {
     @each $name, $color in $colors {
         &-#{$name} {
-            border-color: $color;
+            border: $color 2px solid;
         }
     }
 }
