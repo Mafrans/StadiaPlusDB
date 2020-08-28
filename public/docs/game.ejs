@@ -63,11 +63,8 @@
 </head>
 <body>
     <div id="app">
-        <navbar 
-            avatar="<%= user.avatar %>" 
-            username="<%= user.username %>" 
-            tag="<%= user.tag %>"
-        ></navbar>
+        <navbar showdb></navbar>
+        <cookie-banner></cookie-banner>
 
         <div class="uk-container uk-container-large">
             <div 
@@ -113,6 +110,7 @@
         import StatCard from '/components/stat-card.js'
         import AchievementCard from '/components/achievement-card.js'
         import Footer from '/components/footer.js';
+        import CookieBanner from '/components/cookie-banner.js';
         
         Vue.component('Navbar', Navbar);
         Vue.component('Badge', Badge);
@@ -120,6 +118,8 @@
         Vue.component('StatCard', StatCard);
         Vue.component('AchievementCard', AchievementCard);
         Vue.component('PageFooter', Footer);
+        Vue.component('CookieBanner', CookieBanner);
+
         var app = new Vue({
             el: '#app',
             methods: {

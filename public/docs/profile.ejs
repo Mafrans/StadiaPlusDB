@@ -46,6 +46,7 @@
     <body>
         <div id="app">
             <navbar showdb></navbar>
+            <cookie-banner></cookie-banner>
 
             <div class="uk-container uk-container-large">
                 <div uk-grid>
@@ -100,6 +101,7 @@
             import AchievementCard from '/components/achievement-card.js';
             import GameCard from '/components/game-card.js';
             import Footer from '/components/footer.js';
+            import CookieBanner from '/components/cookie-banner.js';
 
             Vue.component('Navbar', Navbar);
             Vue.component('Badge', Badge);
@@ -107,6 +109,8 @@
             Vue.component('AchievementCard', AchievementCard);
             Vue.component('GameCard', GameCard);
             Vue.component('PageFooter', Footer);
+            Vue.component('CookieBanner', CookieBanner);
+
             var app = new Vue({
                 el: '#app',
                 methods: {
