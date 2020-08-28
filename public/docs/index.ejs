@@ -19,6 +19,7 @@
         <div id="app">
             <navbar drawer="#drawer"></navbar>
             <drawer id="drawer"></drawer>
+            <cookie-banner></cookie-banner>
 
             <div class="hero bg-light-gray uk-flex uk-flex-middle">
                 <div class="uk-container uk-container-large" style="width: 100%">
@@ -181,10 +182,12 @@
             import Navbar from '/components/navbar.js';
             import Button from '/components/button.js';
             import Footer from '/components/footer.js';
+            import CookieBanner from '/components/cookie-banner.js';
             
             Vue.component('Navbar', Navbar);
             Vue.component('Btn', Button);
             Vue.component('PageFooter', Footer);
+            Vue.component('CookieBanner', CookieBanner);
             var app = new Vue({
                 el: '#app',
                 methods: {
