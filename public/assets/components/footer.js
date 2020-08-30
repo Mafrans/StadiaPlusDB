@@ -1,6 +1,6 @@
 var component = {
     template: `
-       <div class="bg-light-gray uk-margin-xlarge-top uk-padding">
+       <div class="footer bg-light-gray uk-margin-xlarge-top uk-padding uk-width-1-1">
             <div class="uk-container uk-container-large">
                 <div class="uk-grid-medium" uk-grid>
                     <p class="c-gradient uk-text-bold uk-margin-medium-right">STADIA+</p>
