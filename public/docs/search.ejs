@@ -21,7 +21,7 @@
     <div id="app">
         <navbar></navbar>
 
-        <div class="uk-container uk-container-large" style="min-height: 70vh;"> <!-- The min height thing is a workaround and should probably be properly fixed later -->
+        <div class="uk-container uk-container-large" style="min-height: calc(100vh - 200px);"> <!-- This is a workaround, i don't know how to fix it ~for real~ -->
             <div class="uk-container uk-container-small uk-margin-xlarge-top" :class="{centered: <%= query === '' || query === 'undefined' %>}">
                 <h1 class="c-dark-gray uk-heading-small uk-text-bold uk-margin-small-bottom">Search for profiles</h1>
                 <p class="c-gray uk-text-lead uk-margin-medium-bottom">Looking for someone? Search them up here.</p>
