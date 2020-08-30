@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "csass": "sass ./public/assets/scss:./public/assets/scss/dist",
-    "clean": "del-cli --force ./public/scss/dist && del-cli --force ./dist",
+    "clean": "cd public/assets/scss && del-cli \"./dist/\" --force && cd ../../../ && del-cli \"./dist\" --force",
     "build": "npm run clean && npm run csass && webpack --env.production",
     "build:dev": "npm run clean && npm run csass && webpack --env.development",
     "start": "npm run build && node ./dist/backend.js",
