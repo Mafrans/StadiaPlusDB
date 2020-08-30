@@ -80,9 +80,17 @@
 
             <divider class="uk-margin-large-top" icon="show_chart">Key stats</divider>
             <div class="keystats uk-margin-top">
-                <stat-card title="Time Played"><b>{{ parseTime(<%= game.time %>)[0] }}h</b> {{ parseTime(<%= game.time %>)[1] }}m</stat-card>
-                <stat-card title="Achievements Unlocked"><b><%= achievements.filter(e => e.value === 100).length %></b></stat-card>
-                <stat-card title="Rarest Achievement">Top <b>{{ parseRarity(<%= achievements[0].stats.percent %>) }}%</b></stat-card>
+                <stat-card title="Time Played">
+                    <b>{{ parseTime(<%= game.time %>)[0] }}h</b> {{ parseTime(<%= game.time %>)[1] }}m
+                </stat-card>
+                
+                <stat-card title="Achievements Unlocked">
+                    <b> <%= achievements.filter(e => e.value === 100).length %> </b>
+                </stat-card>
+
+                <stat-card title="Rarest Achievement" v-if="<%= achievements.length > 0 %>">
+                    Top <b>{{ parseRarity(<%= achievements[0].stats.percent %>) }}%</b>
+                </stat-card>
             </div>
 
             <divider class="uk-margin-large-top" icon="emoji_events">Achievements</divider>
