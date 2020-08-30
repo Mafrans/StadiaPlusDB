@@ -8,9 +8,9 @@ var component = {
                 <div class="uk-container uk-container-large" style="height: 100%">
                     <div class="uk-height-1-1" uk-grid>
                         <div @click="goToHome()" class="nav-logo-container uk-flex uk-flex-middle uk-height-1-1 uk-width-1-3">
-                            <img class="nav-logo uk-margin-right" src="/images/logo.svg">
-                            <h1 class="nav-logo-title uk-text-bold c-gradient" style="letter-spacing: 2px">STADIA+</h1>
-                            <h1 v-if="showdb != undefined" class="nav-logo-db uk-text-bolder uk-margin-small-left c-cherry">DB</h1>
+                            <img class="logo uk-margin-right" src="/images/logo.svg">
+                            <h1 class="logo-title uk-text-bold c-gradient" style="letter-spacing: 2px">STADIA+</h1>
+                            <h1 v-if="showdb != undefined" class="logo-db uk-text-bolder uk-margin-small-left c-cherry">DB</h1>
                         </div>
                         <div class="uk-visible@m uk-width-expand uk-flex uk-flex-right uk-flex-middle">
                             <a @click="goToHome()" class="c-dark-gray uk-text-medium uk-margin-medium-right">Home</a>
