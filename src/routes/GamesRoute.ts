@@ -37,7 +37,7 @@ export class GamesRoute implements RouteInterface {
             });
         }
 
-        games = games.sort((a, b) => b.time - a.time).slice(0, 4);
+        games = games.sort((a, b) => b.time - a.time);
 
         res.render('games', {
             user: {
