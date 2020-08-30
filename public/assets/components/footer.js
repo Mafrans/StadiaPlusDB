@@ -3,7 +3,7 @@ var component = {
        <div class="footer bg-light-gray uk-margin-xlarge-top uk-padding uk-width-1-1">
             <div class="uk-container uk-container-large">
                 <div class="uk-grid-medium" uk-grid>
-                    <p class="c-gradient uk-text-bold uk-margin-medium-right">STADIA+</p>
+                    <a @click="goToHome()" class="c-gradient uk-text-bold uk-margin-medium-right">STADIA+</a>
                     <a class="c-dark-gray uk-text-medium">Discord</a>
                     <a class="c-dark-gray uk-text-medium">GitHub</a>
                     <a class="c-dark-gray uk-text-medium">Help & docs</a>
@@ -18,7 +18,13 @@ var component = {
                 </div>
             </div>
         </div>
-    `
+    `,
+    
+    methods: {
+        goToHome() {
+            location.href = location.origin;
+        }
+    }
 };
 
 export default component;
