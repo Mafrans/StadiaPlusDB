@@ -1,3 +1,6 @@
+@use "sass:map";
+$node_path: "../../../node_modules/";
+
 $colors: (
     'white': #FFFFFF,
     'tomato': #FA4821,
@@ -8,6 +11,18 @@ $colors: (
     'light-gray': #F0F0F0,
     'marble': #FAFAFA
 );
+
+// 1. Your custom variables and variable overwrites.
+$global-link-color: map.get($colors, "tomato");
+
+// 2. Import default variables and available mixins.
+@import "../../../node_modules/uikit/src/scss/variables-theme.scss";
+@import "../../../node_modules/uikit/src/scss/mixins-theme.scss";
+
+// 4. Import UIkit.
+@import "../../../node_modules/uikit/src/scss/uikit-theme.scss";
+@import "../../../node_modules/uikit/src/scss/uikit.scss";
+
 
 .c {
     @each $name, $color in $colors {
@@ -21,22 +36,22 @@ $colors: (
     }
 
     &-gradient {
-        background: linear-gradient(90deg, #FA4821 0%, #AE0F56 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        background: linear-gradient(90deg, #FA4821 0%, #AE0F56 100%) !important;
+        background-clip: text !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
     }
 }
 
 .bg {
     @each $name, $color in $colors {
         &-#{$name} {
-            background-color: $color;
+            background-color: $color !important;
         }
     }
     
     &-gradient {
-        background: linear-gradient(90deg, #FA4821 0%, #AE0F56 100%);
+        background: linear-gradient(90deg, #FA4821 0%, #AE0F56 100%) !important;
     }
 }
 
