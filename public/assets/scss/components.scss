@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "./theme";
+
 /**
  *  The Navbar component
  */
@@ -31,10 +34,20 @@
     }
 }
 
+
 /**
- *  The Drawer component
+ *  The Search Bar component
  */
-.drawer {
+.search-bar {
+    border-radius: 0.5rem;
+
+    input {
+        height: 45px;
+        width: 400px;
+        font-size: 18px;
+        border: none;
+        outline: none;
+    }
 }
 
 /**

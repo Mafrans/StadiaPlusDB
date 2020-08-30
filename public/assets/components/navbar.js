@@ -1,5 +1,6 @@
 import Button from '/components/button.js';
 import Drawer from '/components/drawer.js';
+import SearchBar from '/components/search-bar.js';
 
 var component = {
     template: `
@@ -7,15 +8,18 @@ var component = {
             <div class="overlay bg-white uk-width-1-1">
                 <div class="uk-container uk-container-large" style="height: 100%">
                     <div class="uk-height-1-1" uk-grid>
-                        <div @click="goToHome()" class="nav-logo-container uk-flex uk-flex-middle uk-height-1-1 uk-width-1-3">
+                        <div @click="goToHome()" class="nav-logo-container uk-flex uk-flex-middle uk-height-1-1 uk-width-expand">
                             <img class="logo uk-margin-right" src="/images/logo.svg">
                             <h1 class="logo-title uk-text-bold c-gradient" style="letter-spacing: 2px">STADIA+</h1>
-                            <h1 v-if="showdb != undefined" class="logo-db uk-text-bolder uk-margin-small-left c-cherry">DB</h1>
+                            <h1 v-if="db != undefined" class="logo-db uk-text-bolder uk-margin-small-left c-cherry">DB</h1>
+                        </div>
+                        <div v-if="search != undefined" class="uk-visible@m uk-flex uk-flex-middle">
+                            <search-bar icon="search"></search-bar>
                         </div>
                         <div class="uk-visible@m uk-width-expand uk-flex uk-flex-right uk-flex-middle">
                             <a @click="goToHome()" class="c-dark-gray uk-text-medium uk-margin-medium-right">Home</a>
                             <a @click="openWikiPage()" class="c-dark-gray uk-text-medium uk-margin-medium-right">Help & docs</a>
-                            <btn class="uk-margin-small-left" icon="get_app" @click="openExtensionPage()" gradient=""> Get the free extension </btn>
+                            <btn v-if="search == undefined" class="uk-margin-small-left" icon="get_app" @click="openExtensionPage()" gradient=""> Get the free extension </btn>
                         </div>
                         <div class="uk-hidden@m uk-width-expand uk-flex uk-flex-right uk-flex-middle">
                             <a class="menu c-tomato uk-flex uk-flex-middle" uk-toggle="target: #drawer">
@@ -30,7 +34,7 @@ var component = {
         </div>
     `,
 
-    props: [ 'showdb', 'drawer' ],
+    props: [ 'db', 'drawer', 'search' ],
     methods: {
         openExtensionPage() {
             window.open(
@@ -50,7 +54,8 @@ var component = {
     },
     components: {
         'btn': Button,
-        'drawer': Drawer
+        'drawer': Drawer,
+        'search-bar': SearchBar
     }
 };
 
