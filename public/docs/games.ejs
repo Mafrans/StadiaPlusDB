@@ -50,8 +50,20 @@
             <divider class="uk-margin-large-top" icon="show_chart">Key stats</divider>
             <div class="keystats uk-margin-top">
                 <stat-card title="Games Owned"><b><%= games.length %></b></stat-card>
-                <stat-card title="Highest Playtime (<%= games.sort((a, b) => b.time - a.time)[0].name %>)"><b>{{ parseTime(<%= games.sort((a, b) => b.time - a.time)[0].time %>)[0] }}h</b> {{ parseTime(<%=games.sort((a, b) => b.time - a.time)[0].time %>)[1] }}m</stat-card>
-                <stat-card title="Total Playtime"><b>{{ parseTime(<%= games.map(e => parseInt(e.time)).reduce((a, e) => a + e) %>)[0] }}h</b> {{ parseTime(<%= games.map(e => parseInt(e.time)).reduce((a, e) => a + e) %>)[1] }}m</stat-card>
+
+                <stat-card title="Highest Playtime (<%= games.length > 0 ? games.sort((a, b) => b.time - a.time)[0].name : '' %>)" v-if="<%= games.length > 0 %>">
+                    <b>
+                        {{ parseTime(<%= games.length > 0 ? games.sort((a, b) => b.time - a.time)[0].time : 0 %>)[0] }}h
+                    </b> 
+                    {{ parseTime(<%= games.length > 0 ? games.sort((a, b) => b.time - a.time)[0].time : 0 %>)[1] }}m
+                </stat-card>
+
+                <stat-card title="Total Playtime" v-if="<%= games.length > 0 %>">
+                    <b>
+                        {{ parseTime(<%= games.map(e => parseInt(e.time)).reduce((a, e) => a + e) %>)[0] }}h
+                    </b> 
+                    {{ parseTime(<%= games.map(e => parseInt(e.time)).reduce((a, e) => a + e) %>)[1] }}m
+                </stat-card>
             </div>
 
             <divider class="uk-margin-large-top" icon="emoji_events">Games</divider>

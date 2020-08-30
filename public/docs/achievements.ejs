@@ -56,8 +56,9 @@
                     <stat-card title="Achievements Unlocked">
                         <b><%= achievements.length %></b>
                     </stat-card>
-                    <stat-card title="Rarest Achievement">
-                        Top <b>{{ parseRarity(<%= achievements[0].stats.percent %>) }}%</b>
+                    
+                    <stat-card title="Rarest Achievement" v-if="<%= achievements.length > 0 %>">
+                        Top <b>{{ parseRarity(<%= achievements.length > 0 ? achievements[0].stats.percent : 100 %>) }}%</b>
                     </stat-card>
                 </div>
 
