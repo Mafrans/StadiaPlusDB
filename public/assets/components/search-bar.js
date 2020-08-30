@@ -9,10 +9,11 @@ var component = {
             </i>
             <input :value="value" v-on:keyup.enter="(e) => submit(e.srcElement)" class="c-dark-gray" type="text">
             <i 
+                v-if="wide != undefined"
                 @click="(e) => submit(e.srcElement.previousElementSibling)" 
                 class="material-icons c-dark-gray uk-margin-small-left uk-margin-small-left"
                 style="cursor: pointer"
-                >
+            >
                 arrow_forward
             </i>
         </div>
