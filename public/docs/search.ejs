@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Profiles - Stadia+</title>
+
+    <link rel="stylesheet" href="/scss/dist/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css" />
+    <script src="/dependencies/uikit/js/uikit.min.js"></script>
+    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+    <style>
+        .centered {
+            margin-top: 20vh !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <navbar></navbar>
+
+        <div class="uk-container uk-container-large" style="min-height: 70vh;"> <!-- The min height thing is a workaround and should probably be properly fixed later -->
+            <div class="uk-container uk-container-small uk-margin-xlarge-top" :class="{centered: <%= query === '' || query === 'undefined' %>}">
+                <h1 class="c-dark-gray uk-heading-small uk-text-bold uk-margin-small-bottom">Search for profiles</h1>
+                <p class="c-gray uk-text-lead uk-margin-medium-bottom">Looking for someone? Search them up here.</p>
+
+                <search-bar icon="search" value="<%= query != 'undefined' ? query : '' %>" wide></search-bar>
+            </div>
+            <div v-if="<%= query != '' && query != 'undefined' %>">
+                <hr class="uk-margin-xlarge-top uk-margin-medium-bottom">
+
+                <h3 class="c-dark-gray uk-text-bold uk-margin-small-bottom">Profiles matching "<%= query %>"</h3>
+                <p class="c-gray uk-margin-medium-bottom" style="font-size: 18px">
+                    <%= resultCount > results.length ? `> ` : '' %><%= Math.min(resultCount, results.length) %> result<%= resultCount != 1 ? 's' : '' %>
+                </p>
+
+                <div class="uk-grid-small" uikit>
+                    <profile-card 
+                        v-for="result in <%= JSON.stringify(results) %>"
+                        :user="result"
+                        @click="goToProfile(result)"
+                    ></profile-card>
+                </div>
+            </div>
+        </div>
+        <page-footer></page-footer>
+    </div>
+
+    <script type="module">
+        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
+        import Navbar from '/components/navbar.js'
+        import Footer from '/components/footer.js'
+        import SearchBar from '/components/search-bar.js'
+        import ProfileCard from '/components/profile-card.js'
+
+        Vue.component('PageFooter', Footer);
+        Vue.component('Navbar', Navbar);
+        Vue.component('SearchBar', SearchBar);
+        Vue.component('ProfileCard', ProfileCard);
+        var app = new Vue({
+            el: '#app',
+
+            methods: {
+                goToProfile(user) {
+                    location.href = `${location.origin}/profile/${user.username}/${user.tag}`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

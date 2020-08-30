@@ -12,6 +12,7 @@ import { IndexRoute } from "./routes/IndexRoute";
 import { WipeDataRoute } from "./routes/WipeDataRoute";
 import { PrivacyPolicyRoutes } from "./routes/PrivacyPolicyRoutes";
 import { TermsAndConditionsRoutes } from "./routes/TermsAndConditionsRoutes";
+import { SearchRoute } from "./routes/SearchRoute";
 
 export interface Route {
     path: string;
@@ -82,6 +83,10 @@ const routes: Route[] = [
     {
         path: '/terms-and-conditions/tldr', 
         classInstances: [new TermsAndConditionsRoutes.TLDRRoute()]
+    },
+    {
+        path: '/search', 
+        classInstances: [new SearchRoute()]
     },
     {
         path: '/', 

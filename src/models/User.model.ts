@@ -4,12 +4,14 @@ import { Game } from './Game.model';
 import { Achievement } from './Achievement.model';
 import { Statistics } from './Statistics.model';
 import { use } from 'passport';
+import { Db } from 'mongodb';
 
 export class User {
     gaia: string;
     games: { [uuid: string]: Game };
     username: string;
     tag: string;
+    searchlabel: string;
     avatar: string;
 
     public static async Find(gaia: string): Promise<User> {
@@ -21,6 +23,16 @@ export class User {
         tag: string
     ): Promise<User> {
         return Database.self.gameDb.users.findOne({ username, tag });
+    }
+
+    public static async Query(query: string, limit: number): Promise<User[]> {
+        let founders = await Database.self.gameDb.users.find({ searchlabel: { $regex: '.*' + query.toLowerCase() + '.*' }, tag: "0000" }).toArray();
+        let nonFounders = await Database.self.gameDb.users.find({ searchlabel: { $regex: '.*' + query.toLowerCase() + '.*' }, tag: { $not: { $eq: "0000" }}}).toArray();
+
+        founders = founders.slice(0, limit).sort((a, b) => a.username.localeCompare(b.username));
+        nonFounders = nonFounders.slice(0, limit - founders.length).sort((a, b) => a.username.localeCompare(b.username));
+
+        return founders.concat(nonFounders); // Founders first, then the rest
     }
 
     public static async CreateOrUpdate(gaia: string, user: IGameData) {
@@ -90,6 +102,7 @@ export class User {
             username: data.user.name,
             tag: data.user.tag,
             avatar: data.user.avatar,
+            searchlabel: (data.user.name + '#' + data.user.tag).toLowerCase()
         });
 
         // Add first game

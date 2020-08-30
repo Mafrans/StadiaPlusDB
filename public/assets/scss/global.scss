@@ -8,10 +8,15 @@
 }
 
 body {
+    font-size: 18px;
+
     h1, h2, h3, h4, h5, p {
         font-family: "Roboto", sans-serif;
         margin: 0;
     }
+}
+
+#app {
 }
 
 // Extend the default uk-text weights

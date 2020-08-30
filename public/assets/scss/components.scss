@@ -41,12 +41,13 @@
 .search-bar {
     border-radius: 0.5rem;
     height: 45px;
-    min-width: 400px;
+    width: 400px;
     font-size: 18px;
 
     &.wide {
         font-size: 24px;
         height: 55px;
+        width: 100%;
 
         .material-icons {
             margin-left: 1rem !important;
@@ -283,6 +284,23 @@
  *  The Footer component
  */
 .footer {
-    position: absolute;
-    bottom: 0;
+    justify-self: flex-end;
+}
+
+/**
+ *  The Profile Card component
+ */
+.profile-card {
+    .content {
+        cursor: pointer;
+        padding: 1rem;
+        border-radius: .5rem;
+        font-size: 18px;
+        margin-bottom: 15px;
+    
+        .avatar {
+            border-radius: 50%;
+            height: 4rem;
+        }
+    }
 }
