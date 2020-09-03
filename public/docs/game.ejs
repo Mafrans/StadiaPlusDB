@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= game.name %> - Stadia+</title>
+
+    <link rel="stylesheet" href="/scss/dist/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    <script src="/dependencies/uikit/js/uikit.min.js"></script>
+    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+
+    <style>
+        .game::before {
+            content: '';
+            position: absolute;
+            border-radius: .5rem;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+        }
+
+        .banner {
+            position: relative;
+            background-size: cover;
+            background-position: center center;
+            height: 200px;
+            border-radius: 0.5rem;
+            padding: 3rem;
+            box-sizing: border-box;
+        }
+
+        .banner::before {
+            display: block !important;
+            content: '';
+            margin: -3rem;
+            position: absolute;
+            border-radius: .5rem;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+        }
+
+        .banner * {
+            position: relative;
+        }
+
+        .banner h1 .material-icons {
+            position: relative;
+            top: 6px;
+            font-size: 48px;
+        }
+
+        .banner a {
+            opacity: 0.8;
+            font-size: 18px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <navbar db search></navbar>
+        <cookie-banner></cookie-banner>
+
+        <div class="uk-container uk-container-large">
+            <div 
+                class="banner uk-margin-large-top uk-flex uk-flex-column uk-flex-between" 
+                style="background-image: url(<%= game.image %>"
+            >
+                <a class="c-white uk-flex uk-flex-middle" href="#" @click="goToProfile()">
+                    <i class="material-icons">arrow_back</i> Back to <%= user.username %>'s profile
+                </a>
+                <h1 class="uk-heading-small c-white uk-text-bold uk-margin-remove">
+                    <%= game.name %>
+                </h1>
+            </div>
+
+            <divider class="uk-margin-large-top" icon="show_chart">Key stats</divider>
+            <div class="keystats uk-margin-top">
+                <stat-card title="Time Played">
+                    <b>{{ parseTime(<%= game.time %>)[0] }}h</b> {{ parseTime(<%= game.time %>)[1] }}m
+                </stat-card>
+
+                <stat-card title="Achievements Unlocked">
+                    <b> <%= achievements.filter(e => e.value === 100).length %> </b>
+                </stat-card>
+
+                <stat-card title="Rarest Achievement" v-if="<%= achievements.length > 0 %>">
+                    Top <b>{{ parseRarity(<%= achievements.length > 0 ? achievements[0].stats.percent : 100 %>) }}%</b>
+                </stat-card>
+            </div>
+
+            <divider class="uk-margin-large-top" icon="emoji_events">Achievements</divider>
+            <div class="achievements uk-margin-top">
+                <achievement-card 
+                    v-for="achievement in <%= JSON.stringify(achievements) %>"
+                    :icon="achievement.icon"
+                    :name="achievement.name"
+                    :description="achievement.description"
+                    :rarity="achievement.stats.percent"
+                    wide="true"
+                ></achievement-card>
+            </div>
+        </div>
+        <page-footer></page-footer>
+    </div>
+
+    <script type="module">
+        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
+        import Navbar from '/components/navbar.js'
+        import Badge from '/components/badge.js'
+        import Divider from '/components/divider.js'
+        import StatCard from '/components/stat-card.js'
+        import AchievementCard from '/components/achievement-card.js'
+        import Footer from '/components/footer.js';
+        import CookieBanner from '/components/cookie-banner.js';
+        
+        Vue.component('Navbar', Navbar);
+        Vue.component('Badge', Badge);
+        Vue.component('Divider', Divider);
+        Vue.component('StatCard', StatCard);
+        Vue.component('AchievementCard', AchievementCard);
+        Vue.component('PageFooter', Footer);
+        Vue.component('CookieBanner', CookieBanner);
+
+        var app = new Vue({
+            el: '#app',
+            methods: {
+                goToProfile() {
+                    location.assign(`${location.origin}/profile/<%= user.username %>/<%= user.tag %>`);
+                },
+                parseTime(seconds) {
+                    const hours = Math.floor(seconds / 3600);
+                    const minutes = Math.floor(seconds / 60) - hours * 60;
+                    return [hours, minutes];
+                },
+                parseRarity(percent) {
+                    if(percent < 10) {
+                        return percent.toFixed(2);
+                    }
+                    else {
+                        return Math.round(percent);
+                    }
+                },
+                parseRarity(percent) {
+                    if(percent < 10) {
+                        return percent.toFixed(2);
+                    }
+                    else {
+                        return Math.round(percent);
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

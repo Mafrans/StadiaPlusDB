@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= user.username %>'s Games - Stadia+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/scss/dist/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    <script src="/dependencies/uikit/js/uikit.min.js"></script>
+    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+
+    <style>
+        .banner {
+            height: 200px;
+            border-radius: 0.5rem;
+            padding: 3rem;
+            box-sizing: border-box;
+        }
+
+        .banner h1 .material-icons {
+            position: relative;
+            top: 6px;
+            font-size: 48px;
+        }
+
+        .banner a {
+            opacity: 0.8;
+            font-size: 18px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <navbar db search></navbar>
+        <cookie-banner></cookie-banner>
+
+        <div class="uk-container uk-container-large">
+            <div class="banner bg-gradient uk-margin-large-top uk-flex uk-flex-column uk-flex-between">
+                <a class="c-white uk-flex uk-flex-middle" href="#" @click="goToProfile()">
+                    <i class="material-icons">arrow_back</i> Back to <%= user.username %>'s profile
+                </a>
+                <h1 class="uk-heading-small c-white uk-text-bold uk-margin-remove"><i class="material-icons uk-margin-small-right uk-visible@s">sports_esports</i>Games</h1>
+            </div>
+            
+
+            <divider class="uk-margin-large-top" icon="show_chart">Key stats</divider>
+            <div class="keystats uk-margin-top">
+                <stat-card title="Games Owned"><b><%= games.length %></b></stat-card>
+
+                <stat-card title="Highest Playtime (<%= games.length > 0 ? games.sort((a, b) => b.time - a.time)[0].name : '' %>)" v-if="<%= games.length > 0 %>">
+                    <b>
+                        {{ parseTime(<%= games.length > 0 ? games.sort((a, b) => b.time - a.time)[0].time : 0 %>)[0] }}h
+                    </b> 
+                    {{ parseTime(<%= games.length > 0 ? games.sort((a, b) => b.time - a.time)[0].time : 0 %>)[1] }}m
+                </stat-card>
+
+                <stat-card title="Total Playtime" v-if="<%= games.length > 0 %>">
+                    <b>
+                        {{ parseTime(<%= games.map(e => parseInt(e.time)).reduce((a, e) => a + e) %>)[0] }}h
+                    </b> 
+                    {{ parseTime(<%= games.map(e => parseInt(e.time)).reduce((a, e) => a + e) %>)[1] }}m
+                </stat-card>
+            </div>
+
+            <divider class="uk-margin-large-top" icon="emoji_events">Games</divider>
+            <div class="games uk-margin-top">
+                <game-card 
+                    v-for="game in <%= JSON.stringify(games) %>"
+                    :image="game.image"
+                    :name="game.name"
+                    :play-time="game.time"
+
+                    @click.native="goToGame(game.uuid)"
+                ></game-card>
+            </div>
+        </div>
+        
+        <page-footer></page-footer>
+    </div>
+
+    <script type="module">
+        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
+        import Navbar from '/components/navbar.js'
+        import Badge from '/components/badge.js'
+        import Divider from '/components/divider.js'
+        import StatCard from '/components/stat-card.js'
+        import GameCard from '/components/game-card.js'
+        import Footer from '/components/footer.js';
+        import CookieBanner from '/components/cookie-banner.js';
+
+        Vue.component('Navbar', Navbar);
+        Vue.component('Badge', Badge);
+        Vue.component('Divider', Divider);
+        Vue.component('StatCard', StatCard);
+        Vue.component('GameCard', GameCard);
+        Vue.component('PageFooter', Footer);
+        Vue.component('CookieBanner', CookieBanner);
+
+        var app = new Vue({
+            el: '#app',
+            methods: {
+                goToProfile() {
+                    location.assign(`${location.origin}/profile/<%= user.username %>/<%= user.tag %>`);
+                },
+                goToGame(uuid) {
+                    location.assign(`${location.origin}/profile/<%= user.username %>/<%= user.tag %>/game/${uuid}`);
+                },
+                parseTime(seconds) {
+                    const hours = Math.floor(seconds / 3600);
+                    const minutes = Math.floor(seconds / 60) - hours * 60;
+                    return [hours, minutes];
+                }
+            }
+        });
+    </script>
+</body>
+</html>

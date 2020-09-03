@@ -1,0 +1,81 @@
+@use "sass:map";
+$node_path: "../../../node_modules/";
+
+$colors: (
+    'white': #FFFFFF,
+    'tomato': #FA4821,
+    'cherry': #B9166A,
+    'charcoal': #424242,
+    'dark-gray': #505050,
+    'gray': #969696,
+    'light-gray': #F0F0F0,
+    'marble': #FAFAFA
+);
+
+:root {
+    @each $name, $color in $colors {
+        --#{$name}: #{$color};
+    }
+}
+
+
+.c {
+    @each $name, $color in $colors {
+        &-#{$name} {
+            color: $color !important;
+
+            &:hover {
+                color: $color !important; // Doesn't work
+            }
+        }
+    }
+
+    &-gradient {
+        background: linear-gradient(90deg, #FA4821 0%, #AE0F56 100%) !important;
+        background-clip: text !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+}
+
+.bg {
+    @each $name, $color in $colors {
+        &-#{$name} {
+            background-color: $color !important;
+        }
+    }
+    
+    &-gradient {
+        background: linear-gradient(90deg, #FA4821 0%, #AE0F56 100%) !important;
+    }
+}
+
+.border {
+    @each $name, $color in $colors {
+        &-#{$name} {
+            border: $color 2px solid;
+        }
+    }
+}
+
+.achievement-card {
+    &.bronze {
+        border-color: #F3B4B4;
+        background-color: #FFF7F5;
+    }
+
+    &.silver {
+        border-color: #C8D2D5;
+        background-color: #F8FBFC;
+    }
+
+    &.gold {
+        border-color: #FFD2A8;
+        background-color: #FFFCF5;
+    }
+
+    &.diamond {
+        border-color: #8AD4FF;
+        background-color: #F5FEFF;
+    }
+}

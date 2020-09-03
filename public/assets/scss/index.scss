@@ -1,0 +1,53 @@
+.hero {
+    height: 600px;
+    font-size: 18px;
+    clip-path: inset(0 0 0 0);
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+
+    .splash {
+        position: relative;
+        
+        img {
+            width: 110%;
+            position: absolute;
+            transform: translateY(-100px) rotate(-5deg) scale(1.2);
+            opacity: 0.5;
+        }
+
+        &.mobile {
+            position: absolute;
+            opacity: 0.5;
+            z-index: -1;
+        }
+    }
+}
+
+.image {
+    border-radius: 1rem;
+
+    img {
+        border-radius: inherit;
+        width: 98%;
+        padding: 1%;
+        box-sizing: initial;
+    }
+
+    @media screen and (min-width: 1500px) {
+        &.right {
+            margin-left: 40px;
+        }
+        &.left {
+            margin-left: -40px;
+        }
+    }
+    @media screen and (min-width: 1600px) {
+        &.right {
+            margin-left: 80px;
+        }
+        &.left {
+            margin-left: -80px;
+        }
+    }
+}
