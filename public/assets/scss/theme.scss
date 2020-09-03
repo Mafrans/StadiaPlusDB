@@ -12,6 +12,12 @@ $colors: (
     'marble': #FAFAFA
 );
 
+:root {
+    @each $name, $color in $colors {
+        --#{$name}: #{$color};
+    }
+}
+
 
 .c {
     @each $name, $color in $colors {

@@ -72,10 +72,10 @@
     align-items: center;
     flex-direction: row;
     padding: 4px 16px;
-    background: #F0F0F0;
+    background: var(--light-gray);
     border-radius: 999px;
     font-weight: 500;
-    color: #505050;
+    color: var(--dark-gray);
     margin-top: 0.5rem;
     margin-right: 0.5rem;
 
@@ -93,7 +93,7 @@
         margin: 0 1rem;
         flex-grow: 1;
         height: 0;
-        border: 1px solid #F0F0F0;
+        border: 1px solid var(--light-gray);
     }
     
     h3 {
@@ -117,7 +117,7 @@
 .achievement-card {
     width: 100%;
     padding: 1rem;
-    border: 2px solid #F0F0F0;
+    border: 2px solid var(--light-gray);
     border-radius: .5rem;
     margin-top: 1rem;
     margin-right: 1rem;
@@ -158,7 +158,7 @@
     width: 100%;
     position: relative;
     padding: 1rem;
-    background-image: #F0F0F0;
+    background-image: var(--light-gray);
     background-size: cover;
     background-position: center center;
     border-radius: .5rem;
@@ -219,7 +219,7 @@
 .stat-card {
     width: 100%;
     height: 150px;
-    border: #f0f0f0 solid 2px;
+    border: var(--light-gray) solid 2px;
     border-radius: .5rem;
     margin-top: 1rem;
     margin-right: 1rem;
@@ -233,7 +233,7 @@
     b {
         font-size: 48px;
         font-weight: 600;
-        color: #FA4821;
+        color: var(--tomato);
     }
 
     @media screen and (min-width: 600px) {
@@ -301,6 +301,17 @@
         .avatar {
             border-radius: 50%;
             height: 4rem;
+        }
+    }
+
+    .click-icon {
+        padding: 1rem;
+        padding-left: 1.5rem;
+        border-left: var(--light-gray) 2px solid;
+    
+        .material-icons {
+            vertical-align: text-bottom;
+            color: var(--dark-gray);
         }
     }
 }
