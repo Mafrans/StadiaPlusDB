@@ -7,8 +7,8 @@ var component = {
             </h3>
             <hr/>
             <p v-if="expand" class="c-gray" style="cursor: pointer" @click="$emit('expand')">
-                <i class="material-icons">expand_more</i>
                 Show all
+                <i class="material-icons">keyboard_arrow_right</i>
             </p>
         </div>
     `,
