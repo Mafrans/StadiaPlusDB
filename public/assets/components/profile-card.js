@@ -23,6 +23,9 @@ var component = {
                         Founder
                     </p>
                 </div>
+                <div class="click-icon uk-margin-auto-left">
+                    <i class="material-icons">arrow_forward</i>
+                </div>
             </div>
         </div>
     `,

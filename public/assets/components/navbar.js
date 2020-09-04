@@ -20,7 +20,7 @@ var component = {
                         </div>
                         <div class="uk-visible@m uk-width-expand uk-flex uk-flex-right uk-flex-middle">
                             <a @click="goToHome()" class="c-dark-gray uk-text-medium uk-margin-medium-right">Home</a>
-                            <a @click="goToSearch()" class="c-tomato uk-text-bold uk-margin-medium-right">DB</a>
+                            <a @click="goToSearch()" :class="{'c-tomato': db != undefined, 'c-dark-gray': db == undefined, 'uk-text-bold': db != undefined}" class="uk-text-medium uk-margin-medium-right">DB</a>
                             <a @click="openWikiPage()" class="c-dark-gray uk-text-medium uk-margin-medium-right">Help & docs</a>
                             <btn v-if="search == undefined" class="uk-margin-small-left" icon="get_app" @click="openExtensionPage()" gradient=""> Get the free extension </btn>
                         </div>

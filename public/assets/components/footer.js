@@ -4,9 +4,9 @@ var component = {
             <div class="uk-container uk-container-large">
                 <div class="uk-grid-medium" uk-grid>
                     <a @click="goToHome()" class="c-gradient uk-text-bold uk-margin-medium-right">STADIA+</a>
-                    <a class="c-dark-gray uk-text-medium">Discord</a>
-                    <a class="c-dark-gray uk-text-medium">GitHub</a>
-                    <a class="c-dark-gray uk-text-medium">Help & docs</a>
+                    <a class="c-dark-gray uk-text-medium" href="https://discord.gg/2VDbEQ8" target="_blank">Discord</a>
+                    <a class="c-dark-gray uk-text-medium" href="https://github.com/Mafrans/StadiaPlus" target="_blank">GitHub</a>
+                    <a class="c-dark-gray uk-text-medium" href="https://patreon.com/Mafras" target="_blank">Help & docs</a>
                 </div>
                 <div class="uk-margin-medium-top">
                     <p>
