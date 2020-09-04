@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="icon" href="/images/favicon_16px.ico" />
-
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Stadia+</title>
-        <link rel="stylesheet" href="/scss/dist/style.css" />
-        <link rel="stylesheet" href="/scss/dist/index.css" />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-        />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css" />
-        <script src="/dependencies/uikit/js/uikit.min.js"></script>
-        <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+        <%- 
+            include('templates/head', {
+                title: `Stadia+`, 
+                description: `
+                    Stadia+ is the world's most popular extension for
+                    Stadia, troubleshoot your issues, find your games quicker and keep track of achievements using the leading
+                    chrome extension for Stadia.
+                `
+            }) 
+        %>
     </head>
     <body style="overflow-x: hidden">
         <div id="app">
@@ -72,13 +67,15 @@
                             More about codec/resolution forcing<i class="material-icons">arrow_forward</i>
                         </a>
                     </div>
-                    <div class="uk-width-1-2@s uk-flex-first uk-flex-last@s uk-margin-small-bottom uk-margin-remove-bottom@s">
+                    <div
+                        class="uk-width-1-2@s uk-flex-first uk-flex-last@s uk-margin-small-bottom uk-margin-remove-bottom@s"
+                    >
                         <div class="image right bg-gradient">
                             <img src="/images/codec_force.png" alt="" />
                         </div>
                     </div>
                 </div>
-                <hr class="uk-margin-xlarge-top uk-margin-xlarge-bottom uk-hidden@s">
+                <hr class="uk-margin-xlarge-top uk-margin-xlarge-bottom uk-hidden@s" />
                 <div class="uk-margin-xlarge-top" uk-grid>
                     <div class="uk-width-1-2@s uk-margin-small-bottom uk-margin-remove-bottom@s">
                         <div class="image left bg-gradient">
@@ -96,7 +93,7 @@
                         >
                     </div>
                 </div>
-                <hr class="uk-margin-xlarge-top uk-margin-xlarge-bottom uk-hidden@s">
+                <hr class="uk-margin-xlarge-top uk-margin-xlarge-bottom uk-hidden@s" />
                 <div class="uk-margin-xlarge-top" uk-grid>
                     <div class="uk-width-1-2@s uk-flex uk-flex-column uk-flex-center">
                         <h2 class="c-gradient uk-margin-medium-bottom uk-text-bold">Find your favourites fast</h2>
@@ -112,13 +109,15 @@
                             >More about filtering and sorting<i class="material-icons">arrow_forward</i></a
                         >
                     </div>
-                    <div class="uk-width-1-2@s uk-flex-first uk-flex-last@s uk-margin-small-bottom uk-margin-remove-bottom@s">
+                    <div
+                        class="uk-width-1-2@s uk-flex-first uk-flex-last@s uk-margin-small-bottom uk-margin-remove-bottom@s"
+                    >
                         <div class="image right bg-gradient">
                             <img src="/images/library_filter.png" alt="" />
                         </div>
                     </div>
                 </div>
-                <hr class="uk-margin-xlarge-top uk-margin-xlarge-bottom uk-hidden@s">
+                <hr class="uk-margin-xlarge-top uk-margin-xlarge-bottom uk-hidden@s" />
                 <div class="uk-margin-xlarge-top" uk-grid>
                     <div class="uk-width-1-2@s uk-margin-small-bottom uk-margin-remove-bottom@s">
                         <div class="image left bg-gradient">
@@ -142,10 +141,10 @@
             </div>
             <div class="bg-light-gray uk-margin-xlarge-top uk-padding-large uk-text-center">
                 <h1 class="uk-heading-small uk-text-bold">Sounds great, huh?</h1>
-                <p>
-                    Installing Stadia+ takes less time than reading this sentence. <b>And it’s totally free.</b>
-                </p>
-                <btn class="uk-visible@s uk-margin-medium-top" icon="get_app" @click="openExtensionPage()" gradient=""> Get the free extension </btn>
+                <p>Installing Stadia+ takes less time than reading this sentence. <b>And it’s totally free.</b></p>
+                <btn class="uk-visible@s uk-margin-medium-top" icon="get_app" @click="openExtensionPage()" gradient="">
+                    Get the free extension
+                </btn>
             </div>
             <div class="uk-container uk-container-large uk-margin-xlarge-top">
                 <div uk-grid>
@@ -160,7 +159,7 @@
                         >
                     </div>
                     <div class="uk-width-1-1 uk-hidden@s uk-margin-large-top uk-margin-small-top">
-                        <hr>
+                        <hr />
                     </div>
                     <div class="uk-width-1-2@s">
                         <h2 class="c-gradient uk-text-bold">Help improve Stadia+</h2>
@@ -175,7 +174,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <page-footer></page-footer>
         </div>
         <script type="module">
@@ -184,7 +183,7 @@
             import Button from '/components/button.js';
             import Footer from '/components/footer.js';
             import CookieBanner from '/components/cookie-banner.js';
-            
+
             Vue.component('Navbar', Navbar);
             Vue.component('Btn', Button);
             Vue.component('PageFooter', Footer);

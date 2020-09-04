@@ -1,126 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="icon" href="/images/favicon_16px.ico" />
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions TL;DR - Stadia+</title>
+    <head>
+        <%- 
+            include('templates/head', {
+                title: `Terms and Conditions TL;DR - Stadia+`, 
+                description: `
+                    Stadia+ is the world's most popular extension for
+                    Stadia, troubleshoot your issues, find your games quicker and keep track of achievements using the leading
+                    chrome extension for Stadia.
+                `
+            })
+        %>
+        
+        <style>
+            section {
+                margin-bottom: 4rem;
+                margin-left: 20px;
+            }
 
-    <link rel="stylesheet" href="/scss/dist/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css" />
-    <script src="/dependencies/uikit/js/uikit.min.js"></script>
-    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+            section.subsection {
+                margin-bottom: 2rem;
+            }
 
-    <style>
-        section {
-            margin-bottom: 4rem;
-            margin-left: 20px;
-        }
+            #app h3 {
+                font-weight: 600;
+            }
 
-        section.subsection {
-            margin-bottom: 2rem;
-        }
+            #app h3,
+            #app h4 {
+                margin-bottom: 1.5rem;
+                margin-top: 2rem;
+            }
 
-        #app h3 {
-            font-weight: 600;
-        }
+            #app ul {
+                margin-top: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <navbar></navbar>
 
-        #app h3, 
-        #app h4 {
-            margin-bottom: 1.5rem;
-            margin-top: 2rem;
-        }
+            <div class="uk-container uk-container-large">
+                <h1 class="c-dark-gray uk-heading-small uk-margin-large-top">Stadia+ Terms and Conditions</h1>
+                <h2 class="c-gray uk-text-lead">
+                    This is the TL;DR version of the Stadia+ terms and conditions, intended for people who want to know
+                    more about what you're allowed/not allowed to use the Stadia+ extension and website for, but aren't
+                    interested in the nitty gritty legal details.
+                </h2>
 
-        #app ul {
-            margin-top: 1rem;
-        }
-    </style>
-</head>
-<body>
-    <div id="app">
-        <navbar></navbar>
+                <hr class="uk-margin-medium-bottom" />
 
-        <div class="uk-container uk-container-large">
-            <h1 class="c-dark-gray uk-heading-small uk-margin-large-top">Stadia+ Terms and Conditions</h1>
-            <h2 class="c-gray uk-text-lead">
-                This is the TL;DR version of the Stadia+ terms and conditions, intended for people 
-                who want to know more about what you're allowed/not allowed to use the Stadia+ extension and website for, but aren't interested 
-                in the nitty gritty legal details.
-            </h2>
+                <h3 class="c-dark-gray">1. Intellectual Property Rigths</h3>
 
-            <hr class="uk-margin-medium-bottom"/>
+                <section class="c-dark-gray">
+                    <h4 class="c-dark-gray">1.1 IP Rights</h4>
+                    <p>
+                        Unless otherwise indicated, this Site and the content on it is intellectual property of Malte
+                        Klüft. You may not attempt to decompile or reverse-engineer this site. Instead, you should use
+                        the code provided on the
+                        <a class="c-tomato" href="https://github.com/Mafrans/StadiaPlusDB" target="_blank"
+                            >Github page</a
+                        >.
+                    </p>
 
-            <h3 class="c-dark-gray">1. Intellectual Property Rigths</h3>
+                    <h4 class="c-dark-gray">1.1 Exceptions</h4>
+                    <p>There are a few notable exceptions to this, namely:</p>
+                    <ul class="uk-list uk-list-decimal">
+                        <li>Achievement icons, names and descriptions</li>
+                        <li>Game information such as images, icons, names, descriptions and other meta data.</li>
+                    </ul>
+                </section>
 
-            <section class="c-dark-gray">
-                <h4 class="c-dark-gray">1.1 IP Rights</h4>
-                <p>
-                    Unless otherwise indicated, this Site and the content on it is intellectual property of Malte Klüft. 
-                    You may not attempt to decompile or reverse-engineer this site. Instead, you should use the code 
-                    provided on the <a class="c-tomato" href="https://github.com/Mafrans/StadiaPlusDB" target="_blank">Github page</a>.
-                </p>
+                <h3 class="c-dark-gray">2. Users and Registration</h3>
 
-                <h4 class="c-dark-gray">1.1 Exceptions</h4>
-                <p>There are a few notable exceptions to this, namely:</p>
-                <ul class="uk-list uk-list-decimal">
-                    <li>Achievement icons, names and descriptions</li>
-                    <li>Game information such as images, icons, names, descriptions and other meta data.</li>
-                </ul>
-            </section>
-            
-            <h3 class="c-dark-gray">2. Users and Registration</h3>
+                <section class="c-dark-gray">
+                    <h4 class="c-dark-gray">2.1 User Information</h4>
+                    <p>By using the site, you agree that:</p>
+                    <ul class="uk-list uk-list-decimal">
+                        <li>All information you sumbit to the site is true and accurate.</li>
+                        <li>You are not under the age of 13.</li>
+                        <li>You are not a minor, or have received parental permission to use the site.</li>
+                        <li>Your use of the site will not violate any applicable law or regulation.</li>
+                    </ul>
+                    <p>If this is violated, we have the right to suspend your account.</p>
 
-            <section class="c-dark-gray">
-                <h4 class="c-dark-gray">2.1 User Information</h4>
-                <p>By using the site, you agree that:</p>
-                <ul class="uk-list uk-list-decimal">
-                    <li>All information you sumbit to the site is true and accurate.</li>
-                    <li>You are not under the age of 13.</li>
-                    <li>You are not a minor, or have received parental permission to use the site.</li>
-                    <li>Your use of the site will not violate any applicable law or regulation.</li>
-                </ul>
-                <p>If this is violated, we have the right to suspend your account.</p>
+                    <h4 class="c-dark-gray">2.2 Registration</h4>
+                    <p>
+                        Stadia+ uses your Google account for registration. You are responsible for all use of your
+                        account, as well as keeping it secure.
+                    </p>
+                </section>
 
-                <h4 class="c-dark-gray">2.2 Registration</h4>
-                <p>Stadia+ uses your Google account for registration. You are responsible for all use of your account, as well as keeping it secure.</p>
-            </section>
+                <h3 class="c-dark-gray">3. Prohibited Activities</h3>
 
-            <h3 class="c-dark-gray">3. Prohibited Activities</h3>
-
-            <section class="c-dark-gray">
-                <p>By using the site, you agree not to:</p>
-                <ul class="uk-list uk-list-decimal">
-                    <li>Trick, defraud or mislead other users.</li>
-                    <li>Circumvent, disable or otherwise interfere with security-related features of the site.</li>
-                    <li>Use any information from the site to harass or harm another person.</li>
-                    <li>Upload data that is inaccurate or not truthful.</li>
-                    <li>Upload or transmit viruses or other material that interferes with another person's use of the site.</li>
-                    <li>Use scripts or data mining tools to extract or inject data from/into the site.</li>
-                    <li>Attempt to impersonate another user or person.</li>
-                    <li>Sell, trade or otherwise transfer your profile.</li>
-                    <li>Attempt to bypass any security measures designed to restrict or prevent access to any portion of the site.</li>
-                    <li>Collect personal information of any user or person on the site.</li>
-                </ul>
-            </section>
+                <section class="c-dark-gray">
+                    <p>By using the site, you agree not to:</p>
+                    <ul class="uk-list uk-list-decimal">
+                        <li>Trick, defraud or mislead other users.</li>
+                        <li>Circumvent, disable or otherwise interfere with security-related features of the site.</li>
+                        <li>Use any information from the site to harass or harm another person.</li>
+                        <li>Upload data that is inaccurate or not truthful.</li>
+                        <li>
+                            Upload or transmit viruses or other material that interferes with another person's use of
+                            the site.
+                        </li>
+                        <li>Use scripts or data mining tools to extract or inject data from/into the site.</li>
+                        <li>Attempt to impersonate another user or person.</li>
+                        <li>Sell, trade or otherwise transfer your profile.</li>
+                        <li>
+                            Attempt to bypass any security measures designed to restrict or prevent access to any
+                            portion of the site.
+                        </li>
+                        <li>Collect personal information of any user or person on the site.</li>
+                    </ul>
+                </section>
+            </div>
+            <page-footer></page-footer>
         </div>
-        <page-footer></page-footer>
-    </div>
 
-    <script type="module">
-        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
-        import Navbar from '/components/navbar.js'
-        import Button from '/components/button.js'
-        import Footer from '/components/footer.js';
+        <script type="module">
+            import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js';
+            import Navbar from '/components/navbar.js';
+            import Button from '/components/button.js';
+            import Footer from '/components/footer.js';
 
-        Vue.component('PageFooter', Footer);
-        Vue.component('Navbar', Navbar);
-        Vue.component('Btn', Button);
-        var app = new Vue({
-            el: '#app'
-        });
-    </script>
-</body>
+            Vue.component('PageFooter', Footer);
+            Vue.component('Navbar', Navbar);
+            Vue.component('Btn', Button);
+            var app = new Vue({
+                el: '#app',
+            });
+        </script>
+    </body>
 </html>

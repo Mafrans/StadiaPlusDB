@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="icon" href="/images/favicon_16px.ico" />
-        
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><%= user.username%>'s Achievements - Stadia+</title>
-
-        <link rel="stylesheet" href="/scss/dist/style.css" />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
-        />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-
-        <script src="/dependencies/uikit/js/uikit.min.js"></script>
-        <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+        <%- 
+            include('templates/head', {
+                title: `${user.username}'s Achievements - Stadia+ DB`, 
+                description: `
+                    ${user.username}' rarest achievement is "${achievements[0].name}" as only ${achievements[0].stats.percent}% 
+                    of players have it. Find out more about your Stadia profile with Stadia+ DB.
+                `
+            })
+        %>
 
         <style>
             .banner {
