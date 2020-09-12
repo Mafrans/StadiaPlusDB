@@ -15,6 +15,7 @@ import { TermsAndConditionsRoutes } from "./routes/TermsAndConditionsRoutes";
 import { SearchRoute } from "./routes/SearchRoute";
 import RateLimit from "express-rate-limit";
 import { ProfileAPIRoutes } from "./routes/api/ProfileAPIRoutes";
+import { StatsRoute } from "./routes/api/StatsRoute";
 export interface Route {
     path: string;
     classInstances: RouteInterface[];
@@ -51,12 +52,31 @@ const routes: Route[] = [
         classInstances: [new UserRoute()]
     },
     {
+        path: '/api/stats/:game', 
+        classInstances: [new StatsRoute()],
+        limiter: {
+            windowMs: 1000,
+            max: 10,
+            message: JSON.stringify({error: 'Too many requests'})
+        }
+    },
+    {
         path: '/api/profile/list', 
-        classInstances: [new ProfileAPIRoutes.ProfilesRoute()]
+        classInstances: [new ProfileAPIRoutes.ProfilesRoute()],
+        limiter: {
+            windowMs: 1000,
+            max: 10,
+            message: JSON.stringify({error: 'Too many requests'})
+        }
     },
     {
         path: '/api/profile/:username/:tag', 
-        classInstances: [new ProfileAPIRoutes.ProfileRoute()]
+        classInstances: [new ProfileAPIRoutes.ProfileRoute()],
+        limiter: {
+            windowMs: 1000,
+            max: 10,
+            message: JSON.stringify({error: 'Too many requests'})
+        }
     },
     {
         path: '/profile/:username/', 

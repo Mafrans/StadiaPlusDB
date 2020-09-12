@@ -9,7 +9,7 @@ export namespace ProfileAPIRoutes {
                 req.params.tag
             );
     
-            let APIUser = null; 
+            let APIUser = {}; 
     
             if(user != null) {
                 APIUser = {
