@@ -11,10 +11,6 @@ var component = {
             this.$emit('click');
         }
     },
-    
-    mounted() {
-        console.log(this.gradient)
-    },
 
     props: [ 'gradient', 'icon' ]
 };

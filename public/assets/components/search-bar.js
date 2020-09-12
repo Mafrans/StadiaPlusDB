@@ -21,7 +21,6 @@ var component = {
 
     methods: {
         submit(el) {
-            console.log(el);
             const text = el.value;
 
             if(text !== '') {
