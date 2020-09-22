@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%- 
-            include('templates/head', {
-                title: `Privacy Policy TL;DR - Stadia+`, 
-                description: `
-                    Stadia+ is the world's most popular extension for
-                    Stadia, troubleshoot your issues, find your games quicker and keep track of achievements using the leading
-                    chrome extension for Stadia.
-                `
-            })
-        %>
+        <%- include('templates/head', { title: `Privacy Policy TL;DR - Stadia+`, description: ` Stadia+ is the world's
+        most popular extension for Stadia, troubleshoot your issues, find your games quicker and keep track of
+        achievements using the leading chrome extension for Stadia. ` }) %>
 
         <style>
             section {
@@ -42,10 +35,16 @@
             <navbar></navbar>
 
             <div class="uk-container uk-container-large">
-                <h1 class="c-dark-gray uk-heading-small uk-margin-large-top">Stadia+ Privacy Policy</h1>
+                <h1 class="c-dark-gray uk-heading-small uk-margin-large-top">Stadia+ DB Privacy Policy</h1>
                 <h2 class="c-gray uk-text-lead">
-                    This is the TL;DR version of the Stadia+ privacy policy, intended for people who want to know more
-                    about how we collect and handle data, but aren't interested in the nitty gritty legal details.
+                    This is the TL;DR version of the Stadia+ DB privacy policy, intended for people who want to know
+                    more about how we collect and handle data, but aren't interested in the nitty gritty legal details.
+                    If you're looking for a more complete version of this document, you can find it at
+                    <a href="https://stadiaplus.dev/privacy-policy">https://stadiaplus.dev/privacy-policy</a>.
+                </h2>
+                <h2>
+                    Note: This document only applies to users of Stadia+ DB, our service that collects and displays your
+                    game progress.
                 </h2>
 
                 <hr class="uk-margin-medium-bottom" />
@@ -87,7 +86,7 @@
                     <section class="subsection c-dark-gray">
                         <p>
                             For the sake of your privacy, we collect very little information from your Google account.
-                            The only data we collect is your GAIA (Google Accounts and ID Administration) identification
+                            The only data we collect is your GAIA (Google Accounts and ID Administration) public identification
                             token, which is used to identify your Google account when you log in.
                         </p>
                     </section>
@@ -101,7 +100,7 @@
                         <p>
                             We will never sell your data to third parties. Instead, all non-identifiable data is freely
                             available to the public through our profile API at
-                            https://stadiaplus.dev/api/profile/USERNAME/TAG according to the terms stated in our
+                            https://stadiaplus.dev/api/profile/:username/:tag according to the terms stated in our
                             <a class="c-tomato" href="/terms-and-conditions" target="_blank">Terms and Conditions</a>.
                         </p>
                     </section>
@@ -124,7 +123,7 @@
                     <h4 class="c-dark-gray">2.3 Your Google account data</h4>
                     <section class="subsection c-dark-gray">
                         <p>
-                            As stated in section 1.2, your Google account data is used by Stadia+ exclusively for
+                            As stated in section 1.2, your Google account data is used by Stadia+ DB exclusively for
                             profile identification. This data is automatically deleted after 30 days, or as soon as you
                             sign out manually.
                         </p>
