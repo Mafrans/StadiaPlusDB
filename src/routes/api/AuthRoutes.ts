@@ -28,13 +28,13 @@ export namespace AuthRoutes {
     }
 
     export class Signout implements RouteInterface {
-        post(req: any, res: any, next: any) {
+        async post(req: any, res: any, next: any) {
             if(req.body.token == null) return;
             const token: string = req.body.token;
 
             req.logout();
             res.send('Signed out');
-            Login.Remove(token);
+            Login.Signout(token);
         }
     }
 }
