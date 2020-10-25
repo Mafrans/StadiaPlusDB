@@ -14,13 +14,8 @@ var component = {
         parseTime(seconds) {
             const hours = Math.floor(seconds / 3600);
             const minutes = Math.floor(seconds / 60) - hours * 60;
-            
-            const out = [];
-            if(hours > 0) out.push(hours);
-            if(minutes > 0) out.push(minutes);
-
-            return out;
-        }
+            return [hours, minutes];
+        },
     }
 };
 

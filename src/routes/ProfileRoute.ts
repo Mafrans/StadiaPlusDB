@@ -29,12 +29,6 @@ export class ProfileRoute implements RouteInterface {
         let games = [];
         for (const game of Object.values(user.games)) {
             const dbgame = App.self.stadiaGameDb.getGame(game.uuid);
-            console.log({
-                uuid: game.uuid,
-                time: game.time,
-                name: game.name,
-                image: dbgame !== undefined ? dbgame.image : '',
-            });
 
             games.push({
                 uuid: game.uuid,

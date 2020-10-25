@@ -23,6 +23,11 @@ export class Login implements LoginInterface {
         return Database.self.auth.logins.remove({ token });
     }
 
+    public static async Signout(token: string) {
+        const gaia: string = await Login.Find(token);
+        return Database.self.auth.logins.deleteMany({ gaia });
+    }
+
     public static async Find(token: string): Promise<string> {
         const logins = Database.self.auth.logins;
 

@@ -1,4 +1,4 @@
-import { RouteInterface } from "./Route.interface";
+import { RouteInterface } from "../Route.interface";
 
 
 export class PingRoute implements RouteInterface {

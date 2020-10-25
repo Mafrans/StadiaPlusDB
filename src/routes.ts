@@ -1,22 +1,25 @@
-import { AuthRoutes } from "./routes/AuthRoutes";
+import { AuthRoutes } from "./routes/api/AuthRoutes";
 import { RouteInterface } from './routes/Route.interface';
-import { UpdateRoute } from "./routes/UpdateRoute";
-import { PingRoute } from "./routes/PingRoute";
-import { UserRoute } from "./routes/UserRoute";
+import { UpdateRoute } from "./routes/api/UpdateRoute";
+import { PingRoute } from "./routes/api/PingRoute";
+import { UserRoute } from "./routes/api/UserRoute";
 import { ProfileRoute } from "./routes/ProfileRoute";
 import { AchievementsRoute } from "./routes/AchievementsRoute";
 import { ProfileRedirectRoute } from "./routes/ProfileRedirectRoute";
 import { GameRoute } from "./routes/GameRoute";
 import { GamesRoute } from "./routes/GamesRoute";
 import { IndexRoute } from "./routes/IndexRoute";
-import { WipeDataRoute } from "./routes/WipeDataRoute";
+import { WipeDataRoute } from "./routes/api/WipeDataRoute";
 import { PrivacyPolicyRoutes } from "./routes/PrivacyPolicyRoutes";
 import { TermsAndConditionsRoutes } from "./routes/TermsAndConditionsRoutes";
 import { SearchRoute } from "./routes/SearchRoute";
-
+import RateLimit from "express-rate-limit";
+import { ProfileAPIRoutes } from "./routes/api/ProfileAPIRoutes";
+import { StatsRoute } from "./routes/api/StatsRoute";
 export interface Route {
     path: string;
     classInstances: RouteInterface[];
+    limiter?: RateLimit.Options;
 } 
 
 const routes: Route[] = [
@@ -47,6 +50,33 @@ const routes: Route[] = [
     {
         path: '/api/user', 
         classInstances: [new UserRoute()]
+    },
+    {
+        path: '/api/stats/:game', 
+        classInstances: [new StatsRoute()],
+        limiter: {
+            windowMs: 1000,
+            max: 10,
+            message: JSON.stringify({error: 'Too many requests'})
+        }
+    },
+    {
+        path: '/api/profile/list', 
+        classInstances: [new ProfileAPIRoutes.ProfilesRoute()],
+        limiter: {
+            windowMs: 1000,
+            max: 10,
+            message: JSON.stringify({error: 'Too many requests'})
+        }
+    },
+    {
+        path: '/api/profile/:username/:tag', 
+        classInstances: [new ProfileAPIRoutes.ProfileRoute()],
+        limiter: {
+            windowMs: 1000,
+            max: 10,
+            message: JSON.stringify({error: 'Too many requests'})
+        }
     },
     {
         path: '/profile/:username/', 

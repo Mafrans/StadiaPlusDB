@@ -1,7 +1,7 @@
-import { RouteInterface } from "./Route.interface";
+import { RouteInterface } from "../Route.interface";
 import passport from "passport";
-import { App } from "../App";
-import { Login } from './../models/Login.model';
+import { App } from "../../App";
+import { Login } from '../../models/Login.model';
 
 export namespace AuthRoutes {
     export class Start implements RouteInterface {
@@ -28,14 +28,13 @@ export namespace AuthRoutes {
     }
 
     export class Signout implements RouteInterface {
-        post(req: any, res: any, next: any) {
-            console.log("signing out", {token: req.body.token});
+        async post(req: any, res: any, next: any) {
             if(req.body.token == null) return;
             const token: string = req.body.token;
 
             req.logout();
             res.send('Signed out');
-            Login.Remove(token);
+            Login.Signout(token);
         }
     }
 }

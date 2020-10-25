@@ -1,172 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy TL;DR - Stadia+</title>
+    <head>
+        <%- include('templates/head', { title: `Privacy Policy TL;DR - Stadia+`, description: ` Stadia+ is the world's
+        most popular extension for Stadia, troubleshoot your issues, find your games quicker and keep track of
+        achievements using the leading chrome extension for Stadia. ` }) %>
 
-    <link rel="stylesheet" href="/scss/dist/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css" />
-    <script src="/dependencies/uikit/js/uikit.min.js"></script>
-    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+        <style>
+            section {
+                margin-bottom: 4rem;
+                margin-left: 20px;
+            }
 
-    <style>
-        section {
-            margin-bottom: 4rem;
-            margin-left: 20px;
-        }
+            section.subsection {
+                margin-bottom: 2rem;
+            }
 
-        section.subsection {
-            margin-bottom: 2rem;
-        }
+            #app h3 {
+                font-weight: 600;
+            }
 
-        #app h3 {
-            font-weight: 600;
-        }
+            #app h3,
+            #app h4 {
+                margin-bottom: 1.5rem;
+            }
 
-        #app h3, 
-        #app h4 {
-            margin-bottom: 1.5rem;
-        }
+            #app ul {
+                margin-top: 1rem;
+                margin-bottom: 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <navbar></navbar>
 
-        #app ul {
-            margin-top: 1rem;
-            margin-bottom: 2rem;
-        }
-    </style>
-</head>
-<body>
-    <div id="app">
-        <navbar></navbar>
+            <div class="uk-container uk-container-large">
+                <h1 class="c-dark-gray uk-heading-small uk-margin-large-top">Stadia+ DB Privacy Policy</h1>
+                <h2 class="c-gray uk-text-lead">
+                    This is the TL;DR version of the Stadia+ DB privacy policy, intended for people who want to know
+                    more about how we collect and handle data, but aren't interested in the nitty gritty legal details.
+                    If you're looking for a more complete version of this document, you can find it at
+                    <a class="c-tomato" href="https://stadiaplus.dev/privacy-policy">https://stadiaplus.dev/privacy-policy</a>.
+                </h2>
+                <h2 class="c-gray uk-text-lead uk-margin-small-top">
+                    <i>
+                        Note: This document only applies to users of Stadia+ DB, our service that collects and displays your
+                        game progress.
+                    </i>
+                </h2>
 
-        <div class="uk-container uk-container-large">
-            <h1 class="c-dark-gray uk-heading-small uk-margin-large-top">Stadia+ Privacy Policy</h1>
-            <h2 class="c-gray uk-text-lead">
-                This is the TL;DR version of the Stadia+ privacy policy, intended for people 
-                who want to know more about how we collect and handle data, but aren't interested 
-                in the nitty gritty legal details.
-            </h2>
+                <hr class="uk-margin-medium-bottom" />
 
-            <hr class="uk-margin-medium-bottom"/>
+                <h3 class="c-dark-gray">1. What do we collect?</h3>
 
-            <h3 class="c-dark-gray">1. What do we collect?</h3>
+                <section class="c-dark-gray">
+                    <h4 class="c-dark-gray">1.1 Your Stadia data</h4>
 
-            <section class="c-dark-gray">
-                <h4 class="c-dark-gray">1.1 Your Stadia data</h4>
-                
-                <section class="subsection c-dark-gray uk-margin-medium-bottom">
-                    <p>Specifically, we collect this information from your Stadia profile:</p>
-                    <ul class="uk-list uk-list-decimal">
-                        <li>Your username</li>
-                        <li>Your # tag</li>
-                        <li>Your avatar</li>
-                    </ul>
+                    <section class="subsection c-dark-gray uk-margin-medium-bottom">
+                        <p>Specifically, we collect this information from your Stadia profile:</p>
+                        <ul class="uk-list uk-list-decimal">
+                            <li>Your username</li>
+                            <li>Your # tag</li>
+                            <li>Your avatar</li>
+                        </ul>
 
-                    <p>We also collect this information from your game library:</p>
-                    <ul class="uk-list uk-list-decimal">
-                        <li>
-                            Game identification information
-                            <p class="c-gray">This includes information like the game's name, its UID (Unique ID) and other data necessary to identify game specifics.</p>
-                        </li>
-                        <li>
-                            Your owned achievements
-                            <p class="c-gray">We don't collect any data about achievements you don't own.</p>
-                        </li>
-                        <li>
-                            How long you have played
-                        </li>
-                    </ul>
+                        <p>We also collect this information from your game library:</p>
+                        <ul class="uk-list uk-list-decimal">
+                            <li>
+                                Game identification information
+                                <p class="c-gray">
+                                    This includes information like the game's name, its UID (Unique ID) and other data
+                                    necessary to identify game specifics.
+                                </p>
+                            </li>
+                            <li>
+                                Your owned achievements
+                                <p class="c-gray">We don't collect any data about achievements you don't own.</p>
+                            </li>
+                            <li>
+                                How long you have played
+                            </li>
+                        </ul>
+                    </section>
+
+                    <h4 class="c-dark-gray">1.2 Your Google account data</h4>
+
+                    <section class="subsection c-dark-gray">
+                        <p>
+                            For the sake of your privacy, we collect very little information from your Google account.
+                            The only data we collect is your GAIA (Google Accounts and ID Administration) public identification
+                            token, which is used to identify your Google account when you log in.
+                        </p>
+                    </section>
                 </section>
 
-                <h4 class="c-dark-gray">1.2 Your Google account data</h4>
-                
-                <section class="subsection c-dark-gray">
-                    <p>
-                        For the sake of your privacy, we collect very little information from your 
-                        Google account. The only data we collect is your GAIA (Google Accounts and 
-                        ID Administration) identification token, which is used to identify your 
-                        Google account when you log in.
-                    </p>
-                </section>
-            </section>
-            
-            
-            <h3 class="c-dark-gray">2. How do we use your data?</h3>
+                <h3 class="c-dark-gray">2. How do we use your data?</h3>
 
-            <section class="c-dark-gray">
-                <h4 class="c-dark-gray">2.1 We will never sell your data</h4>
-                <section class="subsection c-dark-gray">
-                    <p>
-                        We will never sell your data to third parties. Instead, all non-identifiable data is freely 
-                        available to the public through our profile API at https://stadiaplus.dev/api/profile/USERNAME/TAG 
-                        according to the terms stated in our <a class="c-tomato" href="/terms-and-conditions" target="_blank">Terms and Conditions</a>. 
-                    </p>
-                </section>
-                
-                <h4 class="c-dark-gray">2.2 Your Stadia data</h4>
-                <section class="subsection c-dark-gray">
-                    <p>Your Stadia data as listed in section 1.1 is used to: </p>
-                    <ul class="uk-list uk-list-decimal">
-                        <li>Create a viewable profile on the Stadia+ website.</li>
-                        <li>
-                            Produce and publish studies and statistics.
-                            <p class="c-gray">These studies/statistics will not include any data that may identify your Stadia+ profile or you as a person.</p>
-                        </li>
-                    </ul>
-                </section>
-                
-                <h4 class="c-dark-gray">2.3 Your Google account data</h4>
-                <section class="subsection c-dark-gray">
-                    <p>
-                        As stated in section 1.2, your Google account data is used by Stadia+ exclusively for 
-                        profile identification. This data is automatically deleted after 30 days, or as soon as you
-                        sign out manually.
-                    </p>
-                </section>
-            </section>
+                <section class="c-dark-gray">
+                    <h4 class="c-dark-gray">2.1 We will never sell your data</h4>
+                    <section class="subsection c-dark-gray">
+                        <p>
+                            We will never sell your data to third parties. Instead, all non-identifiable data is freely
+                            available to the public through our profile API at
+                            https://stadiaplus.dev/api/profile/:username/:tag according to the terms stated in our
+                            <a class="c-tomato" href="/terms-and-conditions" target="_blank">Terms and Conditions</a>.
+                        </p>
+                    </section>
 
-            
-            <h3 class="c-dark-gray">3. How long do we store your data?</h3>
+                    <h4 class="c-dark-gray">2.2 Your Stadia data</h4>
+                    <section class="subsection c-dark-gray">
+                        <p>Your Stadia data as listed in section 1.1 is used to:</p>
+                        <ul class="uk-list uk-list-decimal">
+                            <li>Create a viewable profile on the Stadia+ website.</li>
+                            <li>
+                                Produce and publish studies and statistics.
+                                <p class="c-gray">
+                                    These studies/statistics will not include any data that may identify your Stadia+
+                                    profile or you as a person.
+                                </p>
+                            </li>
+                        </ul>
+                    </section>
 
-            <section class="c-dark-gray">
-                <h4 class="c-dark-gray">2.1 Your Stadia data</h4>
-                <section class="subsection c-dark-gray">
-                    <p>Your Stadia data is stored by Stadia+ for up to 2 years, or until manually deleted.</p>
+                    <h4 class="c-dark-gray">2.3 Your Google account data</h4>
+                    <section class="subsection c-dark-gray">
+                        <p>
+                            As stated in section 1.2, your Google account data is used by Stadia+ DB exclusively for
+                            profile identification. This data is automatically deleted after 30 days, or as soon as you
+                            sign out manually.
+                        </p>
+                    </section>
                 </section>
-                
-                <h4 class="c-dark-gray">2.2 Your Google account data</h4>
-                <section class="subsection c-dark-gray">
-                    <p>Your Google account data is automatically deleted after 30 days, or as soon as you sign out manually.</p>
+
+                <h3 class="c-dark-gray">3. How long do we store your data?</h3>
+
+                <section class="c-dark-gray">
+                    <h4 class="c-dark-gray">2.1 Your Stadia data</h4>
+                    <section class="subsection c-dark-gray">
+                        <p>Your Stadia data is stored by Stadia+ for up to 2 years, or until manually deleted.</p>
+                    </section>
+
+                    <h4 class="c-dark-gray">2.2 Your Google account data</h4>
+                    <section class="subsection c-dark-gray">
+                        <p>
+                            Your Google account data is automatically deleted after 30 days, or as soon as you sign out
+                            manually.
+                        </p>
+                    </section>
+
+                    <h4 class="c-dark-gray">2.3 Deleting your data</h4>
+                    <section class="subsection c-dark-gray">
+                        <p>
+                            To delete all your data from our servers, press
+                            <a class="c-tomato" href="https://i.imgur.com/Xx7MaZQ.png" target="_blank"
+                                >the dotted "more" icon</a
+                            >
+                            in the Stadia+ popup, and press the "Delete user data" button. Deleting your user data will
+                            completely wipe all data related to your profile from our servers and automatically sign you
+                            out.
+                        </p>
+                    </section>
                 </section>
-                
-                <h4 class="c-dark-gray">2.3 Deleting your data</h4>
-                <section class="subsection c-dark-gray">
-                    <p>
-                        To delete all your data from our servers, press 
-                        <a class="c-tomato" href="https://i.imgur.com/Xx7MaZQ.png" target="_blank">the dotted "more" icon</a> 
-                        in the Stadia+ popup, and press the "Delete user data" button. Deleting your user data will completely 
-                        wipe all data related to your profile from our servers and automatically sign you out.
-                    </p>
-                </section>
-            </section>
+            </div>
+            <page-footer></page-footer>
         </div>
-        <page-footer></page-footer>
-    </div>
 
-    <script type="module">
-        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
-        import Navbar from '/components/navbar.js'
-        import Button from '/components/button.js'
-        import Footer from '/components/footer.js';
+        <script type="module">
+            import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js';
+            import Navbar from '/components/navbar.js';
+            import Button from '/components/button.js';
+            import Footer from '/components/footer.js';
 
-        Vue.component('PageFooter', Footer);
-        Vue.component('Navbar', Navbar);
-        Vue.component('Btn', Button);
-        var app = new Vue({
-            el: '#app'
-        });
-    </script>
-</body>
+            Vue.component('PageFooter', Footer);
+            Vue.component('Navbar', Navbar);
+            Vue.component('Btn', Button);
+            var app = new Vue({
+                el: '#app',
+            });
+        </script>
+
+        <script src="/dependencies/uikit/js/uikit.min.js"></script>
+        <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+    </body>
 </html>

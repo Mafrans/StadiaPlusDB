@@ -1,9 +1,9 @@
-import { RouteInterface } from "./Route.interface";
+import { RouteInterface } from "../Route.interface";
 
-import { Google } from "../models/Google.model";
-import { User } from "../models/User.model";
+import { Google } from "../../models/Google.model";
+import { User } from "../../models/User.model";
 import { Request, Response } from 'express';
-import { UserResource } from './../resources/User.resource';
+import { UserResource } from '../../resources/User.resource';
 
 export class UserRoute implements RouteInterface {
     async get(req: Request, res: Response, next: any) {

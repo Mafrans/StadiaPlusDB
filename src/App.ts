@@ -10,6 +10,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { StadiaGameDBHook } from './StadiaGameDBHook';
 import routes from './routes';
+import RateLimit from "express-rate-limit";
 
 export class App {
     server: Express;
@@ -68,7 +69,12 @@ export class App {
                 if(instance.get != null) get.push(instance.get);
                 if(instance.post != null) post.push(instance.post);
             }
-
+        
+            if(route.limiter != null) {
+                get.push(RateLimit(route.limiter));
+                post.push(RateLimit(route.limiter));
+            }
+            
             this.server.get(route.path, ...get);
             this.server.post(route.path, ...post);
         }

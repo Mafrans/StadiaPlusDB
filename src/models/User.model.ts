@@ -14,6 +14,10 @@ export class User {
     searchlabel: string;
     avatar: string;
 
+    public static async All(): Promise<User[]> {
+        return Database.self.gameDb.users.find({}).toArray();
+    }
+
     public static async Find(gaia: string): Promise<User> {
         return Database.self.gameDb.users.findOne({ gaia: gaia });
     }
@@ -37,6 +41,7 @@ export class User {
 
     public static async CreateOrUpdate(gaia: string, user: IGameData) {
         const dbUser: User = await User.Find(gaia);
+        console.log({dbUser})
 
         const game = {
             uuid: user.game.uuid,
@@ -52,20 +57,18 @@ export class User {
                 await Statistics.AddGame(game.uuid);
             }
 
-            console.log({game, ach: dbUser.games[game.uuid]});
             for (const achievement of game.achievements) {
                 if (!(await User.HasAchievement(dbUser, game.uuid, achievement.id))) {
-                    console.log("new!")
                     await Statistics.AddAchievement(game.uuid, achievement.id);
                 }
             }
         } else {
+            console.log("Creating User")
             User.Create({ gaia, ...user });
 
             await Statistics.AddGame(game.uuid);
 
             for (const achievement of game.achievements) {
-                console.log(achievement)
                 await Statistics.AddAchievement(game.uuid, achievement.id);
             }
         }

@@ -2,16 +2,16 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Stadia+</title>
-
-    <link rel="stylesheet" href="/scss/dist/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/dependencies/uikit/css/uikit.min.css" />
-    <script src="/dependencies/uikit/js/uikit.min.js"></script>
-    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+    <%- 
+        include('templates/head', {
+            title: `Privacy Policy - Stadia+`, 
+            description: `
+                Stadia+ is the world's most popular extension for
+                Stadia, troubleshoot your issues, find your games quicker and keep track of achievements using the leading
+                chrome extension for Stadia.
+            `
+        })
+    %>
 
     <style>
         [data-custom-class='body'],
@@ -98,6 +98,10 @@
                 <p class="c-dark-gray">If you just want to read and understand what we do with your data, take a look at
                     <a href="/privacy-policy/tldr">the TL;DR page</a>.</p>
             </div>
+            <h2>
+                Note: This document only applies to users of Stadia+ DB, our service that collects and displays your
+                game progress.
+            </h2>
             <div data-custom-class="body">
                 <div align="center" class="MsoNormal" data-custom-class="title"
                     style="text-align: left; line-height: 1.5;"><strong><span
@@ -2000,6 +2004,9 @@
             el: '#app'
         });
     </script>
+
+    <script src="/dependencies/uikit/js/uikit.min.js"></script>
+    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
 </body>
 
 </html>

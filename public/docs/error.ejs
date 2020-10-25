@@ -1,81 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uh-oh, we did a fucky wucky</title>
+    <head>
+        <%- include('templates/head', {title: `Uh oh, something went wrong`, description: `Something went wrong during your request.`}) %>
 
-    <link rel="stylesheet" href="/scss/dist/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="/dependencies/uikit/js/uikit.min.js"></script>
-    <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+        <style>
+            .center-card {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 550px;
+                min-height: 350px;
+                border: 2px solid #f0f0f0;
+                box-sizing: border-box;
+                border-radius: 0.5rem;
+            }
 
-    <style>
-        .center-card {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 550px;
-            min-height: 350px;
-            border: 2px solid #F0F0F0;
-            box-sizing: border-box;
-            border-radius: .5rem;
-        }
+            .center-card h1 {
+                font-size: 24px;
+                font-weight: 500;
+                margin-bottom: 1rem;
+            }
 
-        .center-card h1 {
-            font-size: 24px;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
+            .center-card a {
+                color: #fa4821;
+            }
 
-        .center-card a {
-            color: #FA4821;
-        }
+            .center-card .icon {
+                background: linear-gradient(90deg, #fa4821 0%, #ae0f56 100%);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 64px;
+            }
+        </style>
+    </head>
 
-        .center-card .icon {
-            background: linear-gradient(90deg, #FA4821 0%, #AE0F56 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 64px;
-        }
-    </style>
-</head>
-<body>
-    <div id="app">
-        <navbar db search></navbar>
+    <body>
+        <div id="app">
+            <navbar db search></navbar>
 
-        <div class="uk-container uk-container-large">
-            <div class="center-card uk-flex uk-flex-column uk-flex-middle uk-flex-between uk-padding uk-text-middle">
-                <i class="material-icons icon uk-margin-bottom">error_outline</i>
-                <h1 class="c-charcoal uk-heading-small uk-margin-remove"><%- error.message %></h1>
-                <p class="c-dark-gray uk-margin"><%- error.description %></p>
-                <btn @click="goToSafety()" class="uk-text-normal" icon="arrow_back">Back to safety</btn>
+            <div class="uk-container uk-container-large">
+                <div
+                    class="center-card uk-flex uk-flex-column uk-flex-middle uk-flex-between uk-padding uk-text-middle"
+                >
+                    <i class="material-icons icon uk-margin-bottom">error_outline</i>
+                    <h1 class="c-charcoal uk-heading-small uk-margin-remove"><%- error.message %></h1>
+                    <p class="c-dark-gray uk-margin"><%- error.description %></p>
+                    <btn @click="goToSafety()" class="uk-text-normal" icon="arrow_back">Back to safety</btn>
+                </div>
             </div>
+
+            <page-footer></page-footer>
         </div>
 
-        <page-footer></page-footer>
-    </div>
+        <script type="module">
+            import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js';
+            import Navbar from '/components/navbar.js';
+            import Button from '/components/button.js';
+            import Footer from '/components/footer.js';
 
-    <script type="module">
-        import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
-        import Navbar from '/components/navbar.js'
-        import Button from '/components/button.js'
-        import Footer from '/components/footer.js';
+            Vue.component('Navbar', Navbar);
+            Vue.component('Btn', Button);
+            Vue.component('PageFooter', Footer);
+            var app = new Vue({
+                el: '#app',
+                methods: {
+                    goToSafety() {
+                        location.href = '<%- error.safetyURL %>';
+                    },
+                },
+            });
+        </script>
 
-        Vue.component('Navbar', Navbar);
-        Vue.component('Btn', Button);
-        Vue.component('PageFooter', Footer);
-        var app = new Vue({
-            el: '#app',
-            methods: {
-                goToSafety() {
-                    location.href = '<%- error.safetyURL %>';
-                }
-            }
-        });
-    </script>
-</body>
+        <script src="/dependencies/uikit/js/uikit.min.js"></script>
+        <script src="/dependencies/uikit/js/uikit-icons.min.js"></script>
+    </body>
 </html>
