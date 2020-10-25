@@ -6,12 +6,13 @@ import { User } from '../../models/User.model';
 
 export class UpdateRoute implements RouteInterface {
     async post(req: Request, res: Response, next: any) {
-        console.log(req.body.data);
-        if (req.body.data == null || req.body.token == null) return;
+        if (req.body.game == null || req.body.token == null) return next();
 
         const gaia = await Google.GET_ID(req.body.token as string);
         if (gaia != null) {
-            User.CreateOrUpdate(gaia, req.body.data);
+            await User.CreateOrUpdate(gaia, req.body.game);
+            next();
         }
+        next();
     }
 }
