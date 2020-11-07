@@ -62,7 +62,7 @@
                 <div class="achievements uk-margin-top">
                     <achievement-card
                         v-for="achievement in <%= JSON.stringify(achievements) %>"
-                        :icon="achievement.icon"
+                        :icon="achievement.icon.replace('s720-rw', 's64-rw')"
                         :name="achievement.name"
                         :description="achievement.description"
                         :rarity="achievement.stats.percent"

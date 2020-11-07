@@ -11,6 +11,7 @@ import bodyParser from 'body-parser';
 import { StadiaGameDBHook } from './StadiaGameDBHook';
 import routes from './routes';
 import RateLimit from "express-rate-limit";
+import compression from 'compression';
 
 export class App {
     server: Express;
@@ -28,6 +29,11 @@ export class App {
 
         // Allow reading the body of post requests
         this.server.use(bodyParser.json());
+        
+        // Use compression
+        this.server.use(compression({
+            filter: (req, res) => req.headers['x-no-compression'] ? false : compression.filter(req, res)
+        }));
 
         // Set the folder paths
         this.server.use(express.static('public/assets'));
