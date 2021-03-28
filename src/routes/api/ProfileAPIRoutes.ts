@@ -1,8 +1,8 @@
 import { User } from "../../models/User.model";
-import { RouteInterface } from "../Route.interface";
+import { AbstractRoute } from "../AbstractRoute";
 
 export namespace ProfileAPIRoutes {
-    export class ProfileRoute implements RouteInterface {
+    export class ProfileRoute extends AbstractRoute {
         async get(req: any, res: any, next: any) {
             const user = await User.FindByUsernameAndTag(
                 req.params.username,
@@ -25,7 +25,7 @@ export namespace ProfileAPIRoutes {
         }
     }
 
-    export class ProfilesRoute implements RouteInterface {
+    export class ProfilesRoute extends AbstractRoute {
         async get(req: any, res: any, next: any) {
             const profiles: User[] = await User.All();
             res.send(profiles.map(e => ({username: e.username, tag: e.tag})));

@@ -1,10 +1,10 @@
-import { RouteInterface } from './Route.interface';
+import { AbstractRoute } from './AbstractRoute';
 import { App } from '../App';
 import { User } from '../models/User.model';
 import { Statistics } from '../models/Statistics.model';
 import config from '../../config.json';
 
-export class AchievementsRoute implements RouteInterface {
+export class AchievementsRoute extends AbstractRoute {
     async get(req: any, res: any, next: any) {
         const user = await User.FindByUsernameAndTag(
             req.params.username,

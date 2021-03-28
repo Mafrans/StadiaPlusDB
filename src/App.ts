@@ -1,7 +1,6 @@
 import express from 'express';
 import session from 'express-session';
 import { Express } from 'express-serve-static-core';
-import { RouteInterface } from './routes/Route.interface';
 import { Service } from './services/Service.interface';
 import { Database } from './database/Database';
 import passport from 'passport';

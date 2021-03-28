@@ -1,5 +1,5 @@
 import { AuthRoutes } from "./routes/api/AuthRoutes";
-import { RouteInterface } from './routes/Route.interface';
+import { AbstractRoute } from './routes/AbstractRoute';
 import { UpdateRoute } from "./routes/api/UpdateRoute";
 import { PingRoute } from "./routes/api/PingRoute";
 import { UserRoute } from "./routes/api/UserRoute";
@@ -18,7 +18,7 @@ import { ProfileAPIRoutes } from "./routes/api/ProfileAPIRoutes";
 import { StatsRoute } from "./routes/api/StatsRoute";
 export interface Route {
     path: string;
-    classInstances: RouteInterface[];
+    classInstances: AbstractRoute[];
     limiter?: RateLimit.Options;
 } 
 

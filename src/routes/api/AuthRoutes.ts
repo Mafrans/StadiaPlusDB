@@ -1,10 +1,10 @@
-import { RouteInterface } from "../Route.interface";
+import { AbstractRoute } from "../AbstractRoute";
 import passport from "passport";
 import { App } from "../../App";
 import { Login } from '../../models/Login.model';
 
 export namespace AuthRoutes {
-    export class Start implements RouteInterface {
+    export class Start extends AbstractRoute {
         get(req: any, res: any, next: any) {
 
             req.session.redirect = req.query.redirect;
@@ -13,7 +13,7 @@ export namespace AuthRoutes {
         }
     }
 
-    export class Callback implements RouteInterface {
+    export class Callback extends AbstractRoute {
         get(req: any, res: any, next: any) {
 
             const authenticate = passport.authenticate('google', { failureRedirect: '/login' });
@@ -21,13 +21,13 @@ export namespace AuthRoutes {
         }
     }
 
-    export class Redirect implements RouteInterface {
+    export class Redirect extends AbstractRoute {
         get(req: any, res: any, next: any) {
             res.redirect(req.session.redirect + '#' + req.user);
         }
     }
 
-    export class Signout implements RouteInterface {
+    export class Signout extends AbstractRoute {
         async post(req: any, res: any, next: any) {
             if(req.body.token == null) return;
             const token: string = req.body.token;

@@ -1,8 +1,8 @@
-import { RouteInterface } from "./Route.interface";
+import { AbstractRoute } from "./AbstractRoute";
 import { User } from "../models/User.model";
 
 
-export class SearchRoute implements RouteInterface {
+export class SearchRoute extends AbstractRoute {
     async get(req: any, res: any, next: any) {
         const query = decodeURI(req.query.q);
         

@@ -1,9 +1,9 @@
-import { RouteInterface } from './Route.interface';
+import { AbstractRoute } from './AbstractRoute';
 import { App } from '../App';
 import { User } from '../models/User.model';
 import config from '../../config.json';
 
-export class GamesRoute implements RouteInterface {
+export class GamesRoute extends AbstractRoute {
     async get(req: any, res: any, next: any) {
         const user = await User.FindByUsernameAndTag(
             req.params.username,

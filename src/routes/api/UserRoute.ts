@@ -1,13 +1,16 @@
-import { RouteInterface } from "../Route.interface";
+import { AbstractRoute } from "../AbstractRoute";
 
 import { Google } from "../../models/Google.model";
 import { User } from "../../models/User.model";
 import { Request, Response } from 'express';
 import { UserResource } from '../../resources/User.resource';
 
-export class UserRoute implements RouteInterface {
+export class UserRoute extends AbstractRoute {
     async get(req: Request, res: Response, next: any) {
-        const gaia = await Google.GET_ID(req.query.token.toString());
+        const token = AbstractRoute.getToken(req);
+        if (token == null) return next();
+
+        const gaia = await Google.GET_ID(token.toString());
 
         if(gaia == null) {
             res.send({error: 'Not authenticated'});
@@ -19,6 +22,6 @@ export class UserRoute implements RouteInterface {
             res.send({});
             return;
         }
-        res.send(new UserResource(user).toString());
+        res.send(new UserResource(user));
     }
 }
