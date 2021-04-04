@@ -5,9 +5,14 @@ import apiRouter from "./api/router";
 import cors from "cors";
 import {useGoogleOAuth} from "./auth/helpers";
 import {config as loadDotEnv} from "dotenv";
+import {connectMongoose} from "./database/helpers";
+
+loadDotEnv();
+
+// Load database
+void connectMongoose('mongodb://localhost:27017/stadiaplus');
 
 // Load server
-loadDotEnv();
 const app = express();
 const port = 3000;
 
