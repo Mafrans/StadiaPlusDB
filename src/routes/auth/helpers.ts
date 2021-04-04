@@ -1,6 +1,6 @@
 import {Request} from "express";
 import passport from "passport";
-import {OAuthStrategy as GoogleStrategy} from "passport-google-oauth";
+import {Strategy as GoogleStrategy} from "passport-google-oauth20";
 
 export function getToken(req: Request) {
     const header = req.headers.authorization;
@@ -9,10 +9,14 @@ export function getToken(req: Request) {
 
 export function useGoogleOAuth() {
     passport.use(new GoogleStrategy({
-        consumerKey: process.env.GOOGLE_CLIENT_ID,
-        consumerSecret: process.env.GOOGLE_CLIENT_SECRET,
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: process.env.GOOGLE_CALLBACK_URL
-    }, () => console.log /* TODO: Create session here */));
+    }, (accessToken, refreshToken, profile, done) => {
+        // TODO: Verify login here
+        console.log({ accessToken, refreshToken, profile });
+        return done(null, "big boy")
+    }));
 
     passport.serializeUser((user, done) => done(null, user));
     passport.deserializeUser((user, done) => done(null, user));

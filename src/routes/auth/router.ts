@@ -4,6 +4,6 @@ import {authCallback, authRedirect} from "./callback";
 
 const authRouter = Router();
 authRouter.get('/google', authStart);
-authRouter.get('/callback', authCallback, authRedirect);
+authRouter.get('/google/callback', authCallback, authRedirect);
 
 export default authRouter;
