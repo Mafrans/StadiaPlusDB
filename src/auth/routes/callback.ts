@@ -1,6 +1,6 @@
 import {NextFunction, Response} from "express";
 import passport from "passport";
-import {AuthRequest} from "./model";
+import {AuthRequest} from "../model";
 
 export function authCallback(req: AuthRequest, res: Response, next: NextFunction) {
     const authenticate = passport.authenticate('google', {

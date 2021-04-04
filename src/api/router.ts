@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {apiPing} from "./ping";
+import {apiPing} from "./routes/ping";
 import cors from "cors";
 
 const apiRouter = Router();

@@ -1,9 +1,9 @@
 import express from "express";
 import session from "express-session";
-import authRouter from "./routes/auth/router";
-import apiRouter from "./routes/api/router";
+import authRouter from "./auth/router";
+import apiRouter from "./api/router";
 import cors from "cors";
-import {useGoogleOAuth} from "./routes/auth/helpers";
+import {useGoogleOAuth} from "./auth/helpers";
 import {config as loadDotEnv} from "dotenv";
 
 // Load server
