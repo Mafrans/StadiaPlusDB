@@ -1,4 +1,4 @@
-import { Document, model, Schema, Date } from "mongoose"
+import {Document, model, Schema} from "mongoose"
 
 const SessionSchema = new Schema({
     gaiaId: { type: String, required: true },

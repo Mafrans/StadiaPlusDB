@@ -1,4 +1,4 @@
-import { Document, model, Schema } from "mongoose"
+import {Document, model, Schema} from "mongoose"
 
 const GameSchema = new Schema({
     id: { type: String, required: true },
