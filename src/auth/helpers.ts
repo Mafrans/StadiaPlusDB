@@ -2,10 +2,12 @@ import {Express, Request} from "express";
 import passport from "passport";
 import {Strategy as GoogleStrategy} from "passport-google-oauth20";
 import jwt from "jsonwebtoken";
+import {LoginSession} from "./model";
 
-export function getToken(req: Request) {
+export function getLoginSession(req: Request): LoginSession {
     const header = req.headers.authorization;
-    return header && header.substring('Bearer '.length);
+    const token = header && header.substring('Bearer '.length);
+    return token && jwt.verify(token, process.env.JWT_SECRET) as LoginSession;
 }
 
 export function usePassport(app: Express) {

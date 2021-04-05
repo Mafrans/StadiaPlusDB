@@ -10,6 +10,12 @@ export interface AuthSession extends Session {
     redirect: string;
 }
 
+export interface LoginSession {
+    data: string
+    iat: number
+    exp: number
+}
+
 export interface AuthRequest extends Request {
     session: AuthSession;
     sessionID: string;

@@ -1,10 +1,7 @@
 import {Request, Response, NextFunction} from "express";
-import {getToken} from "../../auth/helpers";
-import jwt from "jsonwebtoken";
+import {getLoginSession} from "../../auth/helpers";
 
 export function apiPing(req: Request, res: Response, next: NextFunction) {
-    const token = getToken(req);
-    const decoded = token && jwt.verify(token, process.env.JWT_SECRET);
-
-    res.send({ connected: true, authorized: decoded != null });
+    const login = getLoginSession(req);
+    res.send({ connected: true, authorized: login != null });
 }
