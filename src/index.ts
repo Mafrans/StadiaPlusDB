@@ -3,7 +3,7 @@ import session from "express-session";
 import authRouter from "./auth/router";
 import apiRouter from "./api/router";
 import cors from "cors";
-import {useGoogleOAuth} from "./auth/helpers";
+import {useGoogleOAuth, usePassport} from "./auth/helpers";
 import {config as loadDotEnv} from "dotenv";
 import {connectMongoose} from "./database/helpers";
 
@@ -17,6 +17,7 @@ const app = express();
 const port = 3000;
 
 // Enable middleware
+usePassport();
 useGoogleOAuth();
 app.use(session({
     secret: 'keyboard cat',
