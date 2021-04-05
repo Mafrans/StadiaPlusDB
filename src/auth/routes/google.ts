@@ -5,6 +5,7 @@ import {AuthRequest} from "../model";
 // Route methods
 export function authStart(req: AuthRequest, res: Response, next: NextFunction) {
     req.session.redirect = req.query.redirect;
+    console.log(req.session.redirect)
 
     const authenticate = passport.authenticate('google',  {
         scope: [

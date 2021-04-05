@@ -1,4 +1,4 @@
-import {Request} from "express";
+import {Express, Request} from "express";
 import passport from "passport";
 import {Strategy as GoogleStrategy} from "passport-google-oauth20";
 import jwt from "jsonwebtoken";
@@ -8,8 +8,8 @@ export function getToken(req: Request) {
     return header && header.substring('Bearer '.length);
 }
 
-export function usePassport() {
-    passport.initialize();
+export function usePassport(app: Express) {
+    app.use(passport.initialize());
 }
 
 export function useGoogleOAuth() {
@@ -19,8 +19,7 @@ export function useGoogleOAuth() {
         callbackURL: process.env.GOOGLE_CALLBACK_URL
     }, (accessToken, refreshToken, profile, done) => {
         // TODO: Verify login here
-        const expiryTime = 90 * 24 * 3600 * 1000;
-        const token = jwt.sign({ id: profile.id, expires: new Date(Date.now() + expiryTime) }, process.env.JWT_SECRET);
+        const token = jwt.sign({ data: profile.id }, process.env.JWT_SECRET, { expiresIn: "90 days" });
         return done(null, token);
     }));
 

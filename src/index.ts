@@ -17,13 +17,12 @@ const app = express();
 const port = 3000;
 
 // Enable middleware
-usePassport();
+usePassport(app);
 useGoogleOAuth();
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
+    saveUninitialized: true
 }));
 app.options('*', cors())
 
