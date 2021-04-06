@@ -3,6 +3,7 @@ import {Game} from "./Game";
 import {HistoryEntry} from "./HistoryEntry";
 const UserSchema = new Schema({
     createdAt: { type: Date, required: true },
+    avatar: { type: String, required: true },
     names: { type: [String], required: true },
     searchNames: { type: [String], required: true },
     location: String,
@@ -13,6 +14,7 @@ const UserSchema = new Schema({
 
 export interface User extends Document {
     createdAt: Date
+    avatar: string
     names: string[]
     searchNames: string[]
     location?: string
