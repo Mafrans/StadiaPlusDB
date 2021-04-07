@@ -8,18 +8,19 @@ const AchievementSchema = new Schema({
     name: { type: String, required: true },
     description: String,
     imageURL: String,
-    game: Schema.Types.ObjectId,
-    user: Schema.Types.ObjectId
+    game: { type: Schema.Types.ObjectId, ref: 'Game'},
+    user: String
 })
 
 export interface Achievement extends Document {
+    _id: Game['_id']
     index: number
     timestamp: Date
     name: string
     description?: string
     imageURL?: string
     game?: Game['_id']
-    user?: User['_id']
+    user?: string
 }
 
 export default model<Achievement>('Achievement', AchievementSchema);
