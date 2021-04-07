@@ -1,9 +1,13 @@
 import {Router} from "express";
-import {authStart} from "./routes/google";
-import {authCallback, authRedirect} from "./routes/callback";
+import {authGoogle} from "./routes/google";
+import {authGoogleCallback, authGoogleRedirect} from "./routes/googleCallback";
+import {authPatreon} from "./routes/patreon";
+import {authPatreonCallback} from "./routes/patreonCallback";
 
 const authRouter = Router();
-authRouter.get('/google', authStart);
-authRouter.get('/google/callback', authCallback, authRedirect);
+authRouter.get('/google', authGoogle);
+authRouter.get('/google/callback', authGoogleCallback, authGoogleRedirect);
+authRouter.get('/patreon', authPatreon);
+authRouter.get('/patreon/callback', authPatreonCallback);
 
 export default authRouter;

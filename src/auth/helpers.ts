@@ -8,6 +8,10 @@ import User from "../database/models/User";
 export function getLoginSession(req: Request): LoginSession {
     const header = req.headers.authorization;
     const token = header && header.substring('Bearer '.length);
+    return parseLoginSession(token);
+}
+
+export function parseLoginSession(token: string): LoginSession {
     return token && jwt.verify(token, process.env.JWT_SECRET) as LoginSession;
 }
 

@@ -1,6 +1,7 @@
 import {Document, model, Schema} from "mongoose"
 import {Game} from "./Game";
 import {HistoryEntry} from "./HistoryEntry";
+import {PatreonReward} from "../../auth/model";
 const UserSchema = new Schema({
     _id: String,
     createdAt: { type: Date, required: true },
@@ -9,6 +10,8 @@ const UserSchema = new Schema({
     searchNames: { type: [String], required: true },
     location: String,
     score: { type: Number, required: true },
+    patreonPledge: Number,
+    patreonTier: String,
     history: { type: [Schema.Types.ObjectId], ref: 'HistoryEntry', required: true },
     games: { type: [Schema.Types.ObjectId], ref: 'Game', required: true }
 })
@@ -21,6 +24,8 @@ export interface User extends Document {
     searchNames: string[]
     location?: string
     score: number
+    patreonPledge: number
+    patreonTier: string
     history: HistoryEntry['_id'][]
     games: Game['_id'][]
 }

@@ -1,4 +1,4 @@
-import {Document, model, Schema} from "mongoose"
+import {Document, model, Schema} from "mongoose";
 import GameSchema, {Game} from "./Game";
 import {Achievement} from "./Achievement";
 import {User} from "./User";
