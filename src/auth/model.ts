@@ -34,6 +34,7 @@ export interface PatreonRequest extends Request {
 }
 
 export interface PatreonUser {
+    id: string
     about: string | null
     created: Date
     'default-country-code': string | null
@@ -44,7 +45,7 @@ export interface PatreonUser {
     'image-url': string
     'patron-currency': string | null
     vanity: string
-    pledges: PatreonPledge[]
+    pledges?: PatreonPledge[]
 }
 
 export enum PatreonUserGender {
@@ -64,17 +65,14 @@ export interface PatreonPledge {
     reward: any
 }
 
-export interface PatreonReward {
-    name: string
-    amount: number
-}
+export type PatreonTier = 'none' | 'bronze' | 'silver' | 'gold';
 
-const patreonRewards: PatreonReward[] = [
-    { name: 'bronze', amount: 100 },
-    { name: 'silver', amount: 500 },
-    { name: 'gold', amount: 1000 },
+const patreonRewards: { tier: PatreonTier, amount: number }[] = [
+    { tier: 'bronze', amount: 100 },
+    { tier: 'silver', amount: 500 },
+    { tier: 'gold', amount: 1000 },
 ];
 
-export function getPatreonReward(cents: number) {
-    return patreonRewards.sort(((a, b) => (a.amount - cents) - (b.amount - cents)))[0];
+export function getPatreonReward(cents: number): PatreonTier {
+    return patreonRewards.sort(((a, b) => (a.amount - cents) - (b.amount - cents)))[0].tier;
 }

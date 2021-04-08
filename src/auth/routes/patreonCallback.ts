@@ -1,9 +1,10 @@
 import {NextFunction, Response} from "express";
-import {getPatreonReward, PatreonRequest, PatreonReward, PatreonUser} from "../model";
+import {getPatreonReward, PatreonRequest, PatreonUser} from "../model";
 import {oauth, patreon} from "patreon";
 import User from "../../database/models/User";
 import {Buffer} from "buffer";
 import {Deserializer as JSONAPIDeserializer} from "jsonapi-serializer";
+import PatreonInfo from "../../database/models/PatreonInfo";
 
 const oauthClient = oauth(process.env.PATREON_CLIENT_ID, process.env.PATREON_CLIENT_SECRET);
 
@@ -40,16 +41,21 @@ export async function authPatreonCallback(req: PatreonRequest, res: Response, ne
     }
 
     const pledge = patreonUser.pledges[0];
-    const patreonReward = getPatreonReward(pledge["amount-cents"]);
+    const tier = getPatreonReward(pledge["amount-cents"]);
 
-    user.patreonPledge = patreonReward.amount;
-    user.patreonTier = patreonReward.name;
+    user.patreon = new PatreonInfo({
+        id: patreonUser.id,
+        tier: tier,
+        amount: pledge["amount-cents"]
+    })
     await user.save();
+
+    console.log(patreonUser);
 
     const responseData = Buffer.from(JSON.stringify({
         firstName: patreonUser["first-name"],
         lastName: patreonUser["last-name"],
-        reward: patreonReward,
+        tier: tier,
     }), 'utf-8').toString('base64');
 
     res.redirect(req.session.redirect + '#' + responseData);

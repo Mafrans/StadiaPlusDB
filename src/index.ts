@@ -2,6 +2,7 @@ import express from "express";
 import session from "express-session";
 import authRouter from "./auth/router";
 import apiRouter from "./api/router";
+import hooksRouter from "./hooks/router";
 import cors from "cors";
 import {useGoogleOAuth, usePassport} from "./auth/helpers";
 import {config as loadDotEnv} from "dotenv";
@@ -29,6 +30,7 @@ app.options('*', cors())
 // Load routes
 app.use('/api', apiRouter);
 app.use('/auth', authRouter);
+app.use('/hooks', hooksRouter);
 
 // Start
 app.listen(port, () => {
