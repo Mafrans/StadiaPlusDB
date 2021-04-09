@@ -5,6 +5,7 @@ import User from "../../database/models/User";
 import {Buffer} from "buffer";
 import {Deserializer as JSONAPIDeserializer} from "jsonapi-serializer";
 import PatreonInfo from "../../database/models/PatreonInfo";
+import {setPatreonInfo} from "../../database/helpers";
 
 const oauthClient = oauth(process.env.PATREON_CLIENT_ID, process.env.PATREON_CLIENT_SECRET);
 
@@ -43,14 +44,11 @@ export async function authPatreonCallback(req: PatreonRequest, res: Response, ne
     const pledge = patreonUser.pledges[0];
     const tier = getPatreonTier(pledge["amount-cents"]);
 
-    user.patreon = new PatreonInfo({
+    setPatreonInfo(user, new PatreonInfo({
         id: patreonUser.id,
         tier: tier,
         amount: pledge["amount-cents"]
-    })
-    await user.save();
-
-    console.log(patreonUser);
+    }));
 
     const responseData = Buffer.from(JSON.stringify({
         firstName: patreonUser["first-name"],

@@ -4,6 +4,8 @@ import {Deserializer as JSONAPIDeserializer} from "jsonapi-serializer";
 import {getPatreonTier, PatreonUser} from "../../auth/model";
 import crypto from "crypto";
 import UserSchema, {User} from "../../database/models/User";
+import PatreonInfo from "../../database/models/PatreonInfo";
+import {setPatreonInfo} from "../../database/helpers";
 
 // Route methods
 export async function patreonHook(req: Request, res: Response, next: NextFunction) {
@@ -37,12 +39,12 @@ export async function patreonHook(req: Request, res: Response, next: NextFunctio
         case "members:pledge:update":
         case "members:create":
         case "members:update":
-            updatePatreonInfo(user, hookBody);
+            void updatePatreonInfo(user, hookBody);
             break;
 
         case "members:delete":
         case "members:pledge:delete":
-            resetPatreonInfo(user, hookBody);
+            void resetPatreonInfo(user, hookBody);
             break;
     }
 
@@ -50,17 +52,19 @@ export async function patreonHook(req: Request, res: Response, next: NextFunctio
 }
 
 async function resetPatreonInfo(user: User, body: PledgeHook) {
-    user.patreon.amount = 0;
-    user.patreon.tier = 'none';
-
-    user.save();
+    setPatreonInfo(user, new PatreonInfo({
+        id: user.patreon.id,
+        tier: 'none',
+        amount: 0
+    }));
 }
 
 async function updatePatreonInfo(user: User, body: PledgeHook) {
-    user.patreon.amount = body["currently-entitled-amount-cents"];
-    user.patreon.tier = getPatreonTier(user.patreon.amount);
-
-    user.save();
+    setPatreonInfo(user, new PatreonInfo({
+        id: user.patreon.id,
+        tier: getPatreonTier(body["currently-entitled-amount-cents"]),
+        amount: body["currently-entitled-amount-cents"]
+    }));
 }
 
 type PledgeHookEvent = 'members:create' | 'members:update'

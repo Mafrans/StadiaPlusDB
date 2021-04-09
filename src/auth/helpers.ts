@@ -2,8 +2,11 @@ import {Express, Request} from "express";
 import passport from "passport";
 import {Strategy as GoogleStrategy} from "passport-google-oauth20";
 import jwt from "jsonwebtoken";
-import {LoginSession} from "./model";
-import User from "../database/models/User";
+import {LoginSession, PatreonTier} from "./model";
+import UserSchema, {User} from "../database/models/User";
+import {byberpunkBackground} from "../items/items";
+import {giveInventoryItem} from "../database/helpers";
+import {PatreonInfo} from "../database/models/PatreonInfo";
 
 export function getLoginSession(req: Request): LoginSession {
     const header = req.headers.authorization;
@@ -26,9 +29,9 @@ export function useGoogleOAuth() {
         callbackURL: process.env.GOOGLE_CALLBACK_URL
     }, async (accessToken, refreshToken, profile, done) => {
         // TODO: Verify login here
-        let user = await User.findById(profile.id).exec();
+        let user = await UserSchema.findById(profile.id).exec();
         if (!user) {
-            user = new User({
+            user = new UserSchema({
                 _id: profile.id,
                 createdAt: new Date(),
                 names: [],
