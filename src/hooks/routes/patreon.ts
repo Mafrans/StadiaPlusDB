@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response, Router} from "express";
 import passport from "passport";
 import {Deserializer as JSONAPIDeserializer} from "jsonapi-serializer";
-import {getPatreonReward, PatreonUser} from "../../auth/model";
+import {getPatreonTier, PatreonUser} from "../../auth/model";
 import crypto from "crypto";
 import UserSchema, {User} from "../../database/models/User";
 
@@ -49,18 +49,16 @@ export async function patreonHook(req: Request, res: Response, next: NextFunctio
     res.end();
 }
 
-function resetPatreonInfo(user: User, body: PledgeHook) {
-    console.log('resetPatreonInfo');
+async function resetPatreonInfo(user: User, body: PledgeHook) {
     user.patreon.amount = 0;
     user.patreon.tier = 'none';
 
     user.save();
 }
 
-function updatePatreonInfo(user: User, body: PledgeHook) {
-    console.log('updatePatreonInfo');
-    user.patreon.amount = body["currently-entitled-cents"];
-    user.patreon.tier = getPatreonReward(user.patreon.amount);
+async function updatePatreonInfo(user: User, body: PledgeHook) {
+    user.patreon.amount = body["currently-entitled-amount-cents"];
+    user.patreon.tier = getPatreonTier(user.patreon.amount);
 
     user.save();
 }
@@ -71,7 +69,7 @@ type PledgeHookEvent = 'members:create' | 'members:update'
 
 interface PledgeHook {
     'campaign-lifetime-support-cents': number
-    'currently-entitled-cents': number
+    'currently-entitled-amount-cents': number
     user: PatreonUser
     'is-follower': boolean
     'last-charge-date': Date

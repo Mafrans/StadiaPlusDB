@@ -67,12 +67,17 @@ export interface PatreonPledge {
 
 export type PatreonTier = 'none' | 'bronze' | 'silver' | 'gold';
 
-const patreonRewards: { tier: PatreonTier, amount: number }[] = [
+const patreonTiers: { tier: PatreonTier, amount: number }[] = [
+    { tier: 'none', amount: 0 },
     { tier: 'bronze', amount: 100 },
     { tier: 'silver', amount: 500 },
     { tier: 'gold', amount: 1000 },
-];
+].sort((a, b) => b.amount - a.amount) as never;
 
-export function getPatreonReward(cents: number): PatreonTier {
-    return patreonRewards.sort(((a, b) => (a.amount - cents) - (b.amount - cents)))[0].tier;
+export function getPatreonTier(amount: number): PatreonTier {
+    for (const tier of patreonTiers) {
+        if (tier.amount <= amount) {
+            return tier.tier;
+        }
+    }
 }

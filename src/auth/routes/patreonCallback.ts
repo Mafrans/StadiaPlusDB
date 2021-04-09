@@ -1,5 +1,5 @@
 import {NextFunction, Response} from "express";
-import {getPatreonReward, PatreonRequest, PatreonUser} from "../model";
+import {getPatreonTier, PatreonRequest, PatreonUser} from "../model";
 import {oauth, patreon} from "patreon";
 import User from "../../database/models/User";
 import {Buffer} from "buffer";
@@ -41,7 +41,7 @@ export async function authPatreonCallback(req: PatreonRequest, res: Response, ne
     }
 
     const pledge = patreonUser.pledges[0];
-    const tier = getPatreonReward(pledge["amount-cents"]);
+    const tier = getPatreonTier(pledge["amount-cents"]);
 
     user.patreon = new PatreonInfo({
         id: patreonUser.id,
