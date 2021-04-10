@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "parcel build src/index.ts --dist-dir dist",
+    "build": "parcel build backend/src/index.ts --dist-dir dist",
     "start": "npm run build && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -32,7 +32,10 @@
     "parcel": "^2.0.0-beta.2",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
-    "patreon": "^0.4.1"
+    "patreon": "^0.4.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@parcel/transformer-image": "2.0.0-beta.2",
@@ -42,6 +45,8 @@
     "@types/jsonapi-serializer": "^3.6.3",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/passport": "^1.0.6",
-    "@types/passport-google-oauth": "^1.0.41"
+    "@types/passport-google-oauth": "^1.0.41",
+    "@types/react": "^17.0.3",
+    "@types/react-router-dom": "^5.1.7"
   }
 }
