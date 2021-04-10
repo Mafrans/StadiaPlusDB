@@ -29,14 +29,15 @@ app.use(session({
 app.use('/public', express.static(__dirname));
 app.options('*', cors());
 
-app.get('/', ((req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
-}))
-
 // Load routes
 app.use('/api', apiRouter);
 app.use('/auth', authRouter);
 app.use('/hooks', hooksRouter);
+
+// If the url does not begin with 'auth', 'hooks' or 'api' - serve the react application
+app.get(/(?!auth|hooks|api)\b.+/, ((req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+}))
 
 // Start
 app.listen(port, () => {
