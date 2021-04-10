@@ -1,9 +1,11 @@
 import {NextFunction, Request, Response, Router} from "express";
 import passport from "passport";
 import {Deserializer as JSONAPIDeserializer} from "jsonapi-serializer";
-import {getPatreonReward, PatreonUser} from "../../auth/model";
+import {getPatreonTier, PatreonUser} from "../../auth/model";
 import crypto from "crypto";
 import UserSchema, {User} from "../../database/models/User";
+import PatreonInfo from "../../database/models/PatreonInfo";
+import {setPatreonInfo} from "../../database/helpers";
 
 // Route methods
 export async function patreonHook(req: Request, res: Response, next: NextFunction) {
@@ -37,32 +39,32 @@ export async function patreonHook(req: Request, res: Response, next: NextFunctio
         case "members:pledge:update":
         case "members:create":
         case "members:update":
-            updatePatreonInfo(user, hookBody);
+            void updatePatreonInfo(user, hookBody);
             break;
 
         case "members:delete":
         case "members:pledge:delete":
-            resetPatreonInfo(user, hookBody);
+            void resetPatreonInfo(user, hookBody);
             break;
     }
 
     res.end();
 }
 
-function resetPatreonInfo(user: User, body: PledgeHook) {
-    console.log('resetPatreonInfo');
-    user.patreon.amount = 0;
-    user.patreon.tier = 'none';
-
-    user.save();
+async function resetPatreonInfo(user: User, body: PledgeHook) {
+    setPatreonInfo(user, new PatreonInfo({
+        id: user.patreon.id,
+        tier: 'none',
+        amount: 0
+    }));
 }
 
-function updatePatreonInfo(user: User, body: PledgeHook) {
-    console.log('updatePatreonInfo');
-    user.patreon.amount = body["currently-entitled-cents"];
-    user.patreon.tier = getPatreonReward(user.patreon.amount);
-
-    user.save();
+async function updatePatreonInfo(user: User, body: PledgeHook) {
+    setPatreonInfo(user, new PatreonInfo({
+        id: user.patreon.id,
+        tier: getPatreonTier(body["currently-entitled-amount-cents"]),
+        amount: body["currently-entitled-amount-cents"]
+    }));
 }
 
 type PledgeHookEvent = 'members:create' | 'members:update'
@@ -71,7 +73,7 @@ type PledgeHookEvent = 'members:create' | 'members:update'
 
 interface PledgeHook {
     'campaign-lifetime-support-cents': number
-    'currently-entitled-cents': number
+    'currently-entitled-amount-cents': number
     user: PatreonUser
     'is-follower': boolean
     'last-charge-date': Date
