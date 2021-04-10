@@ -26,10 +26,11 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-app.options('*', cors())
+app.use('/public', express.static(__dirname));
+app.options('*', cors());
 
 app.get('/', ((req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/index.html'));
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
 }))
 
 // Load routes

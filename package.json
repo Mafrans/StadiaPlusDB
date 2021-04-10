@@ -2,21 +2,22 @@
   "name": "StadiaPlusDB",
   "version": "1.0.0",
   "description": "",
-  "backend": "dist/backend/index.js",
-  "frontend": "dist/frontend/index.html",
+  "backend": "dist/index.js",
+  "frontend": "dist/index.html",
   "targets": {
-      "backend": {
-          "context": "node"
-      },
-      "frontend": {
-          "context": "browser"
-      }
+    "backend": {
+      "context": "node"
+    },
+    "frontend": {
+      "context": "browser",
+      "publicUrl": "./public/"
+    }
   },
   "scripts": {
     "build:frontend": "parcel build --target frontend frontend/src/index.html",
     "build:backend": "parcel build --target backend backend/src/index.ts",
     "build": "npm run build:backend && npm run build:frontend",
-    "start": "npm run build && node dist/backend/index.js",
+    "start": "npm run build && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
