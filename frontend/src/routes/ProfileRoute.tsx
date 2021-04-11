@@ -10,10 +10,14 @@ interface ProfileRouteProps {
 }
 
 export default function ProfileRoute(props: ProfileRouteProps) {
-    let { nameAndTag, name, tag } = useParams<ProfileRouteParams>();
-    if (!nameAndTag) {
-        nameAndTag = name + '#' + tag;
+    let { name, tag } = useParams<ProfileRouteParams>();
+    if (!tag) {
+        const hash = location.hash.substring(1, 5);
+        if (!hash) {
+            tag = '0000';
+        }
+        tag = hash;
     }
 
-    return <></>
+    return <div className='container'>{ name }#{ tag }</div>
 }

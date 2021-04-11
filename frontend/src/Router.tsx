@@ -8,7 +8,7 @@ interface RouterProps {
 export default function Router(props: RouterProps) {
     return <BrowserRouter>
         <Switch>
-            <Route path={['/profile/:name/:tag', '/profile/:nameAndTag']}>
+            <Route path={['/profile/:name/:tag', '/profile/:name']}>
                 <ProfileRoute />
             </Route>
         </Switch>
