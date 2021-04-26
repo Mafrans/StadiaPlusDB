@@ -27,10 +27,10 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use('/public', express.static(__dirname));
-app.options('*', cors());
+app.use(cors());
 
 // If the url does not begin with 'auth', 'hooks' or 'api' - serve the react application
-app.get(/(?!auth|hooks|api)\b.+/, ((req, res, next) => {
+app.get(/\/(?!auth|hooks|api).*/y, ((req, res, next) => {
     // If the url includes a '.' anywhere, serve whatever the react middleware wants
     if(req.url.includes('.')) {
         return next();
