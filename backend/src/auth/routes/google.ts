@@ -10,7 +10,6 @@ export function authGoogle(req: AuthRequest, res: Response, next: NextFunction) 
     passport.authenticate('google',  {
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
-            "https://www.googleapis.com/auth/stadia.profile"
         ]
     })(req, res, next);
 }
