@@ -19,7 +19,10 @@
     "build:backend": "parcel build --target backend backend/src/index.ts",
     "build": "npm run clean && npm run build:backend && npm run build:frontend",
     "start": "npm run build && node dist/index.js",
-    "start:dev": "npm run build && concurrently \"npm run build:frontend\" \"node dist/index.js\"",
+    "watch:frontend": "nodemon --ext ts,tsx,scss --watch frontend --exec \"npm run build:frontend\"",
+    "watch:backend": "nodemon --ext ts,tsx,scss --watch backend --exec \"npm run build:backend\"",
+    "watch:dist": "nodemon --ext js,html --watch dist --exec \"node dist/index.js\"",
+    "start:dev": "concurrently \"npm:watch:frontend\" \"npm:watch:backend\" \"npm:watch:dist\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -47,6 +50,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.3",
+    "nodemon": "^2.0.7",
     "parcel": "^2.0.0-beta.3.1",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
