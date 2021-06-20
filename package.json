@@ -14,10 +14,12 @@
     }
   },
   "scripts": {
+    "clean": "del-cli \"dist/*\"",
     "build:frontend": "parcel build --target frontend frontend/src/index.html",
     "build:backend": "parcel build --target backend backend/src/index.ts",
-    "build": "npm run build:backend && npm run build:frontend",
+    "build": "npm run clean && npm run build:backend && npm run build:frontend",
     "start": "npm run build && node dist/index.js",
+    "start:dev": "npm run build && concurrently \"npm run build:frontend\" \"node dist/index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -35,7 +37,9 @@
     "@fontsource/overpass": "^4.2.2",
     "@parcel/transformer-sass": "2.0.0-beta.2",
     "@types/passport-google-oauth20": "^2.0.7",
+    "concurrently": "^6.2.0",
     "cors": "^2.8.5",
+    "del-cli": "^4.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
@@ -43,7 +47,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.3",
-    "parcel": "^2.0.0-beta.2",
+    "parcel": "^2.0.0-beta.3.1",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "patreon": "^0.4.1",
@@ -52,10 +56,11 @@
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.3",
-    "twin.macro": "^2.3.2"
+    "twin.macro": "^2.3.2",
+    "typescript": "^4.3.4"
   },
   "devDependencies": {
-    "@parcel/transformer-image": "2.0.0-beta.2",
+    "@parcel/transformer-image": "2.0.0-nightly.2350+dfb179bd",
     "@types/bootstrap": "^5.0.12",
     "@types/connect-history-api-fallback": "^1.3.4",
     "@types/cors": "^2.8.10",

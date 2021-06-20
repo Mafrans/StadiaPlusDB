@@ -30,9 +30,13 @@ app.use('/public', express.static(__dirname));
 app.use(cors());
 
 // If the url does not begin with 'auth', 'hooks' or 'api' - serve the react application
-app.get(/\/(?!auth|hooks|api).*/y, ((req, res, next) => {
+app.get("*", ((req, res, next) => {
     // If the url includes a '.' anywhere, serve whatever the react middleware wants
-    if(req.url.includes('.')) {
+    if(req.url.includes('.')
+        || req.url.startsWith('/api')
+        || req.url.startsWith('/auth')
+        || req.url.startsWith('/hooks')
+    ) {
         return next();
     }
     res.sendFile(path.join(__dirname, '../dist/index.html'));
