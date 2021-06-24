@@ -1,5 +1,24 @@
 import {Request} from "express";
 import {ParamsDictionary} from "express-serve-static-core";
+import {ParsedQs} from "qs";
+
+// Achievements
+
+export interface AchievementsRequest extends Request {
+    params: AchievementsParams
+    query: AchievementQuery
+}
+
+export interface AchievementsParams extends ParamsDictionary {
+    name: string
+    tag: string
+}
+
+export interface AchievementQuery extends ParsedQs {
+    game: string
+    start: string
+    count: string
+}
 
 // Profile
 export interface ProfileRequest extends Request {

@@ -6,6 +6,8 @@ import {apiProfile} from "./routes/profile/profile";
 import {apiProfileRedirect} from "./routes/profile/profileRedirect";
 import bodyParser from "body-parser";
 import {apiProfileUpdate} from "./routes/profile/profileUpdate";
+import {apiAchievements} from "./routes/achievements/achievements";
+import {apiAchievementsCount} from "./routes/achievements/achievementsCount";
 
 const apiRouter = Router();
 apiRouter.get('/ping', cors(), apiPing);
@@ -13,5 +15,7 @@ apiRouter.get('/profile/self', cors(), apiProfileSelf);
 apiRouter.post('/profile/update', cors(), bodyParser.json(), apiProfileUpdate);
 apiRouter.get('/profile/:name', cors(), apiProfileRedirect);
 apiRouter.get('/profile/:name/:tag', cors(), apiProfile);
+apiRouter.get('/achievements/:name/:tag', cors(), apiAchievements);
+apiRouter.get('/achievements/:name/:tag/count', cors(), apiAchievementsCount);
 
 export default apiRouter;

@@ -13,13 +13,13 @@ const AchievementSchema = new Schema({
 })
 
 export interface Achievement extends Document {
-    _id: Game['_id']
+    _id: Schema.Types.ObjectId
     index: number
     timestamp: Date
     name: string
     description?: string
     imageURL?: string
-    game?: Game['_id']
+    game?: Game['id']
     user?: string
 }
 
