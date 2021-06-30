@@ -2,11 +2,29 @@ import {Request} from "express";
 import {ParamsDictionary} from "express-serve-static-core";
 import {ParsedQs} from "qs";
 
+// History
+
+export interface HistoryRequest extends Request {
+    params: HistoryParams
+    query: HistoryQuery
+}
+
+export interface HistoryParams extends ParamsDictionary {
+    name: string
+    tag: string
+}
+
+export interface HistoryQuery extends ParsedQs {
+    game: string
+    start: string
+    count: string
+}
+
 // Achievements
 
 export interface AchievementsRequest extends Request {
     params: AchievementsParams
-    query: AchievementQuery
+    query: AchievementsQuery
 }
 
 export interface AchievementsParams extends ParamsDictionary {
@@ -14,10 +32,19 @@ export interface AchievementsParams extends ParamsDictionary {
     tag: string
 }
 
-export interface AchievementQuery extends ParsedQs {
+export interface AchievementsQuery extends ParsedQs {
     game: string
     start: string
     count: string
+}
+
+export interface AchievementRarityRequest extends Request {
+    params: AchievementRarityParams
+}
+
+export interface AchievementRarityParams extends ParamsDictionary {
+    game: string
+    index: string
 }
 
 // Profile
@@ -70,6 +97,7 @@ export interface ProfileUpdateBody {
         profile: UserProfileData
         game: Game
         playTime: number
+        achievementCount: number
         achievements: Achievement[]
     }
 }

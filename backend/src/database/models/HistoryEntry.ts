@@ -4,10 +4,11 @@ import {Achievement} from "./Achievement";
 import {User} from "./User";
 
 const HistoryEntrySchema = new Schema({
-    timestamp: { type: Date, required: true },
-    type: { type: String, required: true },
+    timestamp: Date,
+    type: String,
     game: { type: Schema.Types.ObjectId, ref: 'Game' },
     playTime: Number,
+    user: { type: String, ref: 'User' },
     achievements: { type: [Schema.Types.ObjectId], ref: 'Achievement' }
 })
 
@@ -16,26 +17,9 @@ export interface HistoryEntry extends Document {
     timestamp: Date
     type: 'progress' | 'unlock' | 'patreon'
     game?: Game['_id']
-    playTime: Number
+    playTime: number
+    user: User['_id']
     achievements?: Achievement['_id'][]
 }
-
-export function generateHistoryText(entry: HistoryEntry, game: Game, user: User, playTime: number): string {
-    let text = user.names[0];
-    if (playTime !== 0) {
-        text += ` played ${game.name} for ${playTime / 3600} hours`;
-    }
-
-    if (entry.achievements.length > 0) {
-        if(playTime) {
-            text += ' and';
-        }
-        text += ` reached ${entry.achievements.length} achievements`;
-    }
-    text += '.';
-
-    return text;
-}
-
 
 export default model<HistoryEntry>('HistoryEntry', HistoryEntrySchema);

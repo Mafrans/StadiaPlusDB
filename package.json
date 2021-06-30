@@ -14,13 +14,13 @@
     }
   },
   "scripts": {
-    "clean": "del-cli \"dist/*\"",
-    "build:frontend": "parcel build --target frontend frontend/src/index.html",
+    "clean": "del-cli \"dist/*.*.*\"",
+    "build:frontend": "parcel build --no-content-hash --target frontend frontend/src/index.html",
     "build:backend": "parcel build --target backend backend/src/index.ts",
-    "build": "npm run clean && npm run build:backend && npm run build:frontend",
+    "build": "npm run build:backend && npm run build:frontend",
     "start": "npm run build && node dist/index.js",
-    "watch:frontend": "nodemon --ext ts,tsx,scss --watch frontend --exec \"npm run build:frontend\"",
-    "watch:backend": "nodemon --ext ts,tsx,scss --watch backend --exec \"npm run build:backend\"",
+    "watch:frontend": "nodemon --ext ts,tsx,css --watch frontend --exec \"npm run build:frontend\"",
+    "watch:backend": "nodemon --ext ts,tsx,css --watch backend --exec \"npm run build:backend\"",
     "watch:dist": "nodemon --ext js,html --watch dist --exec \"node dist/index.js\"",
     "start:dev": "concurrently \"npm:watch:frontend\" \"npm:watch:backend\" \"npm:watch:dist\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -59,8 +59,8 @@
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
+    "reset-css": "^5.0.1",
     "styled-components": "^5.2.3",
-    "twin.macro": "^2.3.2",
     "typescript": "^4.3.4"
   },
   "devDependencies": {

@@ -4,15 +4,15 @@ import {HistoryEntry} from "./HistoryEntry";
 import {PatreonInfo, PatreonInfoSchema} from "./PatreonInfo";
 const UserSchema = new Schema({
     _id: String,
-    createdAt: { type: Date, required: true },
+    createdAt: Date,
     avatar: String,
-    names: { type: [String], required: true },
-    searchNames: { type: [String], required: true },
+    names: [String],
+    searchNames: [String],
     location: String,
-    score: { type: Number, required: true },
+    score: Number,
     patreon: PatreonInfoSchema,
-    history: { type: [Schema.Types.ObjectId], ref: 'HistoryEntry', required: true },
-    games: { type: [Schema.Types.ObjectId], ref: 'Game', required: true }
+    history: { type: [Schema.Types.ObjectId], ref: 'HistoryEntry' },
+    games: { type: [Schema.Types.ObjectId], ref: 'Game' }
 })
 
 export interface User extends Document {

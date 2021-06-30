@@ -11,7 +11,7 @@ export async function apiAchievementsCount(req: AchievementsRequest, res: Respon
     let query = Achievement.countDocuments({user: user._id});
 
     if (game) {
-        query.where({game})
+        query.where({game});
     }
 
     res.send((await query).toString());

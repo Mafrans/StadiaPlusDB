@@ -1,0 +1,4 @@
+body {
+    line-height: var(--line-height-md);
+    font-size: var(--font-size-base);
+}

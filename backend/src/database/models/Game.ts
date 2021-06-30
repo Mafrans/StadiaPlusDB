@@ -1,15 +1,17 @@
 import {Document, model, Schema} from "mongoose"
 
 const GameSchema = new Schema({
-    id: { type: String, required: true },
-    playTime: { type: Number, required: true },
-    name: { type: String, required: true }
+    id: String,
+    playTime: Number,
+    achievementCount: Number,
+    name: String
 })
 
 export interface Game extends Document {
     _id: Schema.Types.ObjectId
     id: string
     playTime: number
+    achievementCount: number
     name: string
 }
 

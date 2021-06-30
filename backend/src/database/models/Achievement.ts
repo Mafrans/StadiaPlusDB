@@ -3,9 +3,9 @@ import {Game} from "./Game";
 import {User} from "./User";
 
 const AchievementSchema = new Schema({
-    index: { type: Number, required: true },
-    timestamp: { type: Date, required: true },
-    name: { type: String, required: true },
+    index: Number,
+    timestamp: Date,
+    name: String,
     description: String,
     imageURL: String,
     game: { type: Schema.Types.ObjectId, ref: 'Game'},
