@@ -53,4 +53,11 @@
     --color-elevate-300: rgba(255, 255, 255, 0.18);
 
     --color-icon-white: #E8EAED;
+
+    /* BREAKPOINTS */
+    --breakpoint-xs: 640px;
+    --breakpoint-sm: 768px;
+    --breakpoint-md: 1024px;
+    --breakpoint-lg: 1280px;
+    --breakpoint-xl: 1536px;
 }

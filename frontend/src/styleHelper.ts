@@ -21,5 +21,10 @@ export const mixins = {
       background: ${gradient};
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    `,
+    breakpoint: (bp: 'xs'|'sm'|'md'|'lg'|'xl', content: string) => css`
+      @media (min-width: var(breakpoint-${bp})) {
+        ${content};
+      }
     `
 };
