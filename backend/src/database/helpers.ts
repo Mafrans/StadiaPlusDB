@@ -1,15 +1,9 @@
-import mongoose from "mongoose";
-import {User} from "./models/User";
-import InventoryItemSchema, {InventoryItem} from "./models/InventoryItem";
 import {PatreonTier} from "../auth/model";
-import {byberpunkBackground} from "../items/items";
-import {PatreonInfo} from "./models/PatreonInfo";
+import {prisma} from "../index";
+import {PatreonInfo} from "@prisma/client";
 
-export async function connectMongoose(uri: string) {
-    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-}
-
-export async function giveInventoryItem(user: User, item: InventoryItem) {
+/*
+export async function giveInventoryItem(user: any, item: any) {
     console.log('wowzers!', item.name);
     if (!await hasInventoryItem(user, item)) {
         console.log('adding!', item.name);
@@ -22,12 +16,36 @@ export async function giveInventoryItem(user: User, item: InventoryItem) {
 export async function hasInventoryItem(user: User, item: InventoryItem): Promise<boolean> {
     return await InventoryItemSchema.countDocuments({ owner: user['_id'], name: item.name }).exec() > 0;
 }
+*/
 
-export function setPatreonInfo(user: User, info: PatreonInfo) {
-    user.patreon = info;
-    user.save();
+type PartialPatreonInfo = {
+    patreonId: string,
+    tier: PatreonTier,
+    amount: number
+}
 
-    const tier: PatreonTier = info.tier;
+export async function setPatreonInfo(patreonInfo: PartialPatreonInfo, googleId?: string) {
+    let filter: any = {patreonId: patreonInfo.patreonId};
+    if (googleId) {
+        filter = {user: {googleId}};
+    }
+    const user = await prisma.user.findUnique({where: {googleId}});
+
+    prisma.patreonInfo.upsert({
+        where: {
+            ...filter
+        },
+        create: {
+            ...patreonInfo,
+            user: { connect: user }
+        },
+        update: {
+            tier: patreonInfo.tier,
+            amount: patreonInfo.amount
+        }
+    });
+
+    const tier: PatreonTier = patreonInfo.tier as PatreonTier;
 
     // Bronze tier rewards
     if (tier === 'bronze' || tier === 'silver' || tier === 'gold') {
@@ -35,7 +53,7 @@ export function setPatreonInfo(user: User, info: PatreonInfo) {
 
     // Silver tier rewards
     if (tier === 'silver' || tier === 'gold') {
-        void giveInventoryItem(user, byberpunkBackground);
+        //void giveInventoryItem(user, byberpunkBackground);
     }
 
     // Gold tier rewards

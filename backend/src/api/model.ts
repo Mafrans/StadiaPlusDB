@@ -2,6 +2,19 @@ import {Request} from "express";
 import {ParamsDictionary} from "express-serve-static-core";
 import {ParsedQs} from "qs";
 
+// Games
+
+export interface GamesRequest extends Request {
+    params: GamesParams
+}
+
+export interface GamesParams extends ParamsDictionary {
+    name: string
+    tag: string
+}
+
+
+
 // History
 
 export interface HistoryRequest extends Request {
@@ -19,6 +32,8 @@ export interface HistoryQuery extends ParsedQs {
     start: string
     count: string
 }
+
+
 
 // Achievements
 
@@ -80,6 +95,7 @@ export interface UserProfileData {
 
 export interface Game {
     name: string
+    image: string
     id: string
 }
 
@@ -88,7 +104,7 @@ export interface Achievement {
     description: string
     game: string
     icon: string
-    id: number
+    id: string
     value: number
 }
 

@@ -1,0 +1,76 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Achievement {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  index       Int
+  name        String?
+  description String?
+  imageURL    String?
+  game        Game    @relation(fields: [gameId], references: [id])
+  gameId      Int
+  user        User    @relation(fields: [userId], references: [id])
+  userId      Int
+  history     History @relation(fields: [historyId], references: [id])
+  historyId   Int
+}
+
+model Game {
+  id                Int           @id @default(autoincrement())
+  createdAt         DateTime      @default(now())
+  gameId            String
+  playTime          Int?
+  achievements      Achievement[]
+  totalAchievements Int?
+  name              String?
+  imageURL          String?
+  history           History[]
+  user              User         @relation(fields: [userId], references: [id])
+  userId            Int
+
+  @@unique([userId, gameId])
+}
+
+model History {
+  id           Int           @id @default(autoincrement())
+  createdAt    DateTime      @default(now())
+  type         String
+  game         Game          @relation(fields: [gameId], references: [id])
+  gameId       Int
+  playTime     Int?
+  user         User          @relation(fields: [userId], references: [id])
+  userId       Int
+  achievements Achievement[]
+}
+
+model PatreonInfo {
+  id        Int     @id @default(autoincrement())
+  patreonId String
+  tier      String
+  amount    Int
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+model User {
+  id            Int         @id @default(autoincrement())
+  createdAt     DateTime    @default(now())
+  googleId      String      @unique()
+  avatar        String?
+  names         String[]    @unique()
+  searchNames   String[]    @unique()
+  location      String?
+  xp            Int?
+  achievements  Achievement[]
+  history       History[]
+  games         Game[]
+  patreonInfo   PatreonInfo?
+  patreonInfoId Int?
+}

@@ -6,13 +6,13 @@ import hooksRouter from "./hooks/router";
 import cors from "cors";
 import {useGoogleOAuth, usePassport} from "./auth/helpers";
 import {config as loadDotEnv} from "dotenv";
-import {connectMongoose} from "./database/helpers";
 import path from "path";
+import { PrismaClient } from "@prisma/client";
 
 loadDotEnv();
 
 // Load database
-void connectMongoose('mongodb://localhost:27017/stadiaplus');
+export const prisma = new PrismaClient();
 
 // Load server
 const app = express();

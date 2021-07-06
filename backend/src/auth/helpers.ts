@@ -3,10 +3,7 @@ import passport from "passport";
 import {Strategy as GoogleStrategy} from "passport-google-oauth20";
 import jwt from "jsonwebtoken";
 import {LoginSession, PatreonTier} from "./model";
-import UserSchema, {User} from "../database/models/User";
-import {byberpunkBackground} from "../items/items";
-import {giveInventoryItem} from "../database/helpers";
-import {PatreonInfo} from "../database/models/PatreonInfo";
+import {prisma} from "../index";
 
 export function getLoginSession(req: Request): LoginSession {
     const header = req.headers.authorization;
@@ -29,18 +26,13 @@ export function useGoogleOAuth() {
         callbackURL: process.env.GOOGLE_CALLBACK_URL
     }, async (accessToken, refreshToken, profile, done) => {
         // TODO: Verify login here
-        let user = await UserSchema.findById(profile.id).exec();
+        let user = await prisma.user.findFirst({ where: { googleId: profile.id }});
         if (!user) {
-            user = new UserSchema({
-                _id: profile.id,
-                createdAt: new Date(),
-                names: [],
-                searchNames: [],
-                score: 0,
-                history: [],
-                games: []
+            await prisma.user.create({
+                data: {
+                    googleId: profile.id
+                }
             });
-            void user.save();
         }
 
         const token = jwt.sign({ data: profile.id }, process.env.JWT_SECRET, { expiresIn: "90 days" });

@@ -3,9 +3,8 @@ import passport from "passport";
 import {Deserializer as JSONAPIDeserializer} from "jsonapi-serializer";
 import {getPatreonTier, PatreonUser} from "../../auth/model";
 import crypto from "crypto";
-import UserSchema, {User} from "../../database/models/User";
-import PatreonInfo from "../../database/models/PatreonInfo";
 import {setPatreonInfo} from "../../database/helpers";
+import {prisma} from "../../index";
 
 // Route methods
 export async function patreonHook(req: Request, res: Response, next: NextFunction) {
@@ -28,43 +27,37 @@ export async function patreonHook(req: Request, res: Response, next: NextFunctio
     const hookBody = await new JSONAPIDeserializer({}).deserialize(JSON.parse(req.body)) as PledgeHook;
     const event: PledgeHookEvent = req.headers['x-patreon-event'] as PledgeHookEvent;
 
-    const user = await UserSchema.findOne({ 'patreon.id': hookBody.user.id });
-    console.log({user});
-    if (!user) {
-        return res.end();
-    }
-
     switch (event) {
         case "members:pledge:create":
         case "members:pledge:update":
         case "members:create":
         case "members:update":
-            void updatePatreonInfo(user, hookBody);
+            void updatePatreonInfo(hookBody);
             break;
 
         case "members:delete":
         case "members:pledge:delete":
-            void resetPatreonInfo(user, hookBody);
+            void resetPatreonInfo(hookBody);
             break;
     }
 
     res.end();
 }
 
-async function resetPatreonInfo(user: User, body: PledgeHook) {
-    setPatreonInfo(user, new PatreonInfo({
-        id: user.patreon.id,
+async function resetPatreonInfo(body: PledgeHook) {
+    setPatreonInfo({
+        patreonId: body.user.id,
         tier: 'none',
         amount: 0
-    }));
+    });
 }
 
-async function updatePatreonInfo(user: User, body: PledgeHook) {
-    setPatreonInfo(user, new PatreonInfo({
-        id: user.patreon.id,
+async function updatePatreonInfo(body: PledgeHook) {
+    setPatreonInfo({
+        patreonId: body.user.id,
         tier: getPatreonTier(body["currently-entitled-amount-cents"]),
         amount: body["currently-entitled-amount-cents"]
-    }));
+    });
 }
 
 type PledgeHookEvent = 'members:create' | 'members:update'

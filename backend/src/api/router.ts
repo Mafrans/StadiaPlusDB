@@ -10,6 +10,7 @@ import {apiAchievements} from "./routes/achievements/achievements";
 import {apiAchievementsCount} from "./routes/achievements/achievementsCount";
 import {apiHistory} from "./routes/history/history";
 import {apiAchievementRarity} from "./routes/achievements/achievementRarity";
+import {apiGames} from "./routes/game/games";
 
 const apiRouter = Router();
 apiRouter.get('/ping', cors(), apiPing);
@@ -21,6 +22,7 @@ apiRouter.get('/achievements/:name/:tag', cors(), apiAchievements);
 apiRouter.get('/achievements/:name/:tag/count', cors(), apiAchievementsCount);
 apiRouter.get('/achievements/rarity/:game/:index', cors(), apiAchievementRarity);
 apiRouter.get('/history/:name/:tag', cors(), apiHistory);
+apiRouter.get('/games/:name/:tag', cors(), apiGames);
 
 
 export default apiRouter;

@@ -1,23 +1,15 @@
 import {NextFunction, Response} from "express";
 import {getPatreonTier, PatreonRequest, PatreonUser} from "../model";
 import {oauth, patreon} from "patreon";
-import User from "../../database/models/User";
 import {Buffer} from "buffer";
 import {Deserializer as JSONAPIDeserializer} from "jsonapi-serializer";
-import PatreonInfo from "../../database/models/PatreonInfo";
 import {setPatreonInfo} from "../../database/helpers";
+import {prisma} from "../../index";
 
 const oauthClient = oauth(process.env.PATREON_CLIENT_ID, process.env.PATREON_CLIENT_SECRET);
 
 // Route methods
 export async function authPatreonCallback(req: PatreonRequest, res: Response, next: NextFunction) {
-    console.log(req.session.login)
-
-    const user = await User.findById(req.session.login.data).exec();
-    if (!user) {
-        return res.send('Error! Could not find your user id.');
-    }
-
     const grantCode = req.query.code;
 
     const tokenURL = new URL('https://patreon.com/api/oauth2/token');
@@ -44,11 +36,11 @@ export async function authPatreonCallback(req: PatreonRequest, res: Response, ne
     const pledge = patreonUser.pledges[0];
     const tier = getPatreonTier(pledge["amount-cents"]);
 
-    setPatreonInfo(user, new PatreonInfo({
-        id: patreonUser.id,
+    setPatreonInfo({
+        patreonId: patreonUser.id,
         tier: tier,
-        amount: pledge["amount-cents"]
-    }));
+        amount: pledge['amount-cents']
+    }, req.session.login.data);
 
     const responseData = Buffer.from(JSON.stringify({
         firstName: patreonUser["first-name"],

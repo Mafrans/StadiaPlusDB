@@ -1,11 +1,8 @@
 import {NextFunction, Response} from "express";
 import {getLoginSession} from "../../../auth/helpers";
-import User from "../../../database/models/User";
 import {ProfileUpdateRequest} from "../../model";
-import GameSchema, {Game} from "../../../database/models/Game";
-import Achievement from "../../../database/models/Achievement";
-import HistoryEntry from "../../../database/models/HistoryEntry";
-import {Schema, Types} from "mongoose";
+import {prisma} from "../../../index";
+
 
 export async function apiProfileUpdate(req: ProfileUpdateRequest, res: Response, next: NextFunction) {
     const login = getLoginSession(req);
@@ -13,92 +10,94 @@ export async function apiProfileUpdate(req: ProfileUpdateRequest, res: Response,
         return;
     }
 
-    const {profile, game, playTime, achievements, achievementCount} = req.body.data;
-    console.log(game);
-    let user = await User.findById(login.data).populate({ path: 'games', match: { id: game.id } }).exec();
-    console.log(user);
-
-    if (profile.name) {
-        if (!user.names.includes(profile.name)) {
-            user.names.unshift(profile.name);
-            user.searchNames.unshift(profile.name.toLowerCase());
+    const data = req.body.data;
+    const user = await prisma.user.update({
+        where: {
+            googleId: login.data
+        },
+        data: {
+            avatar: data.profile.avatar,
         }
-    }
+    })
 
-    if (profile.avatar) {
-        user.avatar = profile.avatar;
-    }
-
-    if (game) {
-        const historyEntry = new HistoryEntry({
-            timestamp: new Date(),
-            achievements: [],
-            user: user['_id'],
-            type: 'progress'
-        });
-        let dbGame: Game;
-
-        if (user.games.length === 0) {
-            console.log('new game!');
-            dbGame = new GameSchema(game);
-            dbGame.playTime = playTime || 0;
-            console.log({achievementCount})
-            dbGame.achievementCount = achievementCount || achievements.length;
-
-            user.depopulate('games');
-            user.games.push(dbGame['_id']);
-
-            historyEntry.game = dbGame['_id'];
-
-            for (let i = 0; i < achievements.length; i++) {
-                const a = achievements[i];
-
-                if (await Achievement.exists({game: dbGame['_id'] + '', index: a.id, user: user['_id']})) {
-                    continue;
+    if (!user.names.includes(data.profile.name)) {
+        await prisma.user.update({
+            where: {
+                googleId: login.data
+            },
+            data: {
+                names: {
+                    push: data.profile.name
+                },
+                searchNames: {
+                    push: data.profile.name.toLowerCase()
                 }
-
-                const schema = new Achievement({
-                    index: a.id,
-                    timestamp: historyEntry.timestamp,
-                    name: a.name,
-                    description: a.description,
-                    imageURL: a.icon,
-                    game: dbGame['_id'],
-                    user: user['_id']
-                });
-                void schema.save();
-
-                historyEntry.achievements.push(schema['_id']);
             }
-            historyEntry.playTime = playTime;
-        }
-        else {
-            dbGame = user.games[0] as unknown as Game;
-            const deltaTime = playTime - dbGame.playTime;
-            const achievements = await Achievement.find().where({ game: dbGame['_id'] });
+        })
+    }
 
-            if (historyEntry.achievements.length < achievements.length) {
-                historyEntry.achievements = achievements.filter(a =>
-                        achievements.filter(b => a.id === b.id).length === 0
-                    )
-                    .slice(0, 6)
-                    .map(a => a['_id']);
+    if (data.game) {
+        const oldGame = await prisma.game.findUnique({
+            where: {
+                userId_gameId: {
+                    userId: user.id,
+                    gameId: data.game.id
+                }
             }
+        });
 
-            dbGame.playTime = playTime;
-            dbGame.name = game.name;
+        const game = await prisma.game.upsert({
+            where: {
+                userId_gameId: {
+                    userId: user.id,
+                    gameId: data.game.id
+                }
+            },
+            create: {
+                gameId: data.game.id,
+                name: data.game.name,
+                imageURL: data.game.image,
+                playTime: data.playTime || 0,
+                totalAchievements: data.achievementCount || data.achievements.length,
+                userId: user.id
+            },
+            update: {
+                playTime: data.playTime || 0,
+                name: data.game.name,
+                totalAchievements: data.achievementCount || data.achievements.length,
+                imageURL: data.game.image
+            }
+        })
 
-            historyEntry.game = dbGame['_id'];
-            historyEntry.playTime = deltaTime;
+        let time = data.playTime;
+        if (oldGame) {
+            time -= oldGame.playTime;
         }
 
-        if(historyEntry.playTime > 0 || historyEntry.achievements.length > 0) {
-            void historyEntry.save();
-            user.history.push(historyEntry['_id']);
-        }
+        const history = await prisma.history.create({
+            data: {
+                playTime: time,
+                gameId: game.id,
+                userId: user.id,
+                type: 'progress'
+            }
+        })
 
-        void user.save();
-        void dbGame.save();
+        const oldAchievements = await prisma.achievement.findMany({ where: { gameId: game.id }});
+        const newAchievements = data.achievements.filter(a => oldAchievements.find(b => parseInt(a.id) === b.index) !== null);
+
+        await prisma.achievement.createMany({
+            data: newAchievements.map(it => ({
+                index: parseInt(it.id),
+                name: it.name,
+                description: it.description,
+                imageURL: it.icon,
+                gameId: game.id,
+                userId: user.id,
+                historyId: history.id
+            })),
+            skipDuplicates: true
+        });
 
         return res.status(200).end();
     }

@@ -39,6 +39,7 @@
   "dependencies": {
     "@fontsource/overpass": "^4.2.2",
     "@parcel/transformer-sass": "2.0.0-beta.2",
+    "@prisma/client": "^2.26.0",
     "@types/passport-google-oauth20": "^2.0.7",
     "concurrently": "^6.2.0",
     "cors": "^2.8.5",
@@ -48,8 +49,6 @@
     "express-session": "^1.17.1",
     "jsonapi-serializer": "^3.6.7",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.6.5",
-    "mongoose": "^5.12.3",
     "nodemon": "^2.0.7",
     "parcel": "^2.0.0-beta.3.1",
     "passport": "^0.4.1",
@@ -77,6 +76,7 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
-    "@types/styled-components": "^5.1.9"
+    "@types/styled-components": "^5.1.9",
+    "prisma": "^2.26.0"
   }
 }

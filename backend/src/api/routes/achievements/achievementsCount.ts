@@ -1,18 +1,31 @@
-import {AchievementsRequest, ProfileRequest} from "../../model";
+import {AchievementsRequest} from "../../model";
 import {NextFunction, Response} from "express";
-import User from "../../../database/models/User";
-import Achievement from "../../../database/models/Achievement";
+import {prisma} from "../../../index";
 
 export async function apiAchievementsCount(req: AchievementsRequest, res: Response, next: NextFunction) {
     const {name, tag} = req.params;
     const {game} = req.query;
 
-    const user = await User.findOne({ searchNames: `${name}#${tag}`.toLowerCase() });
-    let query = Achievement.countDocuments({user: user._id});
+    const userFilter = {
+        user: {
+            searchNames: {
+                has: `${name}#${tag}`.toLowerCase()
+            }
+        }
+    };
 
-    if (game) {
-        query.where({game});
-    }
+    const gameFilter = game ? {
+        game: {
+            gameId: game
+        }
+    } : null
 
-    res.send((await query).toString());
+    const count = await prisma.achievement.count({
+        where: {
+            ...userFilter,
+            ...gameFilter
+        }
+    });
+
+    res.send(count.toString());
 }

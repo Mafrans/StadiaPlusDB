@@ -1,9 +1,6 @@
-import {AchievementsRequest, ProfileRequest} from "../../model";
+import {AchievementsRequest} from "../../model";
 import {NextFunction, Response} from "express";
-import User from "../../../database/models/User";
-import Achievement from "../../../database/models/Achievement";
-import Game from "../../../database/models/Game";
-import {Types} from "mongoose";
+import {prisma} from "../../../index";
 
 export async function apiAchievements(req: AchievementsRequest, res: Response, next: NextFunction) {
     const {name, tag} = req.params;
@@ -12,16 +9,18 @@ export async function apiAchievements(req: AchievementsRequest, res: Response, n
     const count = parseInt(req.query.count) || 10;
 
     try {
-        const user = await User.findOne({ searchNames: `${name}#${tag}`.toLowerCase() });
-        const query = Achievement.aggregate();
-        query.match({ user: user._id });
-        if(game) {
-            query.match({ game: game });
-        }
-        query.skip(start);
-        query.limit(count);
-
-        res.send(await query);
+        const achievements = prisma.achievement.findMany({
+            where: {
+                user: {
+                    searchNames: {
+                        has: `${name}#${tag}`.toLowerCase()
+                    }
+                }
+            },
+            skip: start,
+            take: count
+        })
+        res.send(achievements);
     }
     catch (e) {
         return res.status(400).end();
