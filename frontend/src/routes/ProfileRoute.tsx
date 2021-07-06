@@ -4,13 +4,13 @@ import ProfilePicture from "../components/ProfilePicture";
 import {CgArrowRight, CgGift, CgPin} from "react-icons/cg";
 import styled from "styled-components";
 import LevelCard from "../components/LevelCard";
-import {getAchievementCount, getProfile, getRecentHistory} from "../apiHelper";
-import {User} from "../../../backend/src/database/models/User";
+import {getAchievementCount, getGames, getProfile, getRecentHistory} from "../apiHelpers";
 import Container from "../Container";
 import FeaturedStatistic from "../components/FeaturedStatistic";
-import {HistoryEntry} from "../../../backend/src/database/models/HistoryEntry";
 import ActivityEntry from "../components/ActivityEntry";
-import {mixins} from "../styleHelper";
+import {mixins} from "../styleHelpers";
+import GameCard from "../components/GameCard";
+import {Game, History, User} from "@prisma/client";
 
 interface ProfileRouteParams {
     nameAndTag?: string
@@ -23,7 +23,8 @@ interface ProfileRouteProps {
 
 export default function ProfileRoute(props: ProfileRouteProps) {
     const [profile, setProfile] = useState<User>();
-    const [history, setHistory] = useState<HistoryEntry[]>([]);
+    const [history, setHistory] = useState<History[]>([]);
+    const [games, setGames] = useState<Game[]>([]);
     const [achievementCount, setAchievementCount] = useState<number>();
 
     let { name, tag } = useParams<ProfileRouteParams>();
@@ -40,6 +41,7 @@ export default function ProfileRoute(props: ProfileRouteProps) {
         getProfile(name, tag).then(json => setProfile(json));
         getAchievementCount(name, tag).then(count => setAchievementCount(count));
         getRecentHistory(name, tag).then(history => setHistory(history));
+        getGames(name, tag).then(games => setGames(games));
     }, [])
 
     if (!profile) {
@@ -106,6 +108,12 @@ export default function ProfileRoute(props: ProfileRouteProps) {
                     <CgArrowRight size={24} />
                 </ActivityButton>
             </RecentActivitySection>
+            <GamesSection>
+                <Heading>Most Played Games</Heading>
+                <GameCardGrid>
+                    { games.map(game => <GameCard game={game} achievementCount={1} />) }
+                </GameCardGrid>
+            </GamesSection>
         </Wrapper>
     </Container>
 }
@@ -182,9 +190,11 @@ const FeaturedStatisticsSection = styled.section`
   margin-top: 12rem;
 `
 
-const RecentActivitySection = styled.section`
+const Section = styled.section`
   margin-top: 6rem;
 `
+const RecentActivitySection = Section;
+const GamesSection = Section;
 
 const Heading = styled.h2`
   padding-bottom: 1.5rem;
@@ -213,3 +223,10 @@ const ActivityButton = styled.button`
     margin-right: 0.5rem;
   }
 `
+
+const GameCardGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+`
+

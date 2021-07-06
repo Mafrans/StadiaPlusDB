@@ -1,4 +1,12 @@
-import {css} from "styled-components";
+import {css, FlattenSimpleInterpolation} from "styled-components";
+
+const breakpoints = {
+    xs: 640,
+    sm: 768,
+    md: 1024,
+    lg: 1280,
+    xl: 1536
+}
 
 export const mixins = {
     absoluteCenterX: css`
@@ -22,8 +30,8 @@ export const mixins = {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     `,
-    breakpoint: (bp: 'xs'|'sm'|'md'|'lg'|'xl', content: string) => css`
-      @media (min-width: var(breakpoint-${bp})) {
+    breakpoint: (bp: "xs" | "sm" | "md" | "lg" | "xl", content: FlattenSimpleInterpolation) => css`
+      @media (min-width: ${breakpoints[bp]}px) {
         ${content};
       }
     `

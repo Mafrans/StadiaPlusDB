@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import {mixins} from "../styleHelper";
+import {mixins} from "../styleHelpers";
 
 type FeaturedStatisticProps = {
     color?: string
