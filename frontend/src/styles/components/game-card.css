@@ -1,0 +1,55 @@
+.game-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    border-radius: var(--border-radius-lg);
+    color: var(--color-white);
+    font-size: var(--font-size-base);
+}
+
+.thumbnail {
+    height: 0;
+    padding-top: calc(61.835% / 2); /* Golden ratio, look at how cool I am */
+    background-position: center;
+    background-size: cover;
+}
+
+.text-container {
+    padding: 1rem;
+
+    background: var(--color-gray-800);
+}
+
+.name {
+    font-weight: var(--font-weight-medium);
+}
+
+.stat-list {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.25rem;
+
+    color: var(--color-gray-400);
+    font-weight: var(--font-weight-light);
+}
+
+.stat {
+    display: flex;
+    align-items: baseline;
+}
+
+.stat>* {
+    position: relative;
+    top: 1px;
+}
+
+.stat>*:first-child {
+    margin-right: 0.325rem;
+}
+
+@media (min-width: 640px) {
+    .thumbnail {
+        padding-top: 61.835%; /* Golden ratio, look at how cool I am */
+    }
+}

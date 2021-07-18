@@ -2,6 +2,7 @@ import {NextFunction, Response} from "express";
 import {getLoginSession} from "../../../auth/helpers";
 import {ProfileUpdateRequest} from "../../model";
 import {prisma} from "../../../index";
+import {User} from "@prisma/client";
 
 
 export async function apiProfileUpdate(req: ProfileUpdateRequest, res: Response, next: NextFunction) {
@@ -16,7 +17,7 @@ export async function apiProfileUpdate(req: ProfileUpdateRequest, res: Response,
             googleId: login.data
         },
         data: {
-            avatar: data.profile.avatar,
+            avatar: data.profile.avatar
         }
     })
 
@@ -99,7 +100,26 @@ export async function apiProfileUpdate(req: ProfileUpdateRequest, res: Response,
             skipDuplicates: true
         });
 
+        // await updateXP(user);
+
         return res.status(200).end();
     }
     return res.status(500).end();
+}
+
+async function updateXP(user: User) {
+    const achievements = await prisma.achievement.count({
+        where: {
+            userId: user.id
+        }
+    });
+
+    const games = await prisma.game.count({
+        where: {
+            userId: user.id,
+            achievements: {
+
+            }
+        }
+    })
 }

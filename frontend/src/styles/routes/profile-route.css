@@ -1,0 +1,181 @@
+.about {
+    display: grid;
+    grid-template-areas:
+            "avatar     username"
+            "biography  biography"
+            "badge-list badge-list"
+            "level-card level-card";
+
+    grid-template-columns: min-content 1fr;
+}
+
+.avatar {
+    grid-area: avatar;
+    margin-right: 3rem;
+}
+
+.name-container {
+    display: flex;
+    align-self: center;
+    align-items: baseline;
+}
+
+.username {
+    grid-area: username;
+    word-break: break-all;
+    color: rgba(0, 0, 0, 0);
+    width: max-content;
+
+    background: var(--color-neon-gradient);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+
+    -webkit-background-clip: text;
+}
+
+.tag {
+    grid-area: tag;
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: 0.25rem;
+
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-thin);
+}
+
+.biography {
+    grid-area: biography;
+    margin-top: 1rem;
+    color: var(--color-white);
+    font-size: var(--font-size-sm);
+}
+
+.badge-list {
+    width: 100%;
+    opacity: 0.7;
+    display: flex;
+    grid-area: badge-list;
+    grid-template-rows: 1fr;
+    margin-top: 1.5rem;
+
+    font-weight: var(--font-weight-light);
+}
+
+.badge {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: 0.25rem;
+    margin-right: 2rem;
+
+    color: var(--color-white);
+}
+
+.level-card {
+    grid-area: level-card;
+}
+
+.featured dl {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+section {
+    margin-top: 6rem;
+}
+
+section h2 {
+    padding-bottom: 1.5rem;
+    padding-top: 0.5rem;
+
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-white);
+}
+
+.all-activity {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    border: none;
+
+    color: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    background: var(--color-gray-800);
+}
+
+.games {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+}
+
+.all-activity span {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    font-family: Overpass, sans-serif;
+    margin-right: 0.5rem;
+}
+
+@media (min-width: 640px) {  } /* Extra small */
+
+@media (min-width: 768px) { /* Small */
+    .about {
+        grid-template-areas:
+            "avatar username   level-card"
+            "avatar biography  level-card"
+            "avatar badge-list level-card";
+
+        grid-template-columns: min-content 1fr min-content;
+        grid-template-rows: repeat(3, min-content);
+    }
+
+    .name-container {
+        align-self: end;
+    }
+
+    .biography {
+        margin-top: 0;
+    }
+
+    .games {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 768px) {
+    .biography {
+        font-size: var(--font-size-base);
+    }
+
+    .avatar {
+        margin-top: -2.5rem;
+    }
+}
+
+@media (min-width: 1024px) { /* Medium */
+    .username {
+        font-size: var(--font-size-5xl);
+    }
+
+    .featured dl {
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 10rem;
+    }
+
+    .games {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1280px) { /* Large */
+    .featured dl {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (min-width: 1536px) { /*  Extra large */
+    .games {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}

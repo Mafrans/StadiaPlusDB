@@ -1,0 +1,46 @@
+.achievement-card {
+    display: grid;
+    grid-template-areas:
+            "thumbnail name"
+            "thumbnail description";
+    grid-template-columns: min-content 1fr;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+
+    border-radius: var(--border-radius-lg);
+    background: var(--color-gray-800);
+    color: var(--color-white);
+}
+
+.thumbnail {
+    grid-area: thumbnail;
+    width: 5rem;
+    height: 5rem;
+    margin-right: 1rem;
+
+    border-radius: var(--border-radius-md);
+}
+
+.name {
+    grid-area: name;
+    margin: 0;
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.description {
+    grid-area: description;
+    opacity: 70%;
+    margin: 0;
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-thin);
+}
+
+@media (min-width: 1024px) {
+    .name, .description {
+        font-size: var(--font-size-base);
+    }
+}

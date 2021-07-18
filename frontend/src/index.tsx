@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Router from "./Router";
-import 'reset-css';
 import './styles/root.css';
 import './styles/global.css';
 import '@fontsource/overpass/200.css'

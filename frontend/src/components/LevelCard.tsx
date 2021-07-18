@@ -1,22 +1,23 @@
 import React from 'react';
 import styled from "styled-components";
-import tw from "twin.macro";
 import {CgDanger} from "react-icons/cg";
 import ProgressBar from "./ProgressBar";
 import Halo from "./Halo";
+import {breakpoints} from "../styleHelpers";
 
 interface LevelCardProps {
     xp: number
     last: number
     next: number
+    className?: string
 }
 
 export default function LevelCard(props: LevelCardProps) {
-    return <Wrapper>
+    return <Wrapper className={props.className}>
         <Level>
             <LevelLabel>Level</LevelLabel>
             <LevelCircleWrapper>
-                <Halo color={'var(--color-neon-cherry)'} thickness={1} range={6}>
+                <Halo color={'var(--color-neon-cherry)'}>
                     <LevelCircle>7</LevelCircle>
                 </Halo>
             </LevelCircleWrapper>
@@ -38,8 +39,15 @@ export default function LevelCard(props: LevelCardProps) {
 }
 
 const Wrapper = styled.div`
-  width: 13rem;
+  width: 100%;
+  margin-top: 4rem;
   color: var(--color-white);
+  
+  @media (min-width: ${breakpoints.sm}px) {
+    width: 13rem;
+    margin-left: 1rem;
+    margin-top: 0rem;
+  }
 `;
 
 const Level = styled.h3`

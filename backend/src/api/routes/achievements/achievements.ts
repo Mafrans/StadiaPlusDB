@@ -8,14 +8,25 @@ export async function apiAchievements(req: AchievementsRequest, res: Response, n
     const start = parseInt(req.query.start) || 0;
     const count = parseInt(req.query.count) || 10;
 
+    const achievementFilter = {
+        user: {
+            searchNames: {
+                has: `${name}#${tag}`.toLowerCase()
+            }
+        }
+    };
+
+    const gameFilter = game ? {
+        game: {
+            gameId: game
+        }
+    }: null
+
     try {
-        const achievements = prisma.achievement.findMany({
+        const achievements = await prisma.achievement.findMany({
             where: {
-                user: {
-                    searchNames: {
-                        has: `${name}#${tag}`.toLowerCase()
-                    }
-                }
+                ...achievementFilter,
+                ...gameFilter
             },
             skip: start,
             take: count

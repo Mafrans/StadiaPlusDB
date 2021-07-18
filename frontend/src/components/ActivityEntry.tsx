@@ -3,16 +3,10 @@ import AchievementCard from "./AchievementCard";
 import styled from "styled-components";
 import {CgChevronUp, CgMore} from "react-icons/cg";
 import {formatPlayTime} from "../helpers";
+import style from '../styles/components/activity-entry.css';
 
 type ActivityEntryProps = {
     entry: any
-}
-
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-function formatTimestamp(timestamp: number) {
-    const date = new Date(timestamp);
-
-    return `${date.getDay()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 }
 
 function ActivityEntry(props: ActivityEntryProps) {
@@ -25,122 +19,39 @@ function ActivityEntry(props: ActivityEntryProps) {
     let label;
     switch (type) {
         case 'unlock':
-            label = <Label>Unlocked an item</Label>;
+            label = <p>Unlocked an item</p>;
             break;
         case 'progress':
-            label = <Label>Played <Name>{game.name}</Name> for {formatPlayTime(playTime) + (achievements.length ? `, unlocking ${achievements.length} achievements` : '')}.</Label>;
+            label = <p>Played <strong>{game.name}</strong> for {formatPlayTime(playTime) + (achievements.length ? `, unlocking ${achievements.length} achievements` : '')}.</p>;
             break;
         case 'patreon':
-            label = <Label>Is now a Patreon supporter</Label>;
+            label = <p>Is now a Patreon supporter</p>;
             break;
     }
 
     return (
-        <Wrapper>
-            <Line image={lineImage}/>
-            <Handle />
-            <Timestamp>{ formatTimestamp(createdAt) }</Timestamp>
+        <div className={style['activity-entry']}>
+            <div className={style.line} />
+            <div className={style.timestamp}>{ formatTimestamp(createdAt) }</div>
             { label }
-            <Achievements>
+            <div className={style.achievements}>
                 { achievements.slice(0, showAll ? -1 : 6).map(achievement => <AchievementCard achievement={achievement}/>) }
-            </Achievements>
-            { achievements.length > 6 && <CollapseButton onClick={() => setShowAll(!showAll)}>
-                { showAll ? <CgChevronUp size={24} /> : <CgMore size={24} /> }
-                <span>Show { showAll ? 'less' : achievements.length - 6 + ' more' }</span>
-            </CollapseButton> }
-        </Wrapper>
+            </div>
+            <div className={style['button-container']}>
+                { achievements.length > 6 && <button onClick={() => setShowAll(!showAll)}>
+                    { showAll ? <CgChevronUp size={24} /> : <CgMore size={24} /> }
+                    <span>Show { showAll ? 'less' : achievements.length - 6 + ' more' }</span>
+                </button> }
+            </div>
+        </div>
     );
 }
 
-const Wrapper = styled.div`
-  position: relative;
-  margin-left: 10rem;
-  margin-top: 0.5rem;
-  padding-left: 2rem;
-  padding-bottom: 4rem;
-  width: 64rem;
-    
-  &:last-child>div:first-child{
-    mask-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF, transparent);
-  }
-`
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function formatTimestamp(timestamp: number) {
+    const date = new Date(timestamp);
 
-const Line = styled.div<{ image: string }>`
-  position: absolute;
-  top: 1.25rem;
-  left: 0;
-  height: 100%;
-  width: 2px;
-  background-image: url("data:image/svg+xml,${props => encodeURIComponent(props.image)}");
-  background-repeat: repeat-y;
-`
-
-const Handle = styled.div`
-  position: absolute;
-  top: 0.5rem;
-  left: 1px; /* half the width of the Line */
-  width: 0.75rem;
-  height: 0.75rem;
-  transform: translateX(-50%);
-  border: solid 2px #FFFFFF;
-  
-  border-radius: var(--border-radius-full);
-  background: var(--color-gray-900);
-`
-
-const Timestamp = styled.div`
-  position: absolute;
-  width: 8rem;
-  left: -10rem;
-  top: -0.25rem;
-  padding: 0.25rem 0;
-  text-align: center;
-
-  border-radius: var(--border-radius-full);
-  color: var(--color-white);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-thin);
-  background: var(--color-gray-800);
-`
-
-const Label = styled.p`
-  margin-bottom: 0.25rem;
-
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-thin);
-  color: var(--color-white);
-`
-
-const Name = styled.span`
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-lg);
-  color: var(--color-neon-tomato);
-`
-
-const Achievements = styled.div`
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1rem;
-  width: 100%;
-`
-
-const CollapseButton = styled.div`
-  display: inline-flex;
-  align-items: center;
-  opacity: 70%;
-  margin-top: 0.5rem;
-  margin-left: auto;
-  text-decoration: underline;
-  cursor: pointer;
-
-  color: var(--color-white);
-  
-  >span {
-    margin-left: 0.5rem;
-    margin-top: 0.3rem;
-    
-    font-weight: var(--font-weight-thin);
-  }
-`
+    return `${date.getDay()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+}
 
 export default ActivityEntry;

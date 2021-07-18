@@ -1,0 +1,16 @@
+.avatar {
+    display: inline-block;
+}
+
+.avatar img {
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+    .avatar img {
+        width: 9rem;
+        height: 9rem;
+    }
+}

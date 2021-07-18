@@ -1,0 +1,32 @@
+.halo {
+    position: relative;
+    display: flex;
+}
+
+.content {
+    display: flex;
+    border-radius: var(--border-radius-full);
+    overflow: hidden;
+}
+
+.shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: var(--border-radius-full);
+    transform: scale(2);
+
+    --shadow-base: 34%;
+    --shadow-blur: 8px;
+    --shadow-stroke: calc(2px / 2);
+    --shadow-aa: 0.25px;
+    mask-image: radial-gradient(
+        transparent var(--shadow-base),
+        black calc(var(--shadow-base) + var(--shadow-aa)),
+        black calc(var(--shadow-base) + var(--shadow-aa) + var(--shadow-stroke)),
+        rgba(0, 0, 0, 0.4) calc(var(--shadow-base) + var(--shadow-aa) * 2 + var(--shadow-stroke)),
+        transparent calc(var(--shadow-base) + var(--shadow-aa) * 2 + var(--shadow-stroke) + var(--shadow-blur))
+    );
+}

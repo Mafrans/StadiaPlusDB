@@ -30,13 +30,13 @@ export async function getGames(name: string, tag: string) {
     return await response.json();
 }
 
-export async function getAchievementCount(name: string, tag: string, game?: string) {
-    const response = await api(`/api/achievements/${name}/${tag}/count?game=${game || ''}`);
+export async function getAchievements(name: string, tag: string, game?: string, start?: number, count?: number) {
+    const response = await api(`/api/achievements/${name}/${tag}/?game=${game ?? ''}&start=${start ?? ''}&count=${count ?? ''}`);
     if (response.status !== 200) {
         throw new Error(response.status + ' - ' + response.statusText);
     }
 
-    return parseInt(await response.text());
+    return await response.json();
 }
 
 export async function getRecentHistory(name: string, tag: string) {

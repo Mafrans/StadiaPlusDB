@@ -1,6 +1,6 @@
 import {css, FlattenSimpleInterpolation} from "styled-components";
 
-const breakpoints = {
+export const breakpoints = {
     xs: 640,
     sm: 768,
     md: 1024,
