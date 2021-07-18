@@ -2,7 +2,7 @@
     display: grid;
     grid-template-areas:
             "thumbnail name"
-            "thumbnail description";
+            "description description";
     grid-template-columns: min-content 1fr;
     align-items: center;
     padding: 1rem;
@@ -15,8 +15,8 @@
 
 .thumbnail {
     grid-area: thumbnail;
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
     margin-right: 1rem;
 
     border-radius: var(--border-radius-md);
@@ -33,10 +33,27 @@
 .description {
     grid-area: description;
     opacity: 70%;
-    margin: 0;
+    margin-top: 1rem;
 
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-thin);
+}
+
+@media (min-width: 640px) {
+    .achievement-card {
+        grid-template-areas:
+            "thumbnail name"
+            "thumbnail description";
+    }
+
+    .thumbnail {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .description {
+        margin-top: 0;
+    }
 }
 
 @media (min-width: 1024px) {

@@ -19,13 +19,13 @@ function ActivityEntry(props: ActivityEntryProps) {
     let label;
     switch (type) {
         case 'unlock':
-            label = <p>Unlocked an item</p>;
+            label = <p className={style.description}>Unlocked an item</p>;
             break;
         case 'progress':
-            label = <p>Played <strong>{game.name}</strong> for {formatPlayTime(playTime) + (achievements.length ? `, unlocking ${achievements.length} achievements` : '')}.</p>;
+            label = <p className={style.description}>Played <strong>{game.name}</strong> for {formatPlayTime(playTime) + (achievements.length ? `, unlocking ${achievements.length} achievements` : '')}.</p>;
             break;
         case 'patreon':
-            label = <p>Is now a Patreon supporter</p>;
+            label = <p className={style.description}>Is now a Patreon supporter</p>;
             break;
     }
 

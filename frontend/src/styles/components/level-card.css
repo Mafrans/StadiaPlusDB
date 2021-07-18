@@ -1,0 +1,69 @@
+.level-card {
+    width: 100%;
+    margin-top: 4rem;
+    color: var(--color-white);
+}
+
+.level {
+    display: flex;
+    align-items: center;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-lg);
+}
+
+.level>p {
+    margin-right: 1rem;
+    margin-top: 0.25rem;
+}
+
+.level span {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.3rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    box-sizing: border-box;
+}
+
+.progress {
+    margin-top: 1rem;
+}
+
+.xp-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-weight: var(--font-weight-thin);
+}
+
+.report-button {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 1.5rem;
+    opacity: 70%;
+    background: none;
+    border: none;
+    color: var(--color-white);
+    font-weight: var(--font-weight-light);
+}
+
+.report-button>span {
+    margin-left: 0.5rem;
+    text-decoration: underline;
+}
+
+@media (min-width: 640px) {
+    .level span {
+        padding-top: 0.4rem;
+        width: 2.75rem;
+        height: 2.75rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .level-card {
+        width: 13rem;
+        margin-left: 1rem;
+        margin-top: 0;
+    }
+}

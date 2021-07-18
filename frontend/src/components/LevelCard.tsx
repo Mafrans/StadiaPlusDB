@@ -4,6 +4,7 @@ import {CgDanger} from "react-icons/cg";
 import ProgressBar from "./ProgressBar";
 import Halo from "./Halo";
 import {breakpoints} from "../styleHelpers";
+import style from '../styles/components/level-card.css';
 
 interface LevelCardProps {
     xp: number
@@ -13,29 +14,29 @@ interface LevelCardProps {
 }
 
 export default function LevelCard(props: LevelCardProps) {
-    return <Wrapper className={props.className}>
-        <Level>
-            <LevelLabel>Level</LevelLabel>
-            <LevelCircleWrapper>
+    return <div className={style['level-card']}>
+        <div className={style.level}>
+            <p>Level</p>
+            <div className={style['level-container']}>
                 <Halo color={'var(--color-neon-cherry)'}>
-                    <LevelCircle>7</LevelCircle>
+                    <span>7</span>
                 </Halo>
-            </LevelCircleWrapper>
-        </Level>
-        <Progress>
+            </div>
+        </div>
+        <div className={style.progress}>
             <ProgressBar
                 value={(props.xp - props.last)/(props.next - props.last)}
             />
-            <XPLabels>
+            <div className={style['xp-labels']}>
                 <span>{props.xp.toLocaleString()} XP</span>
                 <span>{props.next.toLocaleString()}</span>
-            </XPLabels>
-        </Progress>
-        <Report>
+            </div>
+        </div>
+        <button className={style['report-button']}>
             <CgDanger size={24} />
-            <ReportLabel>Report this user</ReportLabel>
-        </Report>
-    </Wrapper>
+            <span>Report this user</span>
+        </button>
+    </div>
 }
 
 const Wrapper = styled.div`

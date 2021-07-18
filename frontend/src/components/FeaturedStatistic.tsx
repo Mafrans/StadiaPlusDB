@@ -12,12 +12,12 @@ function FeaturedStatistic(props: FeaturedStatisticProps) {
     return (
         <div className={style['featured-statistic']}>
             <div className={style.content}>
-                <dt className={style.value}>
+                <div className={style.value}>
                     <span>{ props.prefix }</span>
                     <span>{ props.value }</span>
                     <span>{ props.suffix }</span>
-                </dt>
-                <dd className={style.label}>{ props.label }</dd>
+                </div>
+                <span className={style.label}>{ props.label }</span>
             </div>
         </div>
     );

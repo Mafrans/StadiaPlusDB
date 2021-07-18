@@ -3,9 +3,16 @@
 }
 
 .avatar img {
-    width: 6rem;
-    height: 6rem;
+    width: 4rem;
+    height: 4rem;
     object-fit: cover;
+}
+
+@media (min-width: 640px) {
+    .avatar img {
+        width: 6rem;
+        height: 6rem;
+    }
 }
 
 @media (min-width: 1024px) {
