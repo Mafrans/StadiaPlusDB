@@ -32,6 +32,10 @@
     font-weight: var(--font-weight-regular);
 }
 
+.large .value>span {
+    font-size: var(--font-size-xl);
+}
+
 .value>span:nth-child(2) {
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-xl);
@@ -40,6 +44,10 @@
 
     background: var(--color-neon-gradient);
     -webkit-background-clip: text;
+}
+
+.large .value>span:nth-child(2) {
+    font-size: var(--font-size-2xl);
 }
 
 .value>span:last-child {

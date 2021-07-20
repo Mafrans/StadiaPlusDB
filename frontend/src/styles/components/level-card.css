@@ -41,8 +41,6 @@
     align-items: flex-end;
     margin-top: 1.5rem;
     opacity: 70%;
-    background: none;
-    border: none;
     color: var(--color-white);
     font-weight: var(--font-weight-light);
 }

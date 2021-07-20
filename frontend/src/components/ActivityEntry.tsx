@@ -2,19 +2,18 @@ import React, {useState} from 'react';
 import AchievementCard from "./AchievementCard";
 import styled from "styled-components";
 import {CgChevronUp, CgMore} from "react-icons/cg";
-import {formatPlayTime} from "../helpers";
+import {formatPlayTime, formatTimestamp} from "../helpers";
 import style from '../styles/components/activity-entry.css';
 
 type ActivityEntryProps = {
     entry: any
+    fade?: boolean
 }
 
 function ActivityEntry(props: ActivityEntryProps) {
     const [showAll, setShowAll] = useState<boolean>(false);
 
     const {type, game, achievements, playTime, createdAt} = props.entry;
-    console.log(props.entry)
-    const lineImage = `<svg width="2" height="12" viewBox="0 0 2 12" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="1" cy="1" r="1" fill="#BFBFBF"/></svg>`;
 
     let label;
     switch (type) {
@@ -30,7 +29,7 @@ function ActivityEntry(props: ActivityEntryProps) {
     }
 
     return (
-        <div className={style['activity-entry']}>
+        <div className={style['activity-entry'] + ' ' + (props.fade ? style.fade : '')}>
             <div className={style.line} />
             <div className={style.timestamp}>{ formatTimestamp(createdAt) }</div>
             { label }
@@ -45,13 +44,6 @@ function ActivityEntry(props: ActivityEntryProps) {
             </div>
         </div>
     );
-}
-
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-function formatTimestamp(timestamp: number) {
-    const date = new Date(timestamp);
-
-    return `${date.getDay()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 }
 
 export default ActivityEntry;

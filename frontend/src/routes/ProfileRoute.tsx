@@ -5,7 +5,6 @@ import {CgArrowRight, CgGift, CgPin} from "react-icons/cg";
 import styled from "styled-components";
 import LevelCard from "../components/LevelCard";
 import {getAchievements, getGames, getProfile, getRecentHistory} from "../apiHelpers";
-import Container from "../Container";
 import FeaturedStatistic from "../components/FeaturedStatistic";
 import ActivityEntry from "../components/ActivityEntry";
 import {mixins} from "../styleHelpers";
@@ -14,6 +13,8 @@ import {Achievement, Game, History, User} from "@prisma/client";
 import {formatPlayTime, mapAndReduce} from "../helpers";
 import {breakpoints} from '../styleHelpers';
 import style from '../styles/routes/profile-route.css';
+import Container from "../components/Container";
+import { useHistory } from 'react-router-dom';
 
 interface ProfileRouteParams {
     nameAndTag?: string
@@ -31,6 +32,8 @@ export default function ProfileRoute(props: ProfileRouteProps) {
     const [games, setGames] = useState<Game[]>([]);
     const [achievements, setAchievements] = useState<Achievement[]>([]);
 
+    const router = useHistory();
+
     let { name, tag } = useParams<ProfileRouteParams>();
 
     if (!tag) {
@@ -41,7 +44,7 @@ export default function ProfileRoute(props: ProfileRouteProps) {
     useEffect(() => {
         getProfile(name, tag).then(json => setProfile(json));
         getAchievements(name, tag, undefined, 0, 9999).then(achievements => setAchievements(achievements));
-        getRecentHistory(name, tag).then(history => setHistory(history));
+        getRecentHistory(name, tag, 0, 4).then(history => setHistory(history));
         getGames(name, tag).then(games => setGames(games));
     }, [])
 
@@ -112,9 +115,9 @@ export default function ProfileRoute(props: ProfileRouteProps) {
         <section className={style.activity}>
             <h2>Recent Activity</h2>
             <div>
-                { history.map(entry => <ActivityEntry entry={entry} />) }
+                { history.map(entry => <ActivityEntry fade entry={entry} />) }
             </div>
-            <button className={style['all-activity']}>
+            <button onClick={() => router.push(`/profile/${name}/${tag}/activity`)} className={style['all-activity']}>
                 <span>Show all activity</span>
                 <CgArrowRight size={24} />
             </button>

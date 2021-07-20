@@ -39,8 +39,8 @@ export async function getAchievements(name: string, tag: string, game?: string, 
     return await response.json();
 }
 
-export async function getRecentHistory(name: string, tag: string) {
-    const response = await api(`/api/history/${name}/${tag}/?start=0&count=4`);
+export async function getRecentHistory(name: string, tag: string, start?: number, count?: number) {
+    const response = await api(`/api/history/${name}/${tag}/?start=${start ?? ''}&count=${count ?? ''}`);
     if (response.status !== 200) {
         throw new Error(response.status + ' - ' + response.statusText);
     }

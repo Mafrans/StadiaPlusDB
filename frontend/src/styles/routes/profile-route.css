@@ -12,6 +12,8 @@
 .avatar {
     grid-area: avatar;
     margin-right: 0.75rem;
+    width: 4rem;
+    height: 4rem;
 }
 
 .name-container {
@@ -79,19 +81,6 @@
     grid-template-columns: repeat(2, 1fr);
 }
 
-section {
-    margin-top: 5rem;
-}
-
-section h2 {
-    padding-bottom: 1.5rem;
-    padding-top: 0.5rem;
-
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-white);
-}
-
 .all-activity {
     display: flex;
     align-items: center;
@@ -123,6 +112,8 @@ section h2 {
     }
 
     .avatar {
+        width: 6rem;
+        height: 6rem;
         margin-right: 3rem;
     }
 
@@ -177,6 +168,8 @@ section h2 {
 
     .avatar {
         margin-top: -2.5rem;
+        width: 9rem;
+        height: 9rem;
     }
 }
 

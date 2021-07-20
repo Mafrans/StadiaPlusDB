@@ -17,7 +17,15 @@
     top: 1rem;
 }
 
-.activity-entry:last-child .line::after {
+.activity-entry:last-child .line {
+    height: 0;
+}
+
+.activity-entry.fade:last-child .line {
+    height: 100%;
+}
+
+.activity-entry.fade:last-child .line::after {
     mask-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF, transparent);
 }
 
@@ -99,8 +107,6 @@
     margin-left: auto;
     text-decoration: underline;
     cursor: pointer;
-    background: none;
-    border: none;
 
     color: var(--color-white);
 }

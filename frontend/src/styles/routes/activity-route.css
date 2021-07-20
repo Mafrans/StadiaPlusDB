@@ -1,0 +1,47 @@
+.navigation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.back-button {
+    background: var(--color-gray-800);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    width: 3rem;
+    color: var(--color-white);
+}
+
+.avatar {
+    height: 4rem;
+    width: 4rem;
+    margin-left: 2.5rem;
+    margin-right: 1rem;
+}
+
+.username {
+    margin-top: 0.25rem;
+}
+
+.tag {
+    align-self: center;
+    opacity: 70%;
+    margin-left: 0.25rem;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-light);
+}
+
+.statistics {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 1024px) {
+    .statistics {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}

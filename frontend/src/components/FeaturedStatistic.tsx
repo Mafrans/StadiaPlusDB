@@ -6,11 +6,12 @@ type FeaturedStatisticProps = {
     value: any
     label?: string
     suffix?: string
+    large?: boolean
 }
 
 function FeaturedStatistic(props: FeaturedStatisticProps) {
     return (
-        <div className={style['featured-statistic']}>
+        <div className={`${style['featured-statistic']} ${props.large ? style.large : ''}`}>
             <div className={style.content}>
                 <div className={style.value}>
                     <span>{ props.prefix }</span>
