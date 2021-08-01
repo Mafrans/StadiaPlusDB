@@ -2,16 +2,12 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router';
 import Avatar from "../components/Avatar";
 import {CgArrowRight, CgGift, CgPin} from "react-icons/cg";
-import styled from "styled-components";
 import LevelCard from "../components/LevelCard";
 import {getAchievements, getGames, getProfile, getRecentHistory} from "../apiHelpers";
 import FeaturedStatistic from "../components/FeaturedStatistic";
 import ActivityEntry from "../components/ActivityEntry";
-import {mixins} from "../styleHelpers";
 import GameCard from "../components/GameCard";
 import {Achievement, Game, History, User} from "@prisma/client";
-import {formatPlayTime, mapAndReduce} from "../helpers";
-import {breakpoints} from '../styleHelpers';
 import style from '../styles/routes/profile-route.css';
 import Container from "../components/Container";
 import { useHistory } from 'react-router-dom';
@@ -93,7 +89,7 @@ export default function ProfileRoute(props: ProfileRouteProps) {
                     label={'Games Owned'}
                 />
                 <FeaturedStatistic
-                    value={games.length && Math.round(mapAndReduce<number>(games, 'playTime', (a, b) => a + b) / 3600)}
+                    value={games.length && Math.round(games.map(it => it.playTime).reduce((a, b) => a + b) / 3600)}
                     suffix={'h'}
                     label={'Total play time'}
                 />
