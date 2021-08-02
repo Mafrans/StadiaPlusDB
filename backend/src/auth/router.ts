@@ -3,9 +3,11 @@ import {authGoogle} from "./routes/google";
 import {authGoogleCallback, authGoogleRedirect} from "./routes/googleCallback";
 import {authPatreon} from "./routes/patreon";
 import {authPatreonCallback} from "./routes/patreonCallback";
+import {authGoogleSignout} from "./routes/googleSignout";
 
 const authRouter = Router();
 authRouter.get('/google', authGoogle);
+authRouter.get('/google/signout', authGoogleSignout);
 authRouter.get('/google/callback', authGoogleCallback, authGoogleRedirect);
 authRouter.get('/patreon', authPatreon);
 authRouter.get('/patreon/callback', authPatreonCallback);
