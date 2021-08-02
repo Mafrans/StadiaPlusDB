@@ -13,6 +13,10 @@ export async function apiProfileUpdate(req: ProfileUpdateRequest, res: Response,
 
     const data = req.body.data;
 
+    if(data.playTime < 10 * 60) {
+        return;
+    }
+
     const user = await prisma.user.update({
         where: {
             googleId: login.data
