@@ -12,6 +12,7 @@ export async function apiProfileUpdate(req: ProfileUpdateRequest, res: Response,
     }
 
     const data = req.body.data;
+
     const user = await prisma.user.update({
         where: {
             googleId: login.data
@@ -75,29 +76,30 @@ export async function apiProfileUpdate(req: ProfileUpdateRequest, res: Response,
             time -= oldGame.playTime;
         }
 
-        const history = await prisma.history.create({
+        const oldAchievements = await prisma.achievement.findMany({ where: { gameId: game.id }});
+        const newAchievements = data.achievements.filter(a => oldAchievements.find(b => parseInt(a.id) === b.index) == null);
+
+        await prisma.history.create({
             data: {
                 playTime: time,
                 gameId: game.id,
                 userId: user.id,
-                type: 'progress'
+                type: 'progress',
+
+                achievements: {
+                    createMany: {
+                        data: newAchievements.map(it => ({
+                            index: parseInt(it.id),
+                            name: it.name,
+                            description: it.description,
+                            imageURL: it.icon,
+                            gameId: game.id,
+                            userId: user.id,
+                        })),
+                        skipDuplicates: true
+                    }
+                }
             }
-        })
-
-        const oldAchievements = await prisma.achievement.findMany({ where: { gameId: game.id }});
-        const newAchievements = data.achievements.filter(a => oldAchievements.find(b => parseInt(a.id) === b.index) !== null);
-
-        await prisma.achievement.createMany({
-            data: newAchievements.map(it => ({
-                index: parseInt(it.id),
-                name: it.name,
-                description: it.description,
-                imageURL: it.icon,
-                gameId: game.id,
-                userId: user.id,
-                historyId: history.id
-            })),
-            skipDuplicates: true
         });
 
         // await updateXP(user);
