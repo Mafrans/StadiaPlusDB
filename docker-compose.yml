@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  base:
+    build: .
+
+  frontend: 
+    image: 'node:16'
+    volumes:
+      - './frontend:/stadiaplusdb/frontend'
+    ports:
+      - '1234:1234'
+    build: ./frontend
+
+  backend:
+    image: 'node:16'
+    volumes:
+      - './backend:/stadiaplusdb/backend'
+    ports:
+      - '5678:5678'
+    build: ./backend
+    
+  db:
+    image: postgres:13
+    restart: always
+    container_name: stadiaplusdb-prisma
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: stadiaplusdb
